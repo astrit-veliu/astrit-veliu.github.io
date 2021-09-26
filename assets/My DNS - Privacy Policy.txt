@@ -1,0 +1,37 @@
+Privacy Policy
+
+
+Owner and Data Controller
+
+My DNS - Astrit Veliu
+
+
+Owner contact email: astrit-veliu@hotmail.com
+
+
+What data we collect
+
+We may collect approximate location information that is provided or generated in any of the following ways:
+
+- GPS coordinates
+- Using the MAC address of wireless routers (an alphanumeric code that is unique to that hardware device)
+- Using the Received Signal Strength Indicator (a measurement of the strength of the access point's signal at the time it is received by the mobile device) to identify the cell ID of nearby cell towers
+
+
+How we use the data
+This location data is collected anonymously in a form that does not personally identify the user. We do not send or store any user/device IDs that could allow tracking location over a period of time.
+
+
+Place of processing the Data
+
+The location data along with network measurements may be shared with third parties(SpeedChecker SDK) to compile aggregate information about network statistics and bandwidth usage in particular areas. This data cannot be used to personally identify you.
+
+
+Push notifications
+
+This Application may send push notifications to the User to achieve a better user experience. Users can disable anytime push notifications from application settings or device settings.
+
+
+Changes to this privacy policy
+
+The Owner reserves the right to make changes to this privacy policy at any time. It is strongly recommended to check this page often, referring to the date of the last modification listed at the bottom.
