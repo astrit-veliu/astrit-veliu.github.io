@@ -1,27 +1,85 @@
 Privacy Policy
 
-
 Owner and Data Controller
 Astrit Veliu
 
-
-Owner contact email: astrit-veliu@hotmail.com
-
-
-What data we collect
-
-This app does not collect any data or information, everything stays locally on the user device.
+Contact Email:
+astrit-veliu@hotmail.com
 
 
-How we use the data
-We do not send or store any user/device IDs that could allow tracking location over a period of time.
+1. Introduction
+This Privacy Policy describes how this app (“the App”) processes data.
+The App itself does not collect or store any personal information, but it uses Google Mobile Ads (AdMob/AdSense), which may process certain data for advertising purposes.
+
+By using the App, you agree to the terms described here.
 
 
-Place of processing the Data
+2. Data Collected by the App
+The App does not collect, store, transmit, or share any personal data.
+All features operate entirely on the device.
 
-This data cannot be used to personally identify you.
+However, third-party services may collect data as described below.
 
 
-Changes to this privacy policy
+3. Third-Party Advertising (Google AdMob / AdSense)
+The App uses Google Mobile Ads to display ads. Google may automatically collect and process the following types of data:
+Device identifiers (e.g., AAID – Android Advertising ID)
+Approximate location (non-GPS)
+App interactions
+Crash logs and diagnostics
+Ad engagement information
+IP address (used temporarily; typically anonymized)
 
-The Owner reserves the right to make changes to this privacy policy at any time. It is strongly recommended to check this page often, referring to the date of the last modification listed at the bottom.
+Google uses this information to:
+Serve ads
+Prevent fraud
+Cap ad frequency
+Measure performance
+Provide personalized ads (if consented)
+
+To learn more, visit Google’s Privacy Policy:
+https://policies.google.com/privacy
+
+
+4. Consent (GDPR / UMP SDK)
+For users in GDPR-affected regions (e.g., EU, EEA, UK), the App uses Google’s User Messaging Platform (UMP) to request consent before showing personalized ads.
+
+Users may choose:
+Personalized ads
+Non-personalized ads
+
+To withdraw or change consent at any time via the App’s privacy options Ads will respect your consent choices.
+
+
+5. CCPA (California Privacy Rights)
+California residents can:
+Request to opt out of “sale of personal information” (AdMob interprets personalized ads as “sale”)
+Request non-personalized ads
+
+The App honors these signals through Google’s privacy handling.
+
+
+6. Children’s Privacy
+
+This App is not directed to children under 13.
+No child-directed ad services are used.
+
+
+7. Data Security
+
+The App does not collect or store any personal data.
+Advertising data is secured and processed by Google in accordance with their industry-standard practices.
+
+
+8. Changes to This Privacy Policy
+
+This Policy may be updated periodically.
+The “Last Updated” date will reflect changes.
+
+
+9. Contact
+
+For questions about this Privacy Policy:
+
+Email:
+astrit-veliu@hotmail.com
