@@ -1740,7 +1740,7 @@ Created with ❤️ by Astrit Veliu
         }
 
         function downloadCV() {
-            window.open('Astrit_Veliu_CV_EN.pdf', '_blank');
+            window.open('assets/cv/Astrit_Veliu_CV_EN.pdf', '_blank');
         }
 
         function toggleBuild() {
