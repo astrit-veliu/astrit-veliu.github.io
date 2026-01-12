@@ -3,307 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veliu Labs - Android Software Development</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+    <title>Astrit Veliu - Android Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    <div class="background-gradient">
-        <!-- Android Robot SVG -->
-        <svg class="android-robot" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="androidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#1EB980;stop-opacity:0.6" />
-                    <stop offset="100%" style="stop-color:#18a872;stop-opacity:0.3" />
-                </linearGradient>
-            </defs>
-            <!-- Head -->
-            <rect x="60" y="40" width="80" height="50" rx="10" fill="url(#androidGradient)" opacity="0.7"/>
-            <!-- Antennas -->
-            <line x1="75" y1="40" x2="65" y2="25" stroke="#1EB980" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
-            <line x1="125" y1="40" x2="135" y2="25" stroke="#1EB980" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
-            <!-- Eyes -->
-            <circle cx="80" cy="60" r="5" fill="#201A1A"/>
-            <circle cx="120" cy="60" r="5" fill="#201A1A"/>
-            <!-- Body -->
-            <rect x="60" y="90" width="80" height="70" rx="10" fill="url(#androidGradient)" opacity="0.7"/>
-            <!-- Arms -->
-            <rect x="40" y="95" width="15" height="50" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
-            <rect x="145" y="95" width="15" height="50" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
-            <!-- Legs -->
-            <rect x="70" y="165" width="20" height="40" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
-            <rect x="110" y="165" width="20" height="40" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
-        </svg>
-        <div class="robot-light"></div>
-    </div>
-
-    <!-- Section Indicator -->
-    <div class="section-indicator">
-        <div class="section-dot active" data-section="home" onclick="scrollToSection('home')"></div>
-        <div class="section-dot" data-section="apps" onclick="scrollToSection('apps')"></div>
-        <div class="section-dot" data-section="about" onclick="scrollToSection('about')"></div>
-        <div class="section-dot" data-section="contact" onclick="scrollToSection('contact')"></div>
-    </div>
-
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" onclick="scrollToTop()">
-        <svg viewBox="0 0 24 24">
-            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-        </svg>
-    </div>
-
-    <nav>
-        <div class="container">
-            <div class="logo-container">
-             <div class="logo-image">
-                    <img src="assets/images/avatar.jpg" alt="Astrit Veliu">
+    <!-- Welcome Screen -->
+    <div class="boot-screen" id="bootScreen">
+        <div class="welcome-window">
+            <div class="welcome-header">
+                <div class="welcome-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" fill="#3DDC84"/>
+                        <path d="M17 20L24 13L31 20M17 28L24 35L31 28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-                <div class="logo">Astrit Veliu</div>
+                <div class="welcome-title-section">
+                    <h1 class="welcome-title">Android Studio</h1>
+                    <p class="welcome-version">Otter | 2025.2.1</p>
+                </div>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                <li><a href="#apps" onclick="closeMenu()">Projects</a></li>
-                <li><a href="#about" onclick="closeMenu()">About</a></li>
-                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            
+            <div class="welcome-content">
+                <div class="welcome-sidebar">
+                    <div class="welcome-menu-item active">Projects</div>
+                </div>
+                
+                <div class="welcome-main">
+                    <div class="welcome-actions">
+                        <input type="text" class="welcome-search" placeholder="Search projects">
+                        <button class="welcome-btn" onclick="startPortfolio()">Open</button>
+                    </div>
+                    
+                    <div class="recent-projects">
+                        <div class="project-item highlighted" onclick="startPortfolio()">
+                            <div class="project-icon">AV</div>
+                            <div class="project-info">
+                                <div class="project-name">Astrit Veliu Portfolio</div>
+                                <div class="project-path">~/Documents/Portfolio/AstritVeliu_2025</div>
+                                <div class="project-branch">
+                                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"/>
+                                    </svg>
+                                    main
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="welcome-footer">
+                <button class="welcome-settings">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Overlay Menu -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()">
+        <div class="mobile-menu" onclick="event.stopPropagation()">
+            <div class="mobile-menu-header">
+                <div class="mobile-menu-title">Navigation</div>
+                <div class="mobile-menu-close" onclick="closeMobileMenu()">×</div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('about'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">About</div>
+                    <div class="mobile-menu-desc">Personal information</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('skills'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Skills</div>
+                    <div class="mobile-menu-desc">Technical expertise</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('experience'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Experience</div>
+                    <div class="mobile-menu-desc">Work history</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('projects'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Projects</div>
+                    <div class="mobile-menu-desc">Published apps</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('contact'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Contact</div>
+                    <div class="mobile-menu-desc">Get in touch</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="runApp(); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Run App</div>
+                    <div class="mobile-menu-desc">Build and launch</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="downloadCV(); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Download CV</div>
+                    <div class="mobile-menu-desc">Resume PDF</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Overlay Menu -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()">
+        <div class="mobile-menu" onclick="event.stopPropagation()">
+            <div class="mobile-menu-header">
+                <div class="mobile-menu-title">Navigation</div>
+                <div class="mobile-menu-close" onclick="closeMobileMenu()">×</div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('about'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">About</div>
+                    <div class="mobile-menu-desc">Personal information</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('skills'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Skills</div>
+                    <div class="mobile-menu-desc">Technical expertise</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('experience'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Experience</div>
+                    <div class="mobile-menu-desc">Work history</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('projects'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Projects</div>
+                    <div class="mobile-menu-desc">Published apps</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="navigateToSection('contact'); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Contact</div>
+                    <div class="mobile-menu-desc">Get in touch</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="runApp(); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Run App</div>
+                    <div class="mobile-menu-desc">Build and launch</div>
+                </div>
+            </div>
+            <div class="mobile-menu-item" onclick="downloadCV(); closeMobileMenu();">
+                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <div class="mobile-menu-text">
+                    <div class="mobile-menu-label">Download CV</div>
+                    <div class="mobile-menu-desc">Resume PDF</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon"></span>
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="showCommandPalette()" title="Quick Actions (Ctrl+K)">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+    </button>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <!-- Command Palette -->
+    <div class="command-palette" id="commandPalette" onclick="handlePaletteBackdropClick(event)">
+        <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command or search..." onkeyup="filterCommands(event)" onclick="event.stopPropagation()">
+        <div class="command-palette-results" id="paletteResults" onclick="event.stopPropagation()"></div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="contextMenu">
+        <div class="context-menu-item" onclick="copyToClipboard()">
+            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            Copy Link
+        </div>
+        <div class="context-menu-item" onclick="openInNewTab()">
+            <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            Open in New Tab
+        </div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" onclick="sharePortfolio()">
+            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            Share
+        </div>
+        <div class="context-menu-item" onclick="downloadCV()">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download CV
+        </div>
+    </div>
+
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content about-modal-content">
+            <span class="modal-close" onclick="closeAboutModal()">&times;</span>
+            <div class="about-header">
+                <div class="about-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                    </svg>
+                </div>
+                <div class="about-info">
+                    <div class="about-version">Android Studio Portfolio | 2026.1.12</div>
+                    <div class="about-build">Build #AS-252.25557.131, built on January 12, 2026</div>
+                </div>
+            </div>
+            <div class="about-details">
+                Runtime version: Kotlin 1.9.0-21.0.8+<br>
+                VM: Portfolio JVM by Veliu Labs<br>
+                <br>
+               
+                Copyright © <span id="copyrightYear"></span> Astrit Veliu
+            </div>
+            <div class="about-footer">
+                 Veliu Labs<br>
+                <a href="https://github.com/astrit-veliu/" target="_blank">GitHub</a> • 
+                <a href="https://medium.com/@astrit.veliu95" target="_blank">Medium</a> • 
+                <a href="https://dribbble.com/astrit_veliu" target="_blank">Dribbble</a>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn" onclick="closeAboutModal()">Close</button>
+                <button class="modal-btn primary" onclick="window.open('https://github.com/astrit-veliu/', '_blank')">Visit GitHub</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tools Modal -->
+    <div class="modal" id="toolsModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Terminal Commands</h2>
+            <ul class="command-list">
+                <li class="command-item" onclick="executeCommand('help')">
+                    <div class="command-name">help</div>
+                    <div class="command-desc">Show available commands</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('about')">
+                    <div class="command-name">about</div>
+                    <div class="command-desc">Show information about Astrit</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('skills')">
+                    <div class="command-name">skills</div>
+                    <div class="command-desc">List technical skills</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('apps')">
+                    <div class="command-name">apps</div>
+                    <div class="command-desc">Show published applications</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('experience')">
+                    <div class="command-name">experience</div>
+                    <div class="command-desc">Show work history</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('contact')">
+                    <div class="command-name">contact</div>
+                    <div class="command-desc">Display contact information</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('portfolio')">
+                    <div class="command-name">portfolio</div>
+                    <div class="command-desc">Show portfolio summary</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('git status')">
+                    <div class="command-name">git status</div>
+                    <div class="command-desc">Check repository status</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('git log')">
+                    <div class="command-name">git log</div>
+                    <div class="command-desc">Show commit history</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('ls')">
+                    <div class="command-name">ls</div>
+                    <div class="command-desc">List project files</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('pwd')">
+                    <div class="command-name">pwd</div>
+                    <div class="command-desc">Print working directory</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('whoami')">
+                    <div class="command-name">whoami</div>
+                    <div class="command-desc">Display current user</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('date')">
+                    <div class="command-name">date</div>
+                    <div class="command-desc">Show current date and time</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('uname')">
+                    <div class="command-name">uname</div>
+                    <div class="command-desc">System information</div>
+                </li>
+                <li class="command-item" onclick="executeCommand('clear')">
+                    <div class="command-name">clear</div>
+                    <div class="command-desc">Clear terminal</div>
+                </li>
             </ul>
         </div>
-    </nav>
+    </div>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Veliu Labs</h1>
-            <p>Android Software Development</p>
-            <p class="subtitle">Crafting innovative mobile experiences with modern Android architecture</p>
-            <div class="cta-buttons">
-                <a href="#apps" class="btn btn-primary">View projects</a>
-                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    <!-- Build Window -->
+    <div class="build-window" id="buildWindow">
+        <div class="build-header">
+            <span class="build-title">🔨 Build Output</span>
+            <span class="build-close" onclick="closeBuild()">&times;</span>
+        </div>
+        <div class="build-content" id="buildContentWindow">
+            <div class="terminal-line">Gradle build started...</div>
+            <div class="terminal-line terminal-success">✓ Configuration successful</div>
+            <div class="terminal-line">Compiling Kotlin files...</div>
+            <div class="terminal-line terminal-success">✓ Compiled 42 Kotlin files in 2.3s</div>
+            <div class="terminal-line">Building APK...</div>
+            <div class="terminal-line terminal-success">✓ APK built successfully</div>
+            <div class="terminal-line">Installing on device...</div>
+            <div class="terminal-line terminal-success">✓ App installed and running</div>
+        </div>
+    </div>
+
+    <!-- Main Studio -->
+    <div class="studio-container">
+        <!-- Top Menu Bar -->
+        <div class="menu-bar">
+            <span class="mobile-toggle" onclick="toggleSidebar()">☰</span>
+            <div class="menu-item" onclick="navigateToSection('about')">Home</div>
+            <div class="menu-item menu-with-submenu" onmouseenter="showSubmenu(event, 'view')" onmouseleave="hideSubmenu()">
+                View
+                <div class="submenu" id="viewSubmenu">
+                    <div class="submenu-item" onclick="downloadCV(); hideSubmenu();">
+                        <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: var(--primary); vertical-align: middle; margin-right: 0.5rem;">
+                            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                        </svg>
+                        Open CV
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item" onclick="runApp()">▶ Run</div>
+            <div class="menu-item menu-with-submenu" onmouseenter="showSubmenu(event, 'tools')" onmouseleave="hideSubmenu()">
+                Tools
+                <div class="submenu" id="toolsSubmenu">
+                    <div class="submenu-item" onclick="executeCommand('help')">help</div>
+                    <div class="submenu-item" onclick="executeCommand('about')">about</div>
+                    <div class="submenu-item" onclick="executeCommand('skills')">skills</div>
+                    <div class="submenu-item" onclick="executeCommand('apps')">apps</div>
+                    <div class="submenu-item" onclick="executeCommand('experience')">experience</div>
+                    <div class="submenu-item" onclick="executeCommand('contact')">contact</div>
+                    <div class="submenu-item" onclick="executeCommand('portfolio')">portfolio</div>
+                    <div class="submenu-item" onclick="executeCommand('git status')">git status</div>
+                    <div class="submenu-item" onclick="executeCommand('git log')">git log</div>
+                    <div class="submenu-item" onclick="executeCommand('ls')">ls</div>
+                    <div class="submenu-item" onclick="executeCommand('pwd')">pwd</div>
+                    <div class="submenu-item" onclick="executeCommand('clear')">clear</div>
+                </div>
+            </div>
+            <div class="menu-item menu-with-submenu" onmouseenter="showSubmenu(event, 'help')" onmouseleave="hideSubmenu()">
+                Help
+                <div class="submenu" id="helpSubmenu">
+                    <div class="submenu-section">
+                        <div class="submenu-title">
+                            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: var(--primary); vertical-align: middle; margin-right: 0.5rem;">
+                                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                            </svg>
+                            Keyboard Shortcuts
+                        </div>
+                        <div class="submenu-item">Ctrl/Cmd + K → Command Palette</div>
+                        <div class="submenu-item">Ctrl/Cmd + B → Run & Build</div>
+                        <div class="submenu-item">Ctrl/Cmd + / → About</div>
+                        <div class="submenu-item">ESC → Close Modals</div>
+                    </div>
+                    <div class="submenu-divider"></div>
+                    <div class="submenu-section">
+                        <div class="submenu-title">
+                            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: var(--primary); vertical-align: middle; margin-right: 0.5rem;">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Features
+                        </div>
+                        <div class="submenu-item">Command Palette - Quick Actions</div>
+                        <div class="submenu-item">Swipe Navigation - Mobile</div>
+                        <div class="submenu-item">Right-Click - Context Menu</div>
+                        <div class="submenu-item">Scroll Animations - Stats</div>
+                    </div>
+                    <div class="submenu-divider"></div>
+                    <div class="submenu-section">
+                        <div class="submenu-title">
+                            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: var(--primary); vertical-align: middle; margin-right: 0.5rem;">
+                                <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                            </svg>
+                            Easter Egg
+                        </div>
+                        <div class="submenu-item">Konami Code: ↑↑↓↓←→←→BA</div>
+                    </div>
+                    <div class="submenu-divider"></div>
+                    <div class="submenu-item" onclick="executeCommand('help'); hideSubmenu();">
+                        <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: var(--primary); vertical-align: middle; margin-right: 0.5rem;">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
+                        </svg>
+                        Terminal Commands
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item" onclick="showAbout()">About</div>
+            <div class="studio-title">
+                Astrit Veliu
+                <span class="live-indicator" style="margin-left: 1rem;">
+                    <span class="live-dot"></span>
+                    LIVE
+                </span>
             </div>
         </div>
-    </section>
 
-    <section id="apps">
-        <div class="container">
-            <h2 class="section-title">Featured</h2>
-            <div class="apps-grid">
-                <div class="app-card scroll-reveal">
-                  <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1EB980, #18a872); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                        <img src="assets/images/my-dns-logo.png" style="width: 100%; height: 100%; border-radius: 20px;">
-                    </div>
-                    <h3>My DNS</h3>
-                    <p>Fast & secure DNS switching with modern UI/UX. VPN-based DNS management for optimal privacy.</p>
-                    <div class="app-stats">
-                        <span class="stat">50K+ Users</span>
-                        <span class="stat">4.5★</span>
-                    </div>
-                    <a href="https://play.google.com/store/apps/details?id=website.techalbania.generaldns" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View on Play Store</a>
-                </div>
-
-                <div class="app-card scroll-reveal">
-                     <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #FFFFFF, #FFFFFF); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                     <img src="assets/images/fit-al-logo.png" style="width: 100%; height: 100%; border-radius: 20px;">
-                    </div>
-                    <h3>Fit AL</h3>
-                    <p>Pedometer & health tracker with modern Android architecture and engaging animations.</p>
-                    <div class="app-stats">
-                        <span class="stat">Active</span>
-                        <span class="stat">Health</span>
-                    </div>
-                    <a href="https://play.google.com/store/apps/details?id=website.techalbania.fit" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View on Play Store</a>
-                </div>
-
-                <div class="app-card scroll-reveal">
-                      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #FF5722, #E64A19); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                      <img src="assets/images/my-ip-logo.png" style="width: 100%; height: 100%; border-radius: 20px;">
-                    </div>
-                    <h3>My IP</h3>
-                    <p>Network information tool to check your IP address and network details instantly.</p>
-                    <div class="app-stats">
-                        <span class="stat">Network</span>
-                        <span class="stat">Tools</span>
-                    </div>
-                    <a href="https://play.google.com/store/apps/details?id=website.techalbania.mynetworkip" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View on Play Store</a>
-                </div>
-            </div>
-
-            <div class="playstore-links">
-                <a href="https://play.google.com/store/apps/dev?id=9023809209412327612" class="playstore-badge" target="_blank">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#1EB980">
-                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+        <!-- Main Content -->
+        <div class="content-area">
+            <!-- Left Sidebar -->
+            <div class="project-explorer" id="sidebar">
+                <div class="explorer-header">PROJECT FILES</div>
+                <div class="file active" onclick="openFile('about', this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                     </svg>
-                    <span>Veliu Labs on Play Store</span>
-                </a>
-                <a href="https://play.google.com/store/apps/dev?id=8902247989998999802" class="playstore-badge" target="_blank">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#1EB980">
-                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    <span>AboutMe.kt</span>
+                </div>
+                <div class="file" onclick="openFile('skills', this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                     </svg>
-                    <span>Personal Apps on Play Store</span>
-                </a>
+                    <span>Skills.kt</span>
+                </div>
+                <div class="file" onclick="openFile('experience', this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    <span>Experience.kt</span>
+                </div>
+                <div class="file" onclick="openFile('projects', this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    <span>Projects.kt</span>
+                </div>
+                <div class="file" onclick="openFile('contact', this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    <span>Contact.kt</span>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <section id="about" style="background: var(--surface);">
-        <div class="container">
-            <h2 class="section-title">About</h2>
-            <div class="about-content">
-                <div class="about-text scroll-reveal">
-                    	 <div class="company-header">
-                        <div class="company-logo-placeholder">
-                            <img src="assets/images/avatar.jpg" alt="Avatar">
-                        </div>
-                        <h3>Astrit Veliu</h3>
+            <!-- Center Editor -->
+            <div class="editor-area">
+                <div class="editor-tabs" id="editorTabs"></div>
+                <div class="editor-content" id="editorContent"></div>
+            </div>
+
+            <!-- Right Device Preview -->
+            <div class="device-preview">
+                <div class="device-header">
+                    <span class="device-name">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/>
+                        </svg>
+                        Emulator - Portfolio App
+                    </span>
+                    <div class="device-controls">
+                        <button class="device-control-btn" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">
+                            <svg viewBox="0 0 24 24" id="soundIcon">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                        <button class="device-control-btn" onclick="toggleDeviceMode()" title="Toggle Light/Dark">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                            </svg>
+                        </button>
+                        <button class="device-control-btn active" onclick="refreshDevice()" title="Refresh">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                            </svg>
+                        </button>
                     </div>
-                    <p>Android Software Engineer with 8+ years of experience building innovative mobile applications. Passionate about modern Android architecture (MVVM, MVI), Jetpack Compose, and creating seamless user experiences.</p>
-                  <br>
-				  <p>Currently focused on developing and scaling apps under Veliu Labs, including My DNS and My IP.</p>
                 </div>
-                <div class="about-text scroll-reveal">
-                    <div class="company-header">
-                        <div class="company-logo-placeholder">
-                           <img src="assets/images/veliu-labs-logo.png" alt="Veliu Labs">
+                <div class="device-container">
+                    <div class="device-frame">
+                        <div class="device-notch"></div>
+                        <div class="device-screen" id="deviceScreen">
+                            <!-- Content injected here -->
                         </div>
-                        <h3>Veliu Labs</h3>
-                    </div>
-                    <p>Veliu Labs is a software development company specializing in Android application development. We focus on creating high-quality, user-centric mobile experiences with cutting-edge technology.</p>
-                    <p>Our expertise includes VPN applications, health & fitness trackers, network tools, and e-commerce solutions. We leverage modern Android development practices including Jetpack Compose, Material Design 3, and scalable architecture patterns.</p>
-                </div>
-            </div>
-
-            <h3 style="color: var(--primary); margin-top: 4rem; margin-bottom: 2rem; text-align: center; font-weight: 700;">Tech Stack & Skills</h3>
-            <div class="skills-grid">
-                <div class="skill-tag scroll-reveal">Kotlin</div>
-                <div class="skill-tag scroll-reveal">Java</div>
-                <div class="skill-tag scroll-reveal">Jetpack Compose</div>
-                <div class="skill-tag scroll-reveal">MVVM</div>
-                <div class="skill-tag scroll-reveal">MVI</div>
-                <div class="skill-tag scroll-reveal">Dagger 2</div>
-                <div class="skill-tag scroll-reveal">Hilt</div>
-                <div class="skill-tag scroll-reveal">Retrofit</div>
-                <div class="skill-tag scroll-reveal">Room DB</div>
-                <div class="skill-tag scroll-reveal">Material Design</div>
-                <div class="skill-tag scroll-reveal">Git</div>
-                <div class="skill-tag scroll-reveal">CI/CD</div>
-            </div>
-
-            <h3 style="color: var(--primary); margin-top: 4rem; margin-bottom: 2rem; font-weight: 700;">Professional Experience</h3>
-            <div class="timeline">
-                <div class="timeline-item scroll-reveal">
-                    <h3>Founder & Android Developer</h3>
-                    <div class="date">Veliu Labs | Jan 2026 – Present</div>
-                    <p>Currently developing and scaling My DNS and My IP applications. Focused on building innovative Android solutions with modern architecture.</p>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>Senior Android Developer</h3>
-                    <div class="date">CHECK24 Vergleichsportal Mobilfunk GmbH | Oct 2020 – Dec 2024</div>
-                    <p>Mobilfunk SIM Only module development. Migrated architecture from MVI to MVVM and implemented multiple features. Delivered extensive UI/UX optimizations.</p>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>Android Developer</h3>
-                    <div class="date">Optima Italia | Aug 2019 – Sep 2020</div>
-                    <p>Developed MyOptima and Tuttonizatore Android applications with enhanced features and modern design.</p>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>Android Developer</h3>
-                    <div class="date">ASL Tech Web | Mar 2019 – Jun 2019</div>
-                    <p>Built Android applications with focus on UI/UX improvements and modern architecture.</p>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>Android Developer</h3>
-                    <div class="date">Almotech | Nov 2016 – Sep 2018</div>
-                    <p>Led Shife te Shife e-Commerce app development. Built and maintained multiple Android applications.</p>
-                </div>
-            </div>
-
-            <h3 style="color: var(--primary); margin-top: 3rem; margin-bottom: 2rem; font-weight: 700;">Education & Certifications</h3>
-            <div class="timeline">
-                <div class="timeline-item scroll-reveal">
-                    <h3>MSc in Information Technology</h3>
-                    <div class="date">Faculty of Natural Sciences, Tirana | 2016 – 2018</div>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>BSc in Information Technology</h3>
-                    <div class="date">Faculty of Natural Sciences, Tirana | 2013 – 2016</div>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>CyberSecurity Specialist</h3>
-                    <div class="date">Dekra Akademie Shpk, Tirana | 2018 – 2019</div>
-                </div>
-                <div class="timeline-item scroll-reveal">
-                    <h3>CCNA Certification</h3>
-                    <div class="date">Cisco / Pearson VUE | Score: 961/1000 | 2016 – 2019</div>
-                </div>
-            </div>
-
-            <div class="download-cv-btn scroll-reveal">
-			<a href="assets/cv/Astrit_Veliu_CV_EN.pdf" class="btn btn-primary" download onclick="event.preventDefault(); window.open('assets/cv/Astrit_Veliu_CV_EN.pdf')">
-              
-                    <span style="margin-right: 0.5rem;">📄</span> Download CV
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" style="background: var(--surface);">
-        <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <div id="successMessage" class="success-message">Thank you! Your message has been sent successfully.</div>
-            <div class="contact-container">
-                <div class="contact-left">
-                    <form class="contact-form scroll-reveal" onsubmit="handleSubmit(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
+                        <div class="loading-indicator" id="loadingIndicator">
+                            <div class="spinner"></div>
+                            <div class="loading-text">Installing...</div>
+                        </div>
+                        <div class="bottom-nav">
+                            <div class="nav-item active" onclick="navigateEmu('about')">
+                                <div class="nav-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                                <div class="nav-label">About</div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
+                            <div class="nav-item" onclick="navigateEmu('skills')">
+                                <div class="nav-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/>
+                                    </svg>
+                                </div>
+                                <div class="nav-label">Skills</div>
+                            </div>
+                            <div class="nav-item" onclick="navigateEmu('experience')">
+                                <div class="nav-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/>
+                                    </svg>
+                                </div>
+                                <div class="nav-label">Work</div>
+                            </div>
+                            <div class="nav-item" onclick="navigateEmu('projects')">
+                                <div class="nav-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/>
+                                    </svg>
+                                </div>
+                                <div class="nav-label">Apps</div>
+                            </div>
+                            <div class="nav-item" onclick="navigateEmu('contact')">
+                                <div class="nav-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                    </svg>
+                                </div>
+                                <div class="nav-label">Contact</div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                    </form>
-                </div>
-
-                <div class="contact-right scroll-reveal">
-                    <div class="social-grid">
-                        <a href="https://github.com/astrit-veliu/" class="social-card" target="_blank">
-                            <div class="social-icon">G</div>
-                            <h3>GitHub</h3>
-                            <span class="social-link">@astrit-veliu</span>
-                        </a>
-                        <a href="https://medium.com/@astrit.veliu95" class="social-card" target="_blank">
-                            <div class="social-icon">M</div>
-                            <h3>Medium</h3>
-                            <span class="social-link">@astrit.veliu95</span>
-                        </a>
-                        <a href="https://dribbble.com/astrit_veliu" class="social-card" target="_blank">
-                            <div class="social-icon">D</div>
-                            <h3>Dribbble</h3>
-                            <span class="social-link">@astrit_veliu</span>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="year"></span> Veliu Labs. All rights reserved.</p>
+        <!-- Bottom Terminal -->
+        <div class="terminal-panel">
+            <div class="terminal-tabs">
+                <div class="terminal-tab active" onclick="switchTerminalTab('terminal')">Terminal</div>
+                <div class="terminal-tab" onclick="switchTerminalTab('build')">Build</div>
+            </div>
+            <div class="terminal-content active" id="terminalContent">
+                <div class="terminal-line terminal-success">✓ Project ready</div>
+                <div class="terminal-line">Type 'help' to see available commands</div>
+                <div class="terminal-line"></div>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <span style="color: #4ec9b0;">astrit@veliu-labs</span><span style="color: #858585;">:</span><span style="color: #569cd6;">~</span><span style="color: #d4d4d4;">$</span>
+                    <input type="text" id="terminalInput" style="background: transparent; border: none; color: #d4d4d4; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; outline: none; flex: 1;" placeholder="Type command..." onkeypress="handleTerminalCommand(event)">
+                </div>
+            </div>
+            <div class="terminal-content" id="buildContent">
+                <div class="terminal-line">Gradle build output:</div>
+                <div class="terminal-line terminal-success">✓ Build successful</div>
+                <div class="terminal-line">Compiled 42 Kotlin files</div>
+                <div class="terminal-line terminal-success">✓ APK generated</div>
+                <div class="terminal-line">Output: app/build/outputs/apk/debug/app-debug.apk</div>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <script src="assets/script/script.js"></script>
+ <script src="assets/script/script.js"></script>
 </body>
 </html>

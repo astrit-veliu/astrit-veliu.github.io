@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veliu Labs - Android Software Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="background-gradient">
+        <!-- Android Robot SVG -->
+        <svg class="android-robot" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="androidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#1EB980;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:#18a872;stop-opacity:0.3" />
+                </linearGradient>
+            </defs>
+            <!-- Head -->
+            <rect x="60" y="40" width="80" height="50" rx="10" fill="url(#androidGradient)" opacity="0.7"/>
+            <!-- Antennas -->
+            <line x1="75" y1="40" x2="65" y2="25" stroke="#1EB980" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+            <line x1="125" y1="40" x2="135" y2="25" stroke="#1EB980" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+            <!-- Eyes -->
+            <circle cx="80" cy="60" r="5" fill="#201A1A"/>
+            <circle cx="120" cy="60" r="5" fill="#201A1A"/>
+            <!-- Body -->
+            <rect x="60" y="90" width="80" height="70" rx="10" fill="url(#androidGradient)" opacity="0.7"/>
+            <!-- Arms -->
+            <rect x="40" y="95" width="15" height="50" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
+            <rect x="145" y="95" width="15" height="50" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
+            <!-- Legs -->
+            <rect x="70" y="165" width="20" height="40" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
+            <rect x="110" y="165" width="20" height="40" rx="7" fill="url(#androidGradient)" opacity="0.7"/>
+        </svg>
+        <div class="robot-light"></div>
+    </div>
+
+    <!-- Section Indicator -->
+    <div class="section-indicator">
+        <div class="section-dot active" data-section="home" onclick="scrollToSection('home')"></div>
+        <div class="section-dot" data-section="apps" onclick="scrollToSection('apps')"></div>
+        <div class="section-dot" data-section="about" onclick="scrollToSection('about')"></div>
+        <div class="section-dot" data-section="contact" onclick="scrollToSection('contact')"></div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
+    </div>
+
+    <nav>
+        <div class="container">
+            <div class="logo-container">
+             <div class="logo-image">
+                    <img src="assets/images/avatar.jpg" alt="Astrit Veliu">
+                </div>
+                <div class="logo">Astrit Veliu</div>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#apps" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Veliu Labs</h1>
+            <p>Android Software Development</p>
+            <p class="subtitle">Crafting innovative mobile experiences with modern Android architecture</p>
+            <div class="cta-buttons">
+                <a href="#apps" class="btn btn-primary">View projects</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="apps">
+        <div class="container">
+            <h2 class="section-title">Featured</h2>
+            <div class="apps-grid">
+                <div class="app-card scroll-reveal">
+                  <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1EB980, #18a872); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <img src="assets/images/my-dns-logo.png" style="width: 100%; height: 100%; border-radius: 20px;">
+                    </div>
+                    <h3>My DNS</h3>
+                    <p>Fast & secure DNS switching with modern UI/UX. VPN-based DNS management for optimal privacy.</p>
+                    <div class="app-stats">
+                        <span class="stat">50K+ Users</span>
+                        <span class="stat">4.5★</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=website.techalbania.generaldns" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View on Play Store</a>
+                </div>
+
+                <div class="app-card scroll-reveal">
+                     <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #FFFFFF, #FFFFFF); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                     <img src="assets/images/fit-al-logo.png" style="width: 100%; height: 100%; border-radius: 20px;">
+                    </div>
+                    <h3>Fit AL</h3>
+                    <p>Pedometer & health tracker with modern Android architecture and engaging animations.</p>
+                    <div class="app-stats">
+                        <span class="stat">Active</span>
+                        <span class="stat">Health</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=website.techalbania.fit" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View on Play Store</a>
+                </div>
+
+                <div class="app-card scroll-reveal">
+                      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #FF5722, #E64A19); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                      <img src="assets/images/my-ip-logo.png" style="width: 100%; height: 100%; border-radius: 20px;">
+                    </div>
+                    <h3>My IP</h3>
+                    <p>Network information tool to check your IP address and network details instantly.</p>
+                    <div class="app-stats">
+                        <span class="stat">Network</span>
+                        <span class="stat">Tools</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=website.techalbania.mynetworkip" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View on Play Store</a>
+                </div>
+            </div>
+
+            <div class="playstore-links">
+                <a href="https://play.google.com/store/apps/dev?id=9023809209412327612" class="playstore-badge" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#1EB980">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    </svg>
+                    <span>Veliu Labs on Play Store</span>
+                </a>
+                <a href="https://play.google.com/store/apps/dev?id=8902247989998999802" class="playstore-badge" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#1EB980">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    </svg>
+                    <span>Personal Apps on Play Store</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div class="about-text scroll-reveal">
+                    	 <div class="company-header">
+                        <div class="company-logo-placeholder">
+                            <img src="assets/images/avatar.jpg" alt="Avatar">
+                        </div>
+                        <h3>Astrit Veliu</h3>
+                    </div>
+                    <p>Android Software Engineer with 8+ years of experience building innovative mobile applications. Passionate about modern Android architecture (MVVM, MVI), Jetpack Compose, and creating seamless user experiences.</p>
+                  <br>
+				  <p>Currently focused on developing and scaling apps under Veliu Labs, including My DNS and My IP.</p>
+                </div>
+                <div class="about-text scroll-reveal">
+                    <div class="company-header">
+                        <div class="company-logo-placeholder">
+                           <img src="assets/images/veliu-labs-logo.png" alt="Veliu Labs">
+                        </div>
+                        <h3>Veliu Labs</h3>
+                    </div>
+                    <p>Veliu Labs is a software development company specializing in Android application development. We focus on creating high-quality, user-centric mobile experiences with cutting-edge technology.</p>
+                    <p>Our expertise includes VPN applications, health & fitness trackers, network tools, and e-commerce solutions. We leverage modern Android development practices including Jetpack Compose, Material Design 3, and scalable architecture patterns.</p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary); margin-top: 4rem; margin-bottom: 2rem; text-align: center; font-weight: 700;">Tech Stack & Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-tag scroll-reveal">Kotlin</div>
+                <div class="skill-tag scroll-reveal">Java</div>
+                <div class="skill-tag scroll-reveal">Jetpack Compose</div>
+                <div class="skill-tag scroll-reveal">MVVM</div>
+                <div class="skill-tag scroll-reveal">MVI</div>
+                <div class="skill-tag scroll-reveal">Dagger 2</div>
+                <div class="skill-tag scroll-reveal">Hilt</div>
+                <div class="skill-tag scroll-reveal">Retrofit</div>
+                <div class="skill-tag scroll-reveal">Room DB</div>
+                <div class="skill-tag scroll-reveal">Material Design</div>
+                <div class="skill-tag scroll-reveal">Git</div>
+                <div class="skill-tag scroll-reveal">CI/CD</div>
+            </div>
+
+            <h3 style="color: var(--primary); margin-top: 4rem; margin-bottom: 2rem; font-weight: 700;">Professional Experience</h3>
+            <div class="timeline">
+                <div class="timeline-item scroll-reveal">
+                    <h3>Founder & Android Developer</h3>
+                    <div class="date">Veliu Labs | Jan 2026 – Present</div>
+                    <p>Currently developing and scaling My DNS and My IP applications. Focused on building innovative Android solutions with modern architecture.</p>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>Senior Android Developer</h3>
+                    <div class="date">CHECK24 Vergleichsportal Mobilfunk GmbH | Oct 2020 – Dec 2024</div>
+                    <p>Mobilfunk SIM Only module development. Migrated architecture from MVI to MVVM and implemented multiple features. Delivered extensive UI/UX optimizations.</p>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>Android Developer</h3>
+                    <div class="date">Optima Italia | Aug 2019 – Sep 2020</div>
+                    <p>Developed MyOptima and Tuttonizatore Android applications with enhanced features and modern design.</p>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>Android Developer</h3>
+                    <div class="date">ASL Tech Web | Mar 2019 – Jun 2019</div>
+                    <p>Built Android applications with focus on UI/UX improvements and modern architecture.</p>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>Android Developer</h3>
+                    <div class="date">Almotech | Nov 2016 – Sep 2018</div>
+                    <p>Led Shife te Shife e-Commerce app development. Built and maintained multiple Android applications.</p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary); margin-top: 3rem; margin-bottom: 2rem; font-weight: 700;">Education & Certifications</h3>
+            <div class="timeline">
+                <div class="timeline-item scroll-reveal">
+                    <h3>MSc in Information Technology</h3>
+                    <div class="date">Faculty of Natural Sciences, Tirana | 2016 – 2018</div>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>BSc in Information Technology</h3>
+                    <div class="date">Faculty of Natural Sciences, Tirana | 2013 – 2016</div>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>CyberSecurity Specialist</h3>
+                    <div class="date">Dekra Akademie Shpk, Tirana | 2018 – 2019</div>
+                </div>
+                <div class="timeline-item scroll-reveal">
+                    <h3>CCNA Certification</h3>
+                    <div class="date">Cisco / Pearson VUE | Score: 961/1000 | 2016 – 2019</div>
+                </div>
+            </div>
+
+            <div class="download-cv-btn scroll-reveal">
+			<a href="assets/cv/Astrit_Veliu_CV_EN.pdf" class="btn btn-primary" download onclick="event.preventDefault(); window.open('assets/cv/Astrit_Veliu_CV_EN.pdf')">
+              
+                    <span style="margin-right: 0.5rem;">📄</span> Download CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div id="successMessage" class="success-message">Thank you! Your message has been sent successfully.</div>
+            <div class="contact-container">
+                <div class="contact-left">
+                    <form class="contact-form scroll-reveal" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-right scroll-reveal">
+                    <div class="social-grid">
+                        <a href="https://github.com/astrit-veliu/" class="social-card" target="_blank">
+                            <div class="social-icon">G</div>
+                            <h3>GitHub</h3>
+                            <span class="social-link">@astrit-veliu</span>
+                        </a>
+                        <a href="https://medium.com/@astrit.veliu95" class="social-card" target="_blank">
+                            <div class="social-icon">M</div>
+                            <h3>Medium</h3>
+                            <span class="social-link">@astrit.veliu95</span>
+                        </a>
+                        <a href="https://dribbble.com/astrit_veliu" class="social-card" target="_blank">
+                            <div class="social-icon">D</div>
+                            <h3>Dribbble</h3>
+                            <span class="social-link">@astrit_veliu</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Veliu Labs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/script/script.js"></script>
+</body>
+</html>
