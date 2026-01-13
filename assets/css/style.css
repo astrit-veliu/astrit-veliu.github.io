@@ -992,8 +992,8 @@
         }
 
         .emu-content {
-            padding: 1.5rem 1.5rem 7rem 1.5rem;  /* Changed 6rem to 7rem */
-            flex: 1;
+             padding: 1rem 1.5rem 6rem 1.5rem;  /* Reduced top padding from 1.5rem */
+        
         }
 
         .loading-indicator {
@@ -1168,7 +1168,7 @@
         /* Floating Action Button */
         .fab {
             position: fixed;
-            bottom: 80px;
+            bottom: 30px;
             right: 30px;
             width: 56px;
             height: 56px;
@@ -2198,6 +2198,11 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+			.content-area {
+                height: calc(100vh - 50px);  /* Account for header when visible */
+                overflow: hidden;
+            }
+
             .editor-area {
                 display: none;
             }
@@ -2217,11 +2222,20 @@
             .device-preview {
                 width: 100%;
                 min-width: unset;
+				height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
             }
 
             .device-container {
-                padding: 0.5rem;
+                padding: 0.5rem 0.5rem 110px 0.5rem;
+        height: 100%;
             }
+			
+			/* Adjust when terminal visible */
+    body:has(.terminal-panel:not(.hidden)) .device-container {
+        padding-bottom: 0.5rem;
+    }
 
             .device-frame {
                 margin: 0 auto;
@@ -2307,14 +2321,41 @@
             .device-frame {
                 width: 100%;
                 max-width: 340px;
-                height: calc(100vh - 380px);
+                height: auto;
+				min-height: 600px;
                 padding-bottom: 20px;
-                margin: 1.5rem auto;
+                margin: 0 auto;
+				position: relative;
             }
 
             .device-container {
                 padding: 0.5rem;
+				height: 100%;
+                display: flex;
+                align-items: stretch; 
             }
+			
+			    /* Adjust device container based on terminal visibility */
+    .device-container {
+        padding-top: 0.5rem;  /* Reduce top padding */
+        padding-bottom: 110px;  /* Space for FABs when terminal hidden */
+    }
+
+
+    /* When terminal is visible */
+    body:has(.terminal-panel:not(.hidden)) .device-container {
+        padding-bottom: 0.5rem;
+    }
+
+    body:has(.terminal-panel:not(.hidden)) .device-frame {
+        margin-bottom: 260px;  /* Space for terminal */
+    }
+
+    /* Make device screen fill available space */
+    .device-frame .device-screen {
+        height: 100%;
+        min-height: 550px;
+    }
 
             .terminal-panel {
                 height: 250px;
@@ -2349,8 +2390,8 @@
     }
     
     .device-header {
-        justify-content: space-between;
-        padding: 1rem;
+        padding: 0.75rem 1rem;
+        margin: 0;
     }
     
     .device-name {
@@ -2383,8 +2424,20 @@
         bottom: 0;
         left: 0;
         right: 0;
+		 height: 250px;  /* Fixed height */
         z-index: 999;
         transition: transform 0.3s ease;
+    }
+	
+	 /* Adjust device frame when terminal is visible */
+    body:has(.terminal-panel:not(.hidden)) .device-frame {
+        margin-bottom: 260px;
+    }
+
+    /* Adjust FABs when terminal is visible */
+    body:has(.terminal-panel:not(.hidden)) .fab,
+    body:has(.terminal-panel:not(.hidden)) .terminal-toggle {
+        bottom: 260px;  /* Move above terminal */
     }
     
     .terminal-panel.hidden {
@@ -2393,7 +2446,7 @@
     
     .terminal-toggle {
         position: fixed;
-        bottom: 90px;
+        bottom: 30px;
         left: 20px;
         width: 48px;
         height: 48px;
