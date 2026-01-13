@@ -1977,7 +1977,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Handle window resize
+// Handle window resize - todo: decide to keep same behaviour for desktop too
 window.addEventListener('resize', () => {
     if (window.innerWidth > 1024) {
         // Desktop: always show terminal
