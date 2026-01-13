@@ -20,7 +20,7 @@
                 </div>
                 <div class="welcome-title-section">
                     <h1 class="welcome-title">Android Studio</h1>
-                    <p class="welcome-version">Otter | 2025.2.1</p>
+                   <p class="welcome-version" id="studioVersion">Veliu Labs | 2025.2.1</p>
                 </div>
             </div>
             
@@ -39,8 +39,8 @@
                         <div class="project-item highlighted" onclick="startPortfolio()">
                             <div class="project-icon">AV</div>
                             <div class="project-info">
-                                <div class="project-name">Astrit Veliu Portfolio</div>
-                                <div class="project-path">~/Documents/Portfolio/AstritVeliu_2025</div>
+                               <div class="project-name">Astrit Veliu Portfolio</div>
+                               <div class="project-path" id="projectPath">~/Documents/Portfolio/AstritVeliu_2025</div>
                                 <div class="project-branch">
                                     <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
                                         <path d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"/>
@@ -196,15 +196,25 @@
             <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         </svg>
     </button>
+	
+	<button class="terminal-toggle" id="terminalToggle" onclick="toggleTerminal()" title="Toggle Terminal">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px;">
+        <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4V8h16v10z"/>
+    </svg>
+</button>
 
     <!-- Scroll to Top -->
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
 
     <!-- Command Palette -->
-    <div class="command-palette" id="commandPalette" onclick="handlePaletteBackdropClick(event)">
-        <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command or search..." onkeyup="filterCommands(event)" onclick="event.stopPropagation()">
-        <div class="command-palette-results" id="paletteResults" onclick="event.stopPropagation()"></div>
+<div class="command-palette" id="commandPalette" onclick="handlePaletteBackdropClick(event)">
+    <div class="command-palette-header" onclick="event.stopPropagation()">
+        <div style="color: var(--primary); font-weight: 600; font-size: 1.1rem;">Quick Actions</div>
+        <div class="command-palette-close" onclick="closeCommandPalette()">×</div>
     </div>
+    <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command or search..." onkeyup="filterCommands(event)" onclick="event.stopPropagation()">
+    <div class="command-palette-results" id="paletteResults" onclick="event.stopPropagation()"></div>
+</div>
 
     <!-- Context Menu -->
     <div class="context-menu" id="contextMenu">
@@ -242,7 +252,7 @@
                 </div>
                 <div class="about-info">
                     <div class="about-version">Android Studio Portfolio | 2026.1.12</div>
-                    <div class="about-build">Build #AS-252.25557.131, built on January 12, 2026</div>
+                    <div class="about-build" id="buildDate">Build #AS-252.25557.131, built on January 12, 2026</div>
                 </div>
             </div>
             <div class="about-details">
@@ -490,31 +500,32 @@
 
             <!-- Right Device Preview -->
             <div class="device-preview">
-                <div class="device-header">
-                    <span class="device-name">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/>
-                        </svg>
-                        Emulator - Portfolio App
-                    </span>
-                    <div class="device-controls">
-                        <button class="device-control-btn" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">
-                            <svg viewBox="0 0 24 24" id="soundIcon">
-                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                            </svg>
-                        </button>
-                        <button class="device-control-btn" onclick="toggleDeviceMode()" title="Toggle Light/Dark">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
-                            </svg>
-                        </button>
-                        <button class="device-control-btn active" onclick="refreshDevice()" title="Refresh">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+<div class="device-header">
+    <span class="device-name">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/>
+        </svg>
+        Emulator - Portfolio App
+    </span>
+    <div class="device-controls">
+        <button class="device-control-btn" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">
+            <svg viewBox="0 0 24 24" id="soundIcon">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </button>
+        <button class="device-control-btn" onclick="toggleDeviceMode()" title="Toggle Light/Dark">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
+        <button class="device-control-btn active" onclick="refreshDevice()" title="Refresh">
+            <svg viewBox="0 0 24 24">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+            </svg>
+        </button>
+    </div>
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+</div>
                 <div class="device-container">
                     <div class="device-frame">
                         <div class="device-notch"></div>

@@ -2341,3 +2341,120 @@
                 text-align: center;
             }
         }
+		
+		/* Mobile Menu Bar Improvements */
+@media (max-width: 1024px) {
+    .menu-bar {
+        display: none; /* Hide entire top menu bar on mobile */
+    }
+    
+    .device-header {
+        justify-content: space-between;
+        padding: 1rem;
+    }
+    
+    .device-name {
+        flex: 1;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: var(--studio-surface);
+        border: 1px solid var(--studio-border);
+        border-radius: 6px;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        color: var(--primary);
+        font-size: 1.2rem;
+        transition: all 0.2s;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: var(--studio-border);
+        border-color: var(--primary);
+    }
+    
+    .terminal-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        transition: transform 0.3s ease;
+    }
+    
+    .terminal-panel.hidden {
+        transform: translateY(100%);
+    }
+    
+    .terminal-toggle {
+        position: fixed;
+        bottom: 90px;
+        left: 20px;
+        width: 48px;
+        height: 48px;
+        background: var(--studio-surface);
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 1.2rem;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(30, 185, 128, 0.4);
+        z-index: 998;
+        transition: all 0.3s;
+    }
+    
+    .terminal-toggle:hover {
+        transform: scale(1.1);
+    }
+    
+    .terminal-toggle.active {
+        background: var(--primary);
+        color: white;
+    }
+}
+
+/* Command Palette Close Button */
+.command-palette-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--studio-border);
+}
+
+.command-palette-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--studio-border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: #858585;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.command-palette-close:hover {
+    background: var(--primary);
+    color: white;
+}
+
+@media (min-width: 1025px) {
+    .terminal-toggle {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+    }
+}

@@ -1782,3 +1782,209 @@ Created with ❤️ by Astrit Veliu
             const termInput = document.getElementById('terminalInput');
             if (termInput) termInput.focus();
         }, 3000);
+		
+		function updateDynamicDates() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    
+    // Update project path with current year
+    const projectPath = document.getElementById('projectPath');
+    if (projectPath) {
+        projectPath.textContent = `~/Documents/Portfolio/AstritVeliu_${year}`;
+    }
+    
+    // Update studio version with current date
+    const studioVersion = document.getElementById('studioVersion');
+    if (studioVersion) {
+        studioVersion.textContent = `Veliu Labs | ${year}.${month}.${day}`;
+    }
+    
+    // Update copyright year in about modal (already exists but ensure it's set)
+    const copyrightYear = document.getElementById('copyrightYear');
+    if (copyrightYear) {
+        copyrightYear.textContent = year;
+    }
+	const buildDate = document.getElementById('buildDate');
+    if (buildDate) {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                   'July', 'August', 'September', 'October', 'November', 'December'];
+    const buildNumber = `AS-${year}${month}${day}.${Math.floor(Math.random() * 90000) + 10000}`;
+    buildDate.textContent = `Build #${buildNumber}, built on ${months[now.getMonth()]} ${day}, ${year}`;
+}
+}
+
+// Call the function when page loads
+updateDynamicDates();
+
+// Terminal auto-hide functionality
+let terminalActivityTimeout;
+let isTerminalActive = false;
+
+function resetTerminalTimeout() {
+    clearTimeout(terminalActivityTimeout);
+    
+    // Only auto-hide on mobile
+    if (window.innerWidth <= 1024) {
+        terminalActivityTimeout = setTimeout(() => {
+            if (isTerminalActive) {
+                hideTerminal();
+            }
+        }, 10000); // 10 seconds
+    }
+}
+
+function showTerminal() {
+    const terminal = document.querySelector('.terminal-panel');
+    const toggle = document.getElementById('terminalToggle');
+    
+    if (terminal) {
+        terminal.classList.remove('hidden');
+        isTerminalActive = true;
+        if (toggle) toggle.classList.add('active');
+        resetTerminalTimeout();
+    }
+}
+
+function hideTerminal() {
+    const terminal = document.querySelector('.terminal-panel');
+    const toggle = document.getElementById('terminalToggle');
+    
+    if (terminal && window.innerWidth <= 1024) {
+        terminal.classList.add('hidden');
+        isTerminalActive = false;
+        if (toggle) toggle.classList.remove('active');
+        clearTimeout(terminalActivityTimeout);
+    }
+}
+
+function toggleTerminal() {
+    const terminal = document.querySelector('.terminal-panel');
+    
+    if (terminal.classList.contains('hidden')) {
+        showTerminal();
+    } else {
+        hideTerminal();
+    }
+}
+
+// Update the existing runApp function to show terminal
+function runApp() {
+    // Show terminal on mobile
+    if (window.innerWidth <= 1024) {
+        showTerminal();
+    }
+    
+    // Show loading indicator
+    const loader = document.getElementById('loadingIndicator');
+    loader.classList.add('active');
+    
+    showToast('Starting build process...', 'success');
+    showProgress();
+    
+    const terminal = document.getElementById('buildContent');
+    terminal.innerHTML = '';
+    
+    // Switch to Build tab
+    document.querySelectorAll('.terminal-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.terminal-tab')[1].classList.add('active');
+    document.querySelectorAll('.terminal-content').forEach(c => c.classList.remove('active'));
+    terminal.classList.add('active');
+    
+    const messages = [
+        'Gradle build started...',
+        '> Task :app:preBuild UP-TO-DATE',
+        '> Task :app:compileDebugKotlin',
+        '✓ Compiled 42 Kotlin files in 2.3s',
+        '> Task :app:processDebugResources',
+        '> Task :app:dexBuilderDebug',
+        '✓ Dex processing complete',
+        '> Task :app:packageDebug',
+        '✓ APK built successfully',
+        '> Task :app:installDebug',
+        '✓ Installing APK on Emulator',
+        '> Task :app:runDebug',
+        '✓ App launched successfully',
+        '',
+        'BUILD SUCCESSFUL in 2.8s',
+        '12 actionable tasks: 12 executed'
+    ];
+    
+    messages.forEach((msg, index) => {
+        setTimeout(() => {
+            const line = document.createElement('div');
+            line.className = msg.includes('✓') || msg.includes('SUCCESS') ? 'terminal-line terminal-success' : 'terminal-line';
+            line.textContent = msg;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+            
+            // Reset terminal timeout on activity
+            resetTerminalTimeout();
+            
+            if (index === messages.length - 1) {
+                setTimeout(() => {
+                    loader.classList.remove('active');
+                    goToPage('about');
+                    document.getElementById('deviceScreen').scrollTop = 0;
+                    showToast('App launched successfully!', 'success');
+                    
+                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                    document.querySelector('.nav-item').classList.add('active');
+                }, 500);
+            }
+        }, index * 200);
+    });
+}
+
+// Update executeCommandByIndex to close palette on mobile
+function executeCommandByIndex(index) {
+    const query = document.getElementById('paletteInput').value.toLowerCase();
+    const filtered = paletteCommands.filter(cmd => 
+        cmd.name.toLowerCase().includes(query) || 
+        cmd.desc.toLowerCase().includes(query)
+    );
+    if (filtered[index]) {
+        filtered[index].action();
+        
+        // Close palette on mobile after executing command
+        if (window.innerWidth <= 1024) {
+            closeCommandPalette();
+        }
+    }
+}
+
+// Track terminal activity
+document.addEventListener('DOMContentLoaded', () => {
+    const terminalInput = document.getElementById('terminalInput');
+    const terminalPanel = document.querySelector('.terminal-panel');
+    
+    if (terminalInput) {
+        terminalInput.addEventListener('keypress', resetTerminalTimeout);
+        terminalInput.addEventListener('focus', resetTerminalTimeout);
+    }
+    
+    if (terminalPanel) {
+        terminalPanel.addEventListener('click', resetTerminalTimeout);
+        terminalPanel.addEventListener('touchstart', resetTerminalTimeout);
+    }
+    
+    // Hide terminal on mobile by default
+    if (window.innerWidth <= 1024) {
+        setTimeout(() => {
+            hideTerminal();
+        }, 100);
+    }
+});
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+        // Desktop: always show terminal
+        const terminal = document.querySelector('.terminal-panel');
+        if (terminal) {
+            terminal.classList.remove('hidden');
+        }
+        clearTimeout(terminalActivityTimeout);
+    }
+});
