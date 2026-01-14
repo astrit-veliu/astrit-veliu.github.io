@@ -1564,6 +1564,7 @@
             background: linear-gradient(135deg, transparent 0%, rgba(30, 185, 128, 0.1) 100%);
             opacity: 0;
             transition: opacity 0.3s;
+			pointer-events: none;
         }
 
         .emu-card:hover::before {
@@ -1600,6 +1601,13 @@
             color: #c9d1d9;
             font-size: 0.9rem;
             line-height: 1.6;
+			z-index: 15;
+        }
+
+        .emu-card-text a {
+            position: relative;
+            z-index: 2;
+            pointer-events: auto;
         }
 
         .emu-stats {

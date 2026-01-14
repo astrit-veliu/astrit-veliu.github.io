@@ -106,7 +106,7 @@ object CareerHistory {
     val experiences = listOf(
         WorkExperience(
             company = "Veliu Labs",
-            role = "Founder & Android Developer",
+            role = "Founder & Android Engineer",
             period = "January 2026 - Present",
             location = "Köln, Germany",
             achievements = listOf(
@@ -319,7 +319,7 @@ object Contact {
                     </div>
                     <div class="emu-card">
                         <div class="emu-card-title">Current Role</div>
-                        <div class="emu-card-text">Founder & Android Developer at Veliu Labs, focused on developing My DNS and My IP applications.</div>
+                        <div class="emu-card-text">Founder & Android Engineer at Veliu Labs, focused on developing My DNS and My IP applications.</div>
                     </div>
                     <div class="emu-card">
                         <div class="emu-card-title">Location</div>
@@ -1100,7 +1100,7 @@ Specialization: Modern Android Development`,
 Play Store: https://play.google.com/store/apps/dev?id=9023809209412327612`,
             
             experience: `Work Experience:
-• Veliu Labs (2026-Present) - Founder & Android Developer
+• Veliu Labs (2026-Present) - Founder & Android Engineer
 • CHECK24 (2020-2025) - Senior Android Developer
 • Optima Italia (2019-2020) - Android Developer
 • ASL Tech Web (2019) - Android Developer
