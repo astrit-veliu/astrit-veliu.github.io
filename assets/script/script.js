@@ -263,7 +263,7 @@ data class ContactInfo(
     val email: String,
     val github: String,
     val medium: String,
-    val dribbble: String
+    val linkedIn: String
 )
 
 object Contact {
@@ -272,7 +272,7 @@ object Contact {
         email = "astrit-veliu@hotmail.com",
         github = "https://github.com/astrit-veliu/",
         medium = "https://medium.com/@astrit.veliu95",
-        dribbble = "https://dribbble.com/astrit_veliu"
+        linkedIn = "https://www.linkedin.com/in/astrit-veliu/"
     )
     
     val availability = true
@@ -515,18 +515,18 @@ object Contact {
                                     <div style="font-size: 0.8rem; color: #858585;">@astrit-veliu</div>
                                 </div>
                             </a>
+							 <a href="https://www.linkedin.com/in/astrit-veliu/" target="_blank" class="emu-social-link">
+                                <div class="emu-social-icon">D</div>
+                                <div>
+                                    <div style="font-weight: 600;">LinkedIn</div>
+                                    <div style="font-size: 0.8rem; color: #858585;">@astrit_veliu</div>
+                                </div>
+                            </a>
                             <a href="https://medium.com/@astrit.veliu95" target="_blank" class="emu-social-link">
                                 <div class="emu-social-icon">M</div>
                                 <div>
                                     <div style="font-weight: 600;">Medium</div>
                                     <div style="font-size: 0.8rem; color: #858585;">@astrit.veliu95</div>
-                                </div>
-                            </a>
-                            <a href="https://dribbble.com/astrit_veliu" target="_blank" class="emu-social-link">
-                                <div class="emu-social-icon">D</div>
-                                <div>
-                                    <div style="font-weight: 600;">Dribbble</div>
-                                    <div style="font-size: 0.8rem; color: #858585;">@astrit_veliu</div>
                                 </div>
                             </a>
                         </div>
@@ -1110,7 +1110,7 @@ Play Store: https://play.google.com/store/apps/dev?id=9023809209412327612`,
 Email: astrit-veliu@hotmail.com
 GitHub: https://github.com/astrit-veliu/
 Medium: https://medium.com/@astrit.veliu95
-Dribbble: https://dribbble.com/astrit_veliu
+LinkedIn: https://www.linkedin.com/in/astrit-veliu/
 
 Availability: Open to opportunities
 Response Time: Within 24 hours
