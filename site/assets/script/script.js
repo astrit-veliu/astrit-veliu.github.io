@@ -69,25 +69,23 @@
         function updateSectionIndicator() {
             const sections = ['home', 'apps', 'about', 'contact'];
             const dots = document.querySelectorAll('.section-dot');
-            
-            let currentSection = 'home';
-            sections.forEach(section => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                        currentSection = section;
-                    }
-                }
-            });
-
-            dots.forEach((dot, index) => {
-                dot.classList.remove('active');
-                if (sections[index] === currentSection) {
-                    dot.classList.add('active');
-                }
+        
+            let scrollPos = window.scrollY + window.innerHeight / 2;
+        
+            sections.forEach((id, index) => {
+                const section = document.getElementById(id);
+                if (!section) return;
+        
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+        
+                dots[index].classList.toggle(
+                    'active',
+                    scrollPos >= top && scrollPos < bottom
+                );
             });
         }
+
 
         // Scroll to section
         function scrollToSection(sectionId) {
@@ -133,6 +131,9 @@
 
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
+		
+		window.addEventListener('scroll', updateSectionIndicator);
+        window.addEventListener('load', updateSectionIndicator);
 
         // Form submission handler
         function handleSubmit(event) {
@@ -163,37 +164,6 @@
             }, 5000);
         }
 
-        // Smooth scroll enhancement with easing
-        let scrollTimeout;
-        let isScrolling = false;
-
-        window.addEventListener('wheel', (e) => {
-            clearTimeout(scrollTimeout);
-            
-            scrollTimeout = setTimeout(() => {
-                isScrolling = false;
-            }, 150);
-            
-            if (!isScrolling) {
-                isScrolling = true;
-            }
-        }, { passive: true });
-
-        // Add momentum scroll effect
-        document.addEventListener('DOMContentLoaded', () => {
-            const scrollContainer = document.documentElement;
-            let scrollVelocity = 0;
-            let lastScrollTime = Date.now();
-            
-            window.addEventListener('wheel', (e) => {
-                const currentTime = Date.now();
-                const deltaTime = currentTime - lastScrollTime;
-                lastScrollTime = currentTime;
-                
-                scrollVelocity = e.deltaY / deltaTime;
-            }, { passive: true });
-        });
-
         // Close mobile menu when clicking outside
         document.addEventListener('click', (event) => {
             const navLinks = document.getElementById('navLinks');
@@ -203,3 +173,13 @@
                 navLinks.classList.remove('active');
             }
         });
+		
+		const nav = document.querySelector('nav');
+
+		window.addEventListener('scroll', () => {
+		    if (window.scrollY > 5) {
+		        nav.classList.add('scrolled');
+		    } else {
+		        nav.classList.remove('scrolled');
+		    }
+		});
