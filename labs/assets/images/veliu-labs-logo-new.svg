@@ -1,0 +1,9 @@
+<svg width="200" height="56" viewBox="0 0 200 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- VL chevron mark -->
+  <polygon points="0,6 14,6 32,42 18,42" fill="#0B2240"/>
+  <polygon points="14,6 28,6 46,42 32,42" fill="#00C8A0"/>
+  <polygon points="28,20 42,20 50,42 36,42" fill="#0B2240"/>
+  <!-- Wordmark -->
+  <text x="62" y="24" font-family="Montserrat, sans-serif" font-weight="800" font-size="19" fill="#0B2240" letter-spacing="-0.5">Veliu</text>
+  <text x="62" y="46" font-family="Montserrat, sans-serif" font-weight="800" font-size="19" fill="#0B2240" letter-spacing="-0.5">Labs</text>
+</svg>
