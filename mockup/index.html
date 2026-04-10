@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play Store Mockup Generator — Veliu Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+// Fallback: if html2canvas not available, use a simple download approach
+if (typeof html2canvas === 'undefined') {
+  window.html2canvas = function(el, opts) {
+    return new Promise((res) => {
+      const canvas = document.createElement('canvas');
+      const scale = opts.scale || 1;
+      canvas.width = (opts.width || el.offsetWidth) * scale;
+      canvas.height = (opts.height || el.offsetHeight) * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#07090f';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.font = `${24*scale}px Montserrat,sans-serif`;
+      ctx.fillStyle = '#00c8a8';
+      ctx.textAlign = 'center';
+      ctx.fillText('Screenshot export requires html2canvas', canvas.width/2, canvas.height/2);
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = `${14*scale}px Poppins,sans-serif`;
+      ctx.fillText('Open file in a browser with internet access', canvas.width/2, canvas.height/2 + 30*scale);
+      res(canvas);
+    });
+  };
+}
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="logo" style="background:none;width:32px;height:32px"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="igr" x1="0" y1="0" x2="28" y2="28">
+      <stop stop-color="#00c8a8"/>
+      <stop offset="1" stop-color="#0077ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="28" height="28" rx="7" fill="url(#igr)"/>
+  <!-- Phone outline -->
+  <rect x="8" y="5" width="12" height="18" rx="2.5" stroke="white" stroke-width="1.5" fill="none"/>
+  <!-- Home indicator -->
+  <rect x="11.5" y="19.5" width="5" height="1.5" rx="0.75" fill="white" opacity="0.7"/>
+  <!-- Star/spark -->
+  <path d="M14 8.5 L14.6 10.4 L16.6 10.4 L15 11.6 L15.6 13.5 L14 12.3 L12.4 13.5 L13 11.6 L11.4 10.4 L13.4 10.4 Z" fill="white" opacity="0.9"/>
+</svg></div>
+  <h1>Play Store <span>Mockup Generator</span></h1>
+  <div class="badge" style="background:none;border:none;padding:0;display:flex;align-items:center"><svg width="90" height="26" viewBox="0 0 200 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="0,6 14,6 32,42 18,42" fill="rgba(255,255,255,0.25)"/>
+  <polygon points="14,6 28,6 46,42 32,42" fill="#00C8A0"/>
+  <polygon points="28,20 42,20 50,42 36,42" fill="rgba(255,255,255,0.15)"/>
+  <text x="62" y="24" font-family="Montserrat,sans-serif" font-weight="800" font-size="19" fill="white" letter-spacing="-0.5">Veliu</text>
+  <text x="62" y="46" font-family="Montserrat,sans-serif" font-weight="800" font-size="19" fill="#00C8A0" letter-spacing="-0.5">Labs</text>
+</svg></div>
+</header>
+
+<div class="layout">
+
+  <!-- LEFT: Controls (no tabs — all visible, 2-column) -->
+  <aside class="panel-left">
+    <div class="sidebar-body">
+
+    <!-- ══ SECTION 1: Screens + Frame | Theme + Typography ══ -->
+    <div class="sb-row">
+      <div class="sb-left">
+        <div class="section-label">Screens</div>
+        <div class="screen-list" id="screenList"></div>
+        <div class="section-label" style="margin-top:10px">Frame</div>
+        <div class="device-grid-v" id="deviceGrid">
+          <div class="device-card active" data-device="pixel" onclick="setDevice('pixel',this)">
+            <div class="device-icon"><i class="fa fa-mobile-screen-button"></i></div>
+            <div class="device-name">Pixel 9</div>
+          </div>
+          <div class="device-card" data-device="fold" onclick="setDevice('fold',this)">
+            <div class="device-icon"><i class="fa fa-tablet-screen-button"></i></div>
+            <div class="device-name">Z Fold</div>
+          </div>
+          <div class="device-card" data-device="flat" onclick="setDevice('flat',this)">
+            <div class="device-icon"><i class="fa fa-display"></i></div>
+            <div class="device-name">Flat UI</div>
+          </div>
+          <div class="device-card" data-device="tablet" onclick="setDevice('tablet',this)">
+            <div class="device-icon"><i class="fa fa-tablet"></i></div>
+            <div class="device-name">Tablet</div>
+          </div>
+        </div>
+      </div>
+      <div class="sb-right">
+        <div class="section-label">Color Theme</div>
+        <div class="theme-row" style="flex-wrap:wrap;gap:7px;margin-bottom:10px">
+          <div class="theme-dot active" style="background:linear-gradient(135deg,#00d4b8,#0052cc)" data-theme="teal" onclick="setTheme('teal',this)" title="Ocean Teal"></div>
+          <div class="theme-dot" style="background:linear-gradient(135deg,#f59e0b,#ef4444)" data-theme="fire" onclick="setTheme('fire',this)" title="Fire"></div>
+          <div class="theme-dot" style="background:linear-gradient(135deg,#a855f7,#ec4899)" data-theme="purple" onclick="setTheme('purple',this)" title="Neon Purple"></div>
+          <div class="theme-dot" style="background:linear-gradient(135deg,#10b981,#059669)" data-theme="green" onclick="setTheme('green',this)" title="Matrix"></div>
+          <div class="theme-dot" style="background:linear-gradient(135deg,#f0f0f0,#aaaaaa)" data-theme="mono" onclick="setTheme('mono',this)" title="Mono"></div>
+        </div>
+        <div class="section-label">Typography</div>
+        <div class="field-label" style="margin-bottom:3px">Headline font</div>
+        <select class="ctrl-select" id="hlFont" onchange="scState().headlineFont=this.value;renderMockup()" style="width:100%;margin-bottom:5px">
+          <option value="Montserrat">Montserrat</option>
+          <option value="Poppins">Poppins</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Impact">Impact</option>
+          <option value="Arial Black">Arial Black</option>
+        </select>
+        <div class="field-label" style="margin-bottom:3px">Subtitle font</div>
+        <select class="ctrl-select" id="subFont" onchange="scState().subtitleFont=this.value;renderMockup()" style="width:100%;margin-bottom:8px">
+          <option value="Poppins">Poppins</option>
+          <option value="Montserrat">Montserrat</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Arial">Arial</option>
+        </select>
+        <div class="section-label">Sizes</div>
+        <div class="sz-row">
+          <span class="sz-lbl"><i class="fa fa-heading"></i></span>
+          <input type="range" class="ctrl-range" id="hlFontSize" min="60" max="160" value="100"
+            oninput="document.getElementById('hlFontNum').value=this.value;scState().headlineFontSize=this.value/100;renderMockup()">
+          <input type="number" class="ctrl-num" id="hlFontNum" value="100" min="60" max="160"
+            oninput="document.getElementById('hlFontSize').value=this.value;scState().headlineFontSize=this.value/100;renderMockup()">
+        </div>
+        <div class="sz-row">
+          <span class="sz-lbl"><i class="fa fa-align-left"></i></span>
+          <input type="range" class="ctrl-range" id="subFontSize" min="60" max="160" value="100"
+            oninput="document.getElementById('subFontNum').value=this.value;scState().subtitleFontSize=this.value/100;renderMockup()">
+          <input type="number" class="ctrl-num" id="subFontNum" value="100" min="60" max="160"
+            oninput="document.getElementById('subFontSize').value=this.value;scState().subtitleFontSize=this.value/100;renderMockup()">
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- ══ SECTION 2: Media | Text + Badges + Awards ══ -->
+    <div class="sb-row">
+      <div class="sb-left">
+        <div class="section-label">Screenshot</div>
+        <div class="upload-zone-mini" id="screenshotDropZone"
+          onclick="document.getElementById('screenshotUpload').click()"
+          ondragover="event.preventDefault();this.classList.add('dragover')"
+          ondragleave="this.classList.remove('dragover')"
+          ondrop="handleScreenshotDrop(event)" style="margin-bottom:6px">
+          <i class="fa fa-mobile-screen-button"></i>
+          <span>Drop or click</span>
+          <input type="file" id="screenshotUpload" accept="image/png,image/jpeg" onchange="handleScreenshotUpload(event)" style="display:none">
+        </div>
+        <div id="screenshot-preview" style="display:none;margin-bottom:6px"></div>
+        <div class="section-label">Custom Frame</div>
+        <div class="upload-zone-mini" onclick="document.getElementById('frameUpload').click()" style="margin-bottom:6px">
+          <i class="fa fa-border-all"></i>
+          <span>Upload PNG</span>
+          <input type="file" id="frameUpload" accept="image/png" onchange="handleFrameUpload(event)" style="display:none">
+        </div>
+        <div id="frame-preview" style="display:none;margin-bottom:6px"></div>
+        <div class="section-label">Popup Image</div>
+        <div class="upload-zone-mini" onclick="document.getElementById('popupImgUpload').click()">
+          <i class="fa fa-image"></i>
+          <span>Upload</span>
+          <input type="file" id="popupImgUpload" accept="image/*" onchange="handlePopupUpload(event)" style="display:none">
+        </div>
+      </div>
+      <div class="sb-right">
+        <div class="section-label">Text</div>
+        <div id="textEditor"></div>
+        <div class="section-label" style="margin-top:8px">Badge</div>
+        <input class="field-input" id="badge-text" placeholder="e.g. Fast & Secure" style="margin-bottom:4px">
+        <div style="display:flex;gap:5px;margin-bottom:5px">
+          <select class="field-input" id="badge-style" style="flex:1">
+            <option value="accent">Filled</option>
+            <option value="outline">Outline</option>
+            <option value="dark">Glass</option>
+            <option value="white">White</option>
+          </select>
+          <button class="small-btn" onclick="addBadge()"><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="toggle-row" style="margin-bottom:6px">
+          <span class="toggle-label" style="font-size:10px">Show badges</span>
+          <div class="toggle on" id="toggleBadges" onclick="togglePerScreen('badgesShow',this)"></div>
+        </div>
+        <div class="section-label">Award</div>
+        <input class="field-input" id="award-title" placeholder="Title" style="margin-bottom:4px">
+        <input class="field-input" id="award-sub" placeholder="e.g. Google Play 2025" style="margin-bottom:4px">
+        <div style="display:flex;gap:5px;margin-bottom:6px">
+          <select class="field-input" id="award-style" style="flex:1">
+            <option value="gold">Gold</option>
+            <option value="accent">Accent</option>
+            <option value="dark">Glass</option>
+          </select>
+          <button class="small-btn" onclick="addAward()"><i class="fa fa-trophy"></i></button>
+        </div>
+        <div id="overlays-list"></div>
+      </div>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- ══ SECTION 3: Controls | Feature Strip + Watermark ══ -->
+    <div class="sb-row" style="align-items:flex-start">
+      <div class="sb-left">
+        <div class="section-label">Scale</div>
+        <div class="sz-row" style="margin-bottom:6px">
+          <input type="range" class="ctrl-range" id="devScale" min="40" max="160" value="100"
+            oninput="document.getElementById('devScaleNum').value=this.value;scState().deviceScale=this.value/100;renderMockup()">
+          <input type="number" class="ctrl-num" id="devScaleNum" value="100" min="40" max="160">
+        </div>
+        <div class="section-label">Rotate</div>
+        <div class="sz-row" style="margin-bottom:8px">
+          <input type="range" class="ctrl-range" id="devRotate" min="-30" max="30" value="0"
+            oninput="document.getElementById('devRotateNum').value=this.value;scState().deviceRotate=parseInt(this.value);renderMockup()">
+          <input type="number" class="ctrl-num" id="devRotateNum" value="0" min="-30" max="30">
+        </div>
+        <button class="small-btn full" onclick="resetDeviceTransform()">
+          <i class="fa fa-arrows-rotate"></i> Reset
+        </button>
+        <div style="margin-top:7px;font-size:9px;color:var(--muted2);line-height:1.5">
+          <i class="fa fa-circle-info" style="color:var(--teal)"></i>
+          Hover device edge to resize / rotate
+        </div>
+      </div>
+      <div class="sb-right">
+        <div class="section-label">Feature Strip</div>
+        <div class="toggle-row" style="margin-bottom:5px">
+          <span class="toggle-label" style="font-size:10px">Show</span>
+          <div class="toggle on" id="toggleFeatures" onclick="togglePerScreen('featureShow',this)"></div>
+        </div>
+        <select class="ctrl-select" id="featurePos" onchange="scState().featurePos=this.value;renderMockup()" style="width:100%;margin-bottom:5px">
+          <option value="bottom">Bottom</option>
+          <option value="top">Top</option>
+          <option value="center">Center</option>
+        </select>
+        <div class="sz-row" style="margin-bottom:5px">
+          <span class="sz-lbl" style="font-size:9px">Size</span>
+          <input type="range" class="ctrl-range" id="featFontSize" min="6" max="22" value="11"
+            oninput="document.getElementById('featFontNum').value=this.value;scState().featureFontSize=parseInt(this.value);renderMockup()">
+          <input type="number" class="ctrl-num" id="featFontNum" value="11" min="6" max="22" style="width:40px">
+        </div>
+        <div id="featureItemsList"></div>
+        <button class="small-btn full" id="addFeatureBtn" onclick="addFeatureItem()" style="margin-top:4px">
+          <i class="fa fa-plus"></i> Add
+        </button>
+        <div class="section-label" style="margin-top:8px">Watermark</div>
+        <div class="toggle-row" style="margin-bottom:5px">
+          <span class="toggle-label" style="font-size:10px">Show</span>
+          <div class="toggle on" id="toggleWatermark" onclick="togglePerScreen('watermarkShow',this)"></div>
+        </div>
+        <input class="field-input" id="watermarkText" value="VELIU LABS" placeholder="Watermark text"
+          oninput="scState().watermarkText=this.value;renderMockup()">
+      </div>
+    </div>
+
+    </div><!-- /sidebar-body -->
+  </aside><div class="resize-handle" id="resize-left" title="Drag to resize">
+</div>
+
+  <!-- CENTER: Live preview -->
+  <main class="canvas-area">
+    <div class="canvas-toolbar">
+      <span>Live Preview</span>
+      <span style="color:var(--teal);font-size:11px" id="screenTitle">Screen 1 of 5</span>
+      <div class="size-badge" id="sizeBadge">1080 × 1920 px</div>
+    </div>
+
+    <div class="mockup-wrapper">
+      <div id="mockup-canvas">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <!-- SCREEN CAROUSEL -->
+    <div id="screenCarousel">
+      <div id="carouselTrack"></div>
+    </div>
+  </main><div class="resize-handle" id="resize-right" title="Drag to resize"></div>
+
+  <!-- RIGHT: Export -->
+  <aside class="panel-right">
+
+    <div class="section-label">Export</div>
+
+    <div class="export-info">
+      <div class="info-row">
+        <span class="info-key">Resolution</span>
+        <span class="info-val ok" id="expRes">1080 × 1920</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Format</span>
+        <span class="info-val ok">PNG</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Ratio</span>
+        <span class="info-val ok">9:16</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Play Store</span>
+        <span class="info-val ok">Compliant</span>
+      </div>
+    </div>
+
+    <button class="export-btn primary" onclick="exportCurrent()">
+      <span>⬇</span>
+      <span id="exportBtnText">Download This Screen</span>
+      <div class="export-loader" id="exportLoader"></div>
+    </button>
+
+    <button class="export-btn secondary" onclick="exportAllZip()">
+      <span><i class="fa fa-file-zipper"></i></span>
+      <span id="exportAllText">Download All as ZIP</span>
+      <div class="export-loader" id="exportAllLoader"></div>
+    </button>
+
+    <div class="progress-bar" id="progressBar" style="display:none">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+
+<!-- settings mode removed - per-screen is default -->
+
+    <div class="section-label" style="margin-top:10px">Custom Canvas Size</div>
+    <div class="ctrl-row" style="margin-bottom:6px">
+      <label><i class="fa fa-ruler-horizontal"></i> Width px</label>
+      <input type="number" class="ctrl-select" id="customW" placeholder="default"
+        style="width:80px" oninput="scState().customW=this.value?parseInt(this.value):null;updateCanvasSizeBadge()">
+    </div>
+    <div class="ctrl-row" style="margin-bottom:8px">
+      <label><i class="fa fa-ruler-vertical"></i> Height px</label>
+      <input type="number" class="ctrl-select" id="customH" placeholder="default"
+        style="width:80px" oninput="scState().customH=this.value?parseInt(this.value):null;updateCanvasSizeBadge()">
+    </div>
+    <button class="small-btn full" style="margin-bottom:10px" onclick="resetCustomSize()">
+      <i class="fa fa-arrows-rotate"></i> Reset to default size
+    </button>
+    <div class="section-label" style="margin-top:2px">Asset Type</div>
+    <div id="asset-type-tabs">
+      <div class="asset-row active" onclick="setAssetType('phone',this)">
+        <i class="fa fa-mobile-screen ar-icon"></i><span class="ar-name">Phone</span><span class="ar-size">1080×1920</span>
+      </div>
+      <div class="asset-row" onclick="setAssetType('tab7',this)">
+        <i class="fa fa-tablet-screen-button ar-icon"></i><span class="ar-name">Tablet 7"</span><span class="ar-size">1080×1920</span>
+      </div>
+      <div class="asset-row" onclick="setAssetType('tab10',this)">
+        <i class="fa fa-tablet ar-icon"></i><span class="ar-name">Tablet 10"</span><span class="ar-size">1200×1920</span>
+      </div>
+      <div class="asset-row" onclick="setAssetType('tv',this)">
+        <i class="fa fa-tv ar-icon"></i><span class="ar-name">TV Banner</span><span class="ar-size">1280×720</span>
+      </div>
+      <div class="asset-row" onclick="setAssetType('daydream',this)">
+        <i class="fa fa-vr-cardboard ar-icon"></i><span class="ar-name">Daydream</span><span class="ar-size">4096×4096</span>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:10px">Background Config</div>
+    <div id="bg-config-panel" class="bg-panel">
+      <div class="toggle-row">
+        <span class="toggle-label"><i class="fa fa-minus" style="margin-right:5px"></i>Top strip</span>
+        <div class="toggle on" id="togStrip" onclick="this.classList.toggle('on');updateBgCfg()"></div>
+      </div>
+      <div class="field-group" style="margin-bottom:8px">
+        <div class="field-label">Strip style</div>
+        <select class="field-input" id="stripStyle" onchange="updateBgCfg()">
+          <option value="gradient">Gradient</option>
+          <option value="solid">Solid accent</option>
+          <option value="white">White</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+      <div class="field-group" style="margin-bottom:8px">
+        <div class="field-label">Background type</div>
+        <select class="field-input" id="bgType" onchange="updateBgCfg()">
+          <option value="gradient">Gradient</option>
+          <option value="solid">Solid color</option>
+          <option value="mesh">Mesh glow</option>
+          <option value="image">Custom image</option>
+        </select>
+      </div>
+      <div class="field-label" style="margin-bottom:4px">Color 1</div>
+      <div class="color-input-row">
+        <input type="color" id="bgCol1" value="#04101e" oninput="document.getElementById('bgCol1t').value=this.value;updateBgCfg()">
+        <input type="text" id="bgCol1t" value="#04101e" oninput="document.getElementById('bgCol1').value=this.value;updateBgCfg()">
+      </div>
+      <div class="field-label" style="margin-bottom:4px">Color 2</div>
+      <div class="color-input-row">
+        <input type="color" id="bgCol2" value="#0a1628" oninput="document.getElementById('bgCol2t').value=this.value;updateBgCfg()">
+        <input type="text" id="bgCol2t" value="#0a1628" oninput="document.getElementById('bgCol2').value=this.value;updateBgCfg()">
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label"><i class="fa fa-circle-nodes" style="margin-right:5px"></i>Shapes</span>
+        <div class="toggle on" id="togShapes" onclick="this.classList.toggle('on');updateBgCfg()"></div>
+      </div>
+      <div class="range-row">
+        <label><span>Noise overlay</span><span id="noiseVal">0%</span></label>
+        <input type="range" id="noiseRange" min="0" max="60" value="0" oninput="document.getElementById('noiseVal').textContent=this.value+'%';updateBgCfg()">
+      </div>
+      <div class="upload-zone" onclick="document.getElementById('bgImgUpload').click()" style="margin-bottom:8px">
+        <i class="fa fa-image" style="font-size:20px;color:var(--teal);display:block;margin:0 auto 4px"></i>
+        <p>Upload custom background</p>
+        <input type="file" id="bgImgUpload" accept="image/*" onchange="handleBgUpload(event)">
+      </div>
+      <div id="bgImgPreview" style="display:none;margin-bottom:8px"></div>
+    </div>
+    <div class="section-label">Play Store Guide</div>
+    <div class="export-info" style="margin-bottom:0">
+      <div class="info-row">
+        <span class="info-key">Min size</span>
+        <span class="info-val">320 × 568</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Max size</span>
+        <span class="info-val">3840 px</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Max file</span>
+        <span class="info-val">8 MB</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Screens</span>
+        <span class="info-val ok">2–8 required</span>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="assets/script/script.js"></script>
+</body>
+</html>
