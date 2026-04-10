@@ -663,7 +663,7 @@ async function exportCurrent() {
   loader.style.display = 'block';
 
   try {
-    await exportScreen(currentScreen);
+    await exportScreenV2(currentScreen);
     showToast(`Screen ${currentScreen+1} downloaded!`);
   } catch(e) {
     showToast('Error: ' + e.message);
@@ -687,7 +687,7 @@ async function exportAll() {
   for (let i = 0; i < SCREENS.length; i++) {
     selectScreen(i);
     await new Promise(r => setTimeout(r, 300));
-    await exportScreen(i);
+    await exportScreenV2(i);
     fill.style.width = `${((i+1)/SCREENS.length)*100}%`;
   }
 
@@ -699,33 +699,8 @@ async function exportAll() {
 }
 
 async function exportScreen(idx) {
-  // Temporarily set screen
-  const savedIdx = currentScreen;
-  currentScreen = idx;
-  renderMockup();
-  await new Promise(r => setTimeout(r, 200));
-
-  const canvas = document.getElementById('mockup-canvas');
-  const scale = 3; // 360 * 3 = 1080px wide → Play Store compliant
-
-  const c = await html2canvas(canvas, {
-    scale: scale,
-    useCORS: true,
-    backgroundColor: null,
-    logging: false,
-    width: 360,
-    height: 640,
-  });
-
-  const link = document.createElement('a');
-  link.download = `mydns-screen-${idx+1}-${SCREENS[idx].name.replace(/\s+/g,'-').toLowerCase()}-1080x1920.png`;
-  link.href = c.toDataURL('image/png');
-  link.click();
-
-  if (savedIdx !== idx) {
-    currentScreen = savedIdx;
-    renderMockup();
-  }
+  // V1 export — kept for compatibility but defers to V2 below
+  return exportScreenV2(idx);
 }
 
 
@@ -951,13 +926,31 @@ function refreshOverlaysList() {
   const el = document.getElementById('overlays-list');
   if (!el) return;
   const overlays = scState().overlays;
-  if (!overlays.length) { el.innerHTML = '<div style="font-size:11px;color:var(--muted2);padding:4px 0">No overlays yet</div>'; return; }
-  el.innerHTML = overlays.map(ov => `
-    <div style="display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;border:1px solid var(--border2);margin-bottom:5px;background:var(--card)">
-      <i class="fa ${ov.type==='badge'?'fa-tag':ov.type==='award'?'fa-trophy':'fa-image'}" style="color:var(--teal);font-size:12px"></i>
-      <span style="flex:1;font-size:11px;font-weight:600">${ov.type==='badge'?ov.text:ov.type==='award'?ov.title:'Popup image'}</span>
-      <button class="small-btn danger" style="padding:3px 7px" onclick="removeOverlay(${ov.id})"><i class="fa fa-trash"></i></button>
-    </div>`).join('');
+  if (!overlays.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--muted2);padding:6px 0">No overlays yet</div>';
+    return;
+  }
+  el.innerHTML = overlays.map(ov => {
+    const isSelected = selectedOverlay === ov.id;
+    const label = ov.type === 'badge' ? ov.text
+                : ov.type === 'award' ? ov.title
+                : `Popup (${ov.w||120}px${ov.rotate ? ', '+Math.round(ov.rotate)+'°' : ''})`;
+    const icon  = ov.type === 'badge' ? 'fa-tag'
+                : ov.type === 'award' ? 'fa-trophy'
+                : 'fa-image';
+    return `<div style="display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:7px;
+      border:1px solid ${isSelected ? 'var(--teal)' : 'var(--border2)'};
+      background:${isSelected ? 'var(--teal-glow)' : 'var(--card)'};
+      margin-bottom:4px;cursor:pointer;transition:all .15s"
+      onclick="selectedOverlay=${ov.id};renderMockup();refreshOverlaysList()">
+      <i class="fa ${icon}" style="color:var(--teal);font-size:11px;flex-shrink:0"></i>
+      <span style="flex:1;font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${label}</span>
+      <button class="small-btn danger" style="padding:2px 7px;flex-shrink:0"
+        onclick="event.stopPropagation();removeOverlay(${ov.id})">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>`;
+  }).join('');
 }
 
 // ═══════════════════════════════════════════
@@ -1498,7 +1491,7 @@ function renderDaydream(canvas, t, customScreenshot) {
 // ═══════════════════════════════════════════
 // EXPORT: Use canvas.toBlob for accuracy
 // ═══════════════════════════════════════════
-async function exportScreen(idx) {
+async function exportScreenV2(idx) {
   const savedIdx = currentScreen;
   const savedSel = selectedOverlay;
   currentScreen = idx;
@@ -1961,10 +1954,46 @@ function buildCarousel() {
 
 // ── Click outside overlay → deselect ─────────────────────────
 document.getElementById('mockup-canvas').addEventListener('click', (e) => {
-  // If click landed on the canvas background (not an overlay or its children)
-  if (e.target.id === 'mockup-canvas' || e.target.classList.contains('mock-bg')) {
+  // Deselect if clicked on canvas background or non-overlay elements
+  const isOverlay = e.target.closest('.overlay-handle');
+  if (!isOverlay && selectedOverlay !== null) {
+    selectedOverlay = null;
+    renderMockup();
+    refreshOverlaysList();
+  }
+});
+
+
+// ── Keyboard shortcuts for overlays ─────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  // Don't intercept when typing in an input
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+
+  if (e.key === 'Escape') {
     if (selectedOverlay !== null) {
       selectedOverlay = null;
+      renderMockup();
+      refreshOverlaysList();
+    }
+    return;
+  }
+
+  if ((e.key === 'Delete' || e.key === 'Backspace') && selectedOverlay !== null) {
+    e.preventDefault();
+    removeOverlay(selectedOverlay);
+    return;
+  }
+
+  // Arrow keys nudge selected overlay
+  if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key) && selectedOverlay !== null) {
+    e.preventDefault();
+    const step = e.shiftKey ? 10 : 1;
+    const ov = scState().overlays.find(o => o.id === selectedOverlay);
+    if (ov) {
+      if (e.key === 'ArrowLeft')  ov.x -= step;
+      if (e.key === 'ArrowRight') ov.x += step;
+      if (e.key === 'ArrowUp')    ov.y -= step;
+      if (e.key === 'ArrowDown')  ov.y += step;
       renderMockup();
     }
   }
