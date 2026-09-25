@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel Productivity Guide</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070707;
+    --panel:#0E0E0E;
+    --panel-2:#151515;
+    --border:#272727;
+    --border-soft:#1B1B1B;
+    --accent:#FFFFFF;
+    --accent-dim:#A8A8A8;
+    --on-accent:#0A0A0A;
+    --text:#F3F3F3;
+    --text-dim:#9E9E9E;
+    --text-faint:#5E5E5E;
+    --kbd-bg:#050505;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0) 0 0/28px 28px,
+      radial-gradient(900px 600px at 90% -10%, rgba(255,255,255,0.05) 0%, transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Poppins', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  a{color:inherit;}
+
+  /* ---------- Layout shell ---------- */
+  .shell{display:flex; min-height:100vh;}
+
+  .sidebar{
+    width:264px;
+    flex-shrink:0;
+    border-right:1px solid var(--border-soft);
+    padding:30px 20px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent 200px);
+  }
+  .sidebar-header{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding:0 6px;
+  }
+  .brand{
+    font-family:'Montserrat',sans-serif;
+    font-weight:800;
+    font-size:16px;
+    letter-spacing:0.2px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--text);
+  }
+  .brand-icon{
+    width:28px; height:28px;
+    border-radius:7px;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px;
+    color:var(--accent);
+    flex-shrink:0;
+  }
+  .brand-sub{
+    font-size:11px;
+    color:var(--text-faint);
+    padding-left:38px;
+    font-weight:400;
+  }
+
+  nav.tabs{display:flex; flex-direction:column; gap:4px;}
+  .tab-btn{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 12px;
+    border-radius:8px;
+    background:transparent;
+    border:none;
+    color:var(--text-dim);
+    font-family:'Poppins',sans-serif;
+    font-size:13.5px;
+    font-weight:500;
+    text-align:left;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+    width:100%;
+  }
+  .tab-btn i{width:16px; text-align:center; font-size:13px; color:var(--text-faint); transition:color .15s ease;}
+  .tab-btn:hover{background:var(--panel-2); color:var(--text);}
+  .tab-btn.active{background:rgba(255,255,255,0.08); color:var(--accent); box-shadow:inset 0 0 0 1px var(--border);}
+  .tab-btn.active i{color:var(--accent);}
+
+  .sidebar-foot{
+    margin-top:auto;
+    font-size:11px;
+    color:var(--text-faint);
+    padding:14px 6px 0;
+    line-height:1.6;
+    border-top:1px solid var(--border-soft);
+  }
+
+  main{
+    flex:1;
+    padding:50px 64px 100px;
+    max-width:1240px;
+  }
+
+  .section{display:none; animation:fadeIn .25s ease;}
+  .section.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  .page-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:38px;
+    padding-bottom:26px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .page-title{
+    font-family:'Montserrat',sans-serif;
+    font-weight:800;
+    font-size:32px;
+    letter-spacing:-0.4px;
+    margin-bottom:10px;
+  }
+  .page-desc{
+    color:var(--text-dim);
+    font-size:14px;
+    max-width:640px;
+    line-height:1.65;
+  }
+  .page-desc kbd{margin:0 1px;}
+  .page-stat{
+    text-align:right;
+    flex-shrink:0;
+  }
+  .page-stat .num{
+    font-family:'Montserrat',sans-serif;
+    font-weight:800;
+    font-size:34px;
+    line-height:1;
+  }
+  .page-stat .lbl{
+    font-size:11px;
+    color:var(--text-faint);
+    margin-top:6px;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+  }
+
+  /* ---------- Page Setup / Stepper ---------- */
+  .stepper-wrap{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+  }
+  .step-progress{
+    display:flex;
+    padding:26px 34px 0;
+    gap:6px;
+  }
+  .step-dot{
+    height:3px;
+    flex:1;
+    background:var(--border);
+    border-radius:3px;
+    transition:background .2s ease;
+  }
+  .step-dot.done{background:var(--accent-dim);}
+  .step-dot.current{background:var(--accent);}
+
+  .step-body{
+    display:grid;
+    grid-template-columns:1fr 320px;
+    gap:48px;
+    padding:44px 34px 40px;
+    min-height:260px;
+    align-items:center;
+  }
+  .step-num{
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    color:var(--accent);
+    letter-spacing:1.8px;
+    margin-bottom:12px;
+  }
+  .step-title{
+    font-family:'Montserrat',sans-serif;
+    font-size:23px;
+    font-weight:700;
+    margin-bottom:16px;
+    letter-spacing:-0.2px;
+  }
+  .step-text{
+    color:var(--text-dim);
+    font-size:14.5px;
+    line-height:1.75;
+    max-width:440px;
+  }
+  .step-text b{color:var(--text); font-weight:600;}
+  .step-text kbd{margin:0 1px;}
+  .step-visual{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--panel-2);
+    border:1px solid var(--border-soft);
+    border-radius:14px;
+    padding:22px;
+    height:220px;
+  }
+  .step-visual svg{width:100%; height:auto; max-height:180px;}
+
+  .step-controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 34px;
+    border-top:1px solid var(--border);
+    background:var(--panel-2);
+  }
+  .step-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 18px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text);
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .step-btn:hover:not(:disabled){border-color:var(--accent-dim); background:rgba(255,255,255,0.06);}
+  .step-btn:disabled{opacity:0.3; cursor:default;}
+  .step-btn.primary{background:var(--accent); color:var(--on-accent); border-color:var(--accent); font-weight:600;}
+  .step-btn.primary:hover{background:#fff; opacity:0.9;}
+  .step-counter{font-size:12.5px; color:var(--text-faint); font-variant-numeric:tabular-nums;}
+
+  .callout{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    margin-top:24px;
+    padding:18px 20px;
+    background:var(--panel);
+    border:1px solid var(--border-soft);
+    border-left:2px solid var(--accent);
+    border-radius:10px;
+  }
+  .callout i{color:var(--accent); font-size:14px; margin-top:2px;}
+  .callout .t{font-size:13px; color:var(--text-dim); line-height:1.6;}
+  .callout .t b{color:var(--text); font-weight:600;}
+
+  /* ---------- Shortcuts ---------- */
+  .controls-row{
+    display:flex;
+    gap:12px;
+    margin-bottom:24px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .search-box{
+    flex:1;
+    min-width:240px;
+    position:relative;
+  }
+  .search-box i{
+    position:absolute; left:15px; top:50%; transform:translateY(-50%);
+    color:var(--text-faint); font-size:13px;
+  }
+  .search-box input{
+    width:100%;
+    padding:12px 14px 12px 38px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--text);
+    font-family:'Poppins',sans-serif;
+    font-size:13.5px;
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--accent-dim);}
+  .search-box input::placeholder{color:var(--text-faint);}
+
+  .os-toggle{
+    display:flex;
+    border:1px solid var(--border);
+    border-radius:9px;
+    overflow:hidden;
+  }
+  .os-toggle button{
+    padding:11px 18px;
+    background:var(--panel);
+    border:none;
+    color:var(--text-dim);
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .os-toggle button.active{background:var(--accent); color:var(--on-accent); font-weight:600;}
+
+  .chip-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;}
+  .chip{
+    padding:8px 15px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--text-dim);
+    font-size:12.5px;
+    font-weight:500;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip.active{background:rgba(255,255,255,0.1); border-color:var(--accent-dim); color:var(--accent);}
+  .chip:hover:not(.active){border-color:var(--text-faint);}
+
+  .shortcut-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+    gap:10px;
+  }
+  .shortcut-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:15px 17px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .shortcut-card:hover{border-color:var(--accent-dim); background:var(--panel-2);}
+  .shortcut-card .label{font-size:13px; color:var(--text); font-weight:500; line-height:1.4;}
+  .shortcut-card .keys{display:flex; gap:4px; flex-shrink:0;}
+  kbd{
+    background:var(--kbd-bg);
+    border:1px solid var(--border);
+    border-bottom-width:2px;
+    color:var(--text);
+    padding:4px 8px;
+    border-radius:6px;
+    font-family:'Poppins',sans-serif;
+    font-size:11.5px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .no-results{
+    grid-column:1 / -1;
+    text-align:center;
+    color:var(--text-faint);
+    font-size:13.5px;
+    padding:50px 0;
+  }
+
+  /* ---------- Tools & Tips shared grid ---------- */
+  .tools-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(360px, 1fr));
+    gap:14px;
+  }
+  .tool-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:22px;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .tool-card:hover{border-color:var(--accent-dim);}
+  .tool-head{display:flex; align-items:center; gap:13px;}
+  .tool-icon{
+    width:38px; height:38px;
+    border-radius:9px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid var(--border);
+    color:var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px;
+    flex-shrink:0;
+  }
+  .tool-name{font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;}
+  .tool-tag{font-size:11px; color:var(--text-faint); margin-top:2px;}
+  .tool-chevron{margin-left:auto; color:var(--text-faint); font-size:12px; transition:transform .2s ease;}
+  .tool-card.open{background:var(--panel-2);}
+  .tool-card.open .tool-chevron{transform:rotate(180deg); color:var(--accent);}
+  .tool-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease, margin-top .25s ease;
+    margin-top:0;
+  }
+  .tool-card.open .tool-body{max-height:220px; margin-top:16px;}
+  .tool-body-inner{
+    font-size:13px;
+    color:var(--text-dim);
+    line-height:1.65;
+    padding-top:16px;
+    border-top:1px solid var(--border-soft);
+  }
+  .tool-body-inner .how{
+    display:block;
+    margin-top:10px;
+    font-size:12px;
+    color:var(--text-faint);
+  }
+  .tool-body-inner kbd{margin:0 2px;}
+
+  .section-foot{
+    margin-top:40px;
+    padding-top:24px;
+    border-top:1px solid var(--border-soft);
+    font-size:12px;
+    color:var(--text-faint);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-foot i{color:var(--text-faint);}
+
+  @media (max-width:900px){
+    .shell{flex-direction:column;}
+    .sidebar{
+      position:relative; width:100%; height:auto;
+      flex-direction:row; align-items:center; overflow-x:auto;
+      padding:18px 20px; gap:20px;
+    }
+    .sidebar-header{flex-shrink:0;}
+    .brand-sub{display:none;}
+    nav.tabs{flex-direction:row;}
+    .sidebar-foot{display:none;}
+    main{padding:34px 20px 70px;}
+    .page-head{flex-direction:column; align-items:flex-start; gap:12px;}
+    .step-body{grid-template-columns:1fr; padding:28px 22px;}
+    .step-visual{order:-1; height:180px;}
+    .shortcut-grid, .tools-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand"><span class="brand-icon"><i class="fa-solid fa-table-cells"></i></span>Excel Guide</div>
+      <div class="brand-sub">Layout, shortcuts &amp; tools</div>
+    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="setup"><i class="fa-solid fa-file-import"></i>Page Setup &amp; Print</button>
+      <button class="tab-btn" data-tab="shortcuts"><i class="fa-solid fa-keyboard"></i>Keyboard Shortcuts</button>
+      <button class="tab-btn" data-tab="tools"><i class="fa-solid fa-toolbox"></i>Productivity Tools</button>
+      <button class="tab-btn" data-tab="tips"><i class="fa-solid fa-lightbulb"></i>Tips &amp; Tricks</button>
+    </nav>
+    <div class="sidebar-foot">Click through the setup steps, filter shortcuts by category or search, and expand any tool or tip card for details.</div>
+  </aside>
+
+  <main>
+
+    <!-- ================= SECTION 1: PAGE SETUP ================= -->
+    <section class="section active" id="setup">
+      <div class="page-head">
+        <div>
+          <div class="page-title">Page Setup &amp; Print Sizing</div>
+          <div class="page-desc">Get any spreadsheet — however wide — to fit cleanly on a specific paper size like A4. Step through the sequence below.</div>
+        </div>
+        <div class="page-stat"><div class="num">8</div><div class="lbl">Steps</div></div>
+      </div>
+
+      <div class="stepper-wrap">
+        <div class="step-progress" id="stepProgress"></div>
+        <div class="step-body">
+          <div>
+            <div class="step-num" id="stepNum">STEP 1 / 8</div>
+            <div class="step-title" id="stepTitle"></div>
+            <div class="step-text" id="stepText"></div>
+          </div>
+          <div class="step-visual" id="stepVisual"></div>
+        </div>
+        <div class="step-controls">
+          <button class="step-btn" id="prevBtn"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <div class="step-counter" id="stepCounter">1 of 8</div>
+          <button class="step-btn primary" id="nextBtn">Next<i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="callout">
+        <i class="fa-solid fa-circle-info"></i>
+        <div class="t"><b>Extra tip:</b> if a column is wider than it needs to be, manually narrow it before printing — Excel's auto-scaling shrinks everything evenly, so trimming one bloated column helps far more than letting the whole page shrink to fit it.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: SHORTCUTS ================= -->
+    <section class="section" id="shortcuts">
+      <div class="page-head">
+        <div>
+          <div class="page-title">Keyboard Shortcuts</div>
+          <div class="page-desc">Search or filter by category. Toggle the OS switch — Mac swaps <kbd>Ctrl</kbd> for <kbd>Cmd</kbd> and <kbd>Alt</kbd> for <kbd>Option</kbd> on most commands.</div>
+        </div>
+        <div class="page-stat"><div class="num" id="shortcutCount">45</div><div class="lbl">Shortcuts</div></div>
+      </div>
+
+      <div class="controls-row">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="shortcutSearch" placeholder="Search shortcuts, e.g. 'fill' or 'freeze'...">
+        </div>
+        <div class="os-toggle">
+          <button class="active" data-os="win">Windows</button>
+          <button data-os="mac">Mac</button>
+        </div>
+      </div>
+
+      <div class="chip-row" id="chipRow"></div>
+      <div class="shortcut-grid" id="shortcutGrid"></div>
+    </section>
+
+    <!-- ================= SECTION 3: TOOLS ================= -->
+    <section class="section" id="tools">
+      <div class="page-head">
+        <div>
+          <div class="page-title">Productivity Tools</div>
+          <div class="page-desc">Built-in features that save the most time once they're part of your habits. Tap a card for how to use it.</div>
+        </div>
+        <div class="page-stat"><div class="num" id="toolsCount">12</div><div class="lbl">Features</div></div>
+      </div>
+      <div class="tools-grid" id="toolsGrid"></div>
+    </section>
+
+    <!-- ================= SECTION 4: TIPS & TRICKS ================= -->
+    <section class="section" id="tips">
+      <div class="page-head">
+        <div>
+          <div class="page-title">Tips &amp; Tricks</div>
+          <div class="page-desc">Small habits that add up — quicker moves for things you probably already do often.</div>
+        </div>
+        <div class="page-stat"><div class="num" id="tipsCount">12</div><div class="lbl">Tips</div></div>
+      </div>
+      <div class="tools-grid" id="tipsGrid"></div>
+      <div class="section-foot"><i class="fa-solid fa-circle-info"></i>Most of these work the same on Windows and Mac unless a specific key is mentioned.</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   PAGE SETUP STEPPER
+   ============================================================ */
+const steps = [
+  {
+    title:"Open the Page Layout tab",
+    text:"Click <b>Page Layout</b> in the ribbon. Every print-related setting — orientation, paper size, margins, print area and scaling — lives here.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="10" y="20" width="200" height="16" rx="3" fill="#151515" stroke="#272727"/><rect x="18" y="24" width="52" height="8" rx="2" fill="#FFFFFF" opacity="0.85"/><rect x="80" y="24" width="40" height="8" rx="2" fill="#3A3A3A"/><rect x="130" y="24" width="40" height="8" rx="2" fill="#3A3A3A"/><rect x="10" y="42" width="200" height="98" rx="4" fill="#0E0E0E" stroke="#272727"/><rect x="24" y="56" width="60" height="70" rx="3" fill="#151515" stroke="#272727"/></svg>`
+  },
+  {
+    title:"Switch to Landscape orientation",
+    text:"Under <b>Orientation</b>, choose <b>Landscape</b>. Wide tables with many columns fit far better sideways than in tall Portrait mode.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="30" y="20" width="60" height="80" rx="3" fill="#151515" stroke="#3A3A3A" stroke-width="1.5"/><text x="60" y="115" text-anchor="middle" fill="#5E5E5E" font-size="9" font-family="Poppins">Portrait</text><rect x="120" y="40" width="80" height="50" rx="3" fill="#151515" stroke="#FFFFFF" stroke-width="2"/><text x="160" y="105" text-anchor="middle" fill="#FFFFFF" font-size="9" font-family="Poppins" font-weight="600">Landscape</text><path d="M95 60 L112 60" stroke="#FFFFFF" stroke-width="1.5" marker-end="url(#arrow)"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#FFFFFF"/></marker></defs></svg>`
+  },
+  {
+    title:"Set paper size to A4",
+    text:"Under <b>Size</b>, pick <b>A4</b>. Some regional Excel defaults ship with US Letter, so it's worth checking even if A4 looks selected.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="70" y="15" width="80" height="113" rx="3" fill="#151515" stroke="#FFFFFF" stroke-width="2"/><text x="110" y="75" text-anchor="middle" fill="#FFFFFF" font-size="13" font-family="Montserrat" font-weight="700">A4</text><text x="110" y="145" text-anchor="middle" fill="#5E5E5E" font-size="9" font-family="Poppins">210 × 297 mm</text></svg>`
+  },
+  {
+    title:"Narrow the margins",
+    text:"Under <b>Margins</b>, choose <b>Narrow</b>, or set custom values (around 0.5–1 cm on each side). More usable space means fewer columns get pushed to a second page.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="30" y="20" width="160" height="120" rx="3" fill="#0E0E0E" stroke="#272727"/><rect x="42" y="30" width="136" height="100" rx="2" fill="#151515" stroke="#FFFFFF" stroke-dasharray="3 3"/><path d="M30 20 L42 30 M190 20 L178 30 M30 140 L42 130 M190 140 L178 130" stroke="#5E5E5E" stroke-width="1"/></svg>`
+  },
+  {
+    title:"Set the print area",
+    text:"Select the range you want printed, then <b>Page Layout → Print Area → Set Print Area</b>. Only that range prints — not the whole empty sheet around it.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="20" y="20" width="180" height="120" rx="3" fill="#0E0E0E" stroke="#272727"/><rect x="35" y="35" width="120" height="65" rx="2" fill="#151515" stroke="#FFFFFF" stroke-width="2"/><rect x="35" y="35" width="120" height="16" fill="#FFFFFF" opacity="0.12"/><text x="95" y="46" text-anchor="middle" fill="#FFFFFF" font-size="8" font-family="Poppins" font-weight="600">PRINT AREA</text></svg>`
+  },
+  {
+    title:"Repeat header rows on every page",
+    text:"Go to <b>Page Layout → Print Titles → Sheet</b> tab, and set <b>Rows to repeat at top</b> to your header row. Long tables then keep column names visible on every printed page.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="20" y="15" width="80" height="120" rx="3" fill="#0E0E0E" stroke="#272727"/><rect x="20" y="15" width="80" height="14" fill="#FFFFFF" opacity="0.75"/><rect x="120" y="15" width="80" height="120" rx="3" fill="#0E0E0E" stroke="#272727"/><rect x="120" y="15" width="80" height="14" fill="#FFFFFF" opacity="0.75"/><path d="M100 22 L118 22" stroke="#FFFFFF" stroke-width="1.5" marker-end="url(#arrow2)"/><defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#FFFFFF"/></marker></defs></svg>`
+  },
+  {
+    title:"Scale to fit one page wide",
+    text:"Under <b>Scale to Fit</b>, set <b>Width</b> to <b>1 page</b> and leave <b>Height</b> as <b>Automatic</b>. Excel shrinks columns to fit one page across, while allowing as many pages tall as needed.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="60" y="20" width="100" height="30" rx="3" fill="#151515" stroke="#3A3A3A"/><text x="110" y="39" text-anchor="middle" fill="#9E9E9E" font-size="9" font-family="Poppins">too wide →</text><path d="M110 55 L110 68" stroke="#5E5E5E" stroke-width="1.5" marker-end="url(#arrow3)"/><rect x="75" y="75" width="70" height="55" rx="3" fill="#151515" stroke="#FFFFFF" stroke-width="2"/><text x="110" y="107" text-anchor="middle" fill="#FFFFFF" font-size="8" font-family="Poppins" font-weight="600">fits 1 page</text><defs><marker id="arrow3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5E5E5E"/></marker></defs></svg>`
+  },
+  {
+    title:"Check Print Preview",
+    text:"Open <b>File → Print</b> (or <kbd>Ctrl</kbd>+<kbd>P</kbd>). Confirm everything fits before printing or exporting to PDF — nudge margins or scaling further if needed.",
+    visual:`<svg viewBox="0 0 220 160" fill="none"><rect x="55" y="15" width="110" height="130" rx="4" fill="#0E0E0E" stroke="#FFFFFF" stroke-width="2"/><rect x="68" y="30" width="84" height="10" rx="2" fill="#FFFFFF" opacity="0.5"/><rect x="68" y="46" width="84" height="4" rx="1" fill="#3A3A3A"/><rect x="68" y="56" width="84" height="4" rx="1" fill="#3A3A3A"/><rect x="68" y="66" width="60" height="4" rx="1" fill="#3A3A3A"/><path d="M100 100 l8 8 l14 -16" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  }
+];
+
+let stepIdx = 0;
+const stepNum = document.getElementById('stepNum');
+const stepTitle = document.getElementById('stepTitle');
+const stepText = document.getElementById('stepText');
+const stepVisual = document.getElementById('stepVisual');
+const stepCounter = document.getElementById('stepCounter');
+const stepProgress = document.getElementById('stepProgress');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+steps.forEach(() => {
+  const dot = document.createElement('div');
+  dot.className = 'step-dot';
+  stepProgress.appendChild(dot);
+});
+
+function renderStep(){
+  const s = steps[stepIdx];
+  stepNum.textContent = `STEP ${stepIdx+1} / ${steps.length}`;
+  stepTitle.textContent = s.title;
+  stepText.innerHTML = s.text;
+  stepVisual.innerHTML = s.visual;
+  stepCounter.textContent = `${stepIdx+1} of ${steps.length}`;
+  prevBtn.disabled = stepIdx === 0;
+  nextBtn.innerHTML = stepIdx === steps.length - 1
+    ? `Restart <i class="fa-solid fa-rotate-left"></i>`
+    : `Next <i class="fa-solid fa-arrow-right"></i>`;
+  [...stepProgress.children].forEach((dot, i) => {
+    dot.className = 'step-dot' + (i < stepIdx ? ' done' : i === stepIdx ? ' current' : '');
+  });
+}
+prevBtn.addEventListener('click', () => { if(stepIdx>0){ stepIdx--; renderStep(); }});
+nextBtn.addEventListener('click', () => { if(stepIdx<steps.length-1){ stepIdx++; renderStep(); } else { stepIdx = 0; renderStep(); }});
+renderStep();
+
+/* ============================================================
+   TAB NAVIGATION
+   ============================================================ */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============================================================
+   SHORTCUTS
+   ============================================================ */
+const shortcutData = [
+  {cat:"Navigation", label:"Jump to the beginning of the sheet", win:["Ctrl","Home"], mac:["Cmd","Home"]},
+  {cat:"Navigation", label:"Jump to the last used cell", win:["Ctrl","End"], mac:["Cmd","Fn","→"]},
+  {cat:"Navigation", label:"Jump to the edge of a data block", win:["Ctrl","Arrow"], mac:["Cmd","Arrow"]},
+  {cat:"Navigation", label:"Move to next / previous sheet", win:["Ctrl","PgDn / PgUp"], mac:["Option","Arrow"]},
+  {cat:"Navigation", label:"Open Go To", win:["Ctrl","G"], mac:["Cmd","Fn","F5"]},
+  {cat:"Navigation", label:"Find / Replace", win:["Ctrl","F"], mac:["Cmd","F"]},
+  {cat:"Navigation", label:"Select entire column", win:["Ctrl","Space"], mac:["Ctrl","Space"]},
+  {cat:"Navigation", label:"Select entire row", win:["Shift","Space"], mac:["Shift","Space"]},
+  {cat:"Navigation", label:"Select all", win:["Ctrl","A"], mac:["Cmd","A"]},
+
+  {cat:"Editing", label:"Fill down from cell above", win:["Ctrl","D"], mac:["Cmd","D"]},
+  {cat:"Editing", label:"Fill right from cell left", win:["Ctrl","R"], mac:["Cmd","R"]},
+  {cat:"Editing", label:"Fill selection with same entry", win:["Ctrl","Enter"], mac:["Cmd","Enter"]},
+  {cat:"Editing", label:"New line inside a cell", win:["Alt","Enter"], mac:["Ctrl","Option","Enter"]},
+  {cat:"Editing", label:"Edit the active cell", win:["F2"], mac:["Ctrl","U"]},
+  {cat:"Editing", label:"Insert current date", win:["Ctrl",";"], mac:["Cmd",";"]},
+  {cat:"Editing", label:"Insert current time", win:["Ctrl","Shift",":"], mac:["Cmd",";"]},
+  {cat:"Editing", label:"Undo / Redo", win:["Ctrl","Z / Y"], mac:["Cmd","Z / Y"]},
+  {cat:"Editing", label:"Repeat last action", win:["F4"], mac:["Cmd","Y"]},
+  {cat:"Editing", label:"Flash Fill (auto-pattern entry)", win:["Ctrl","E"], mac:["Cmd","E"]},
+
+  {cat:"Formatting", label:"Open Format Cells dialog", win:["Ctrl","1"], mac:["Cmd","1"]},
+  {cat:"Formatting", label:"Bold / Italic / Underline", win:["Ctrl","B / I / U"], mac:["Cmd","B / I / U"]},
+  {cat:"Formatting", label:"Apply currency format", win:["Ctrl","Shift","$"], mac:["Cmd","Shift","$"]},
+  {cat:"Formatting", label:"Apply percentage format", win:["Ctrl","Shift","%"], mac:["Cmd","Shift","%"]},
+  {cat:"Formatting", label:"Apply date format", win:["Ctrl","Shift","#"], mac:["Cmd","Shift","#"]},
+  {cat:"Formatting", label:"Clear to general format", win:["Ctrl","Shift","~"], mac:["Cmd","Shift","~"]},
+  {cat:"Formatting", label:"Copy formatting (Format Painter)", win:["Ctrl","Shift","C / V"], mac:["Cmd","Shift","C / V"]},
+
+  {cat:"Formulas", label:"AutoSum", win:["Alt","="], mac:["Shift","Cmd","T"]},
+  {cat:"Formulas", label:"Toggle showing formulas", win:["Ctrl","`"], mac:["Ctrl","`"]},
+  {cat:"Formulas", label:"Recalculate all open workbooks", win:["F9"], mac:["Cmd","="]},
+  {cat:"Formulas", label:"Toggle relative / absolute reference", win:["F4"], mac:["Cmd","T"]},
+  {cat:"Formulas", label:"Insert function", win:["Shift","F3"], mac:["Shift","F3"]},
+
+  {cat:"Data & View", label:"Create a Table from selection", win:["Ctrl","T"], mac:["Cmd","T"]},
+  {cat:"Data & View", label:"Toggle AutoFilter", win:["Ctrl","Shift","L"], mac:["Cmd","Shift","F"]},
+  {cat:"Data & View", label:"Insert rows / cells", win:["Ctrl","Shift","+"], mac:["Cmd","Shift","+"]},
+  {cat:"Data & View", label:"Delete rows / cells", win:["Ctrl","-"], mac:["Cmd","-"]},
+  {cat:"Data & View", label:"Insert chart (default type)", win:["Alt","F1"], mac:["Fn","F11"]},
+  {cat:"Data & View", label:"Hide selected rows / columns", win:["Ctrl","9 / 0"], mac:["Cmd","9 / 0"]},
+  {cat:"Data & View", label:"Unhide rows / columns", win:["Ctrl","Shift","9 / 0"], mac:["Cmd","Shift","9 / 0"]},
+  {cat:"Data & View", label:"Group rows / columns (outline)", win:["Alt","Shift","→"], mac:["Cmd","Shift","K"]},
+
+  {cat:"File", label:"New workbook", win:["Ctrl","N"], mac:["Cmd","N"]},
+  {cat:"File", label:"Open workbook", win:["Ctrl","O"], mac:["Cmd","O"]},
+  {cat:"File", label:"Save", win:["Ctrl","S"], mac:["Cmd","S"]},
+  {cat:"File", label:"Save As", win:["F12"], mac:["Cmd","Shift","S"]},
+  {cat:"File", label:"Print", win:["Ctrl","P"], mac:["Cmd","P"]},
+  {cat:"File", label:"Close workbook", win:["Ctrl","W"], mac:["Cmd","W"]},
+];
+
+document.getElementById('shortcutCount').textContent = shortcutData.length;
+
+const categories = ["All", ...new Set(shortcutData.map(s => s.cat))];
+let activeCat = "All";
+let activeOS = "win";
+
+const chipRow = document.getElementById('chipRow');
+categories.forEach(cat => {
+  const chip = document.createElement('button');
+  chip.className = 'chip' + (cat === "All" ? ' active' : '');
+  chip.textContent = cat;
+  chip.dataset.cat = cat;
+  chip.addEventListener('click', () => {
+    activeCat = cat;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderShortcuts();
+  });
+  chipRow.appendChild(chip);
+});
+
+document.querySelectorAll('.os-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeOS = btn.dataset.os;
+    document.querySelectorAll('.os-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderShortcuts();
+  });
+});
+
+const shortcutGrid = document.getElementById('shortcutGrid');
+const searchInput = document.getElementById('shortcutSearch');
+searchInput.addEventListener('input', renderShortcuts);
+
+function renderShortcuts(){
+  const query = searchInput.value.trim().toLowerCase();
+  const filtered = shortcutData.filter(s => {
+    const matchesCat = activeCat === "All" || s.cat === activeCat;
+    const matchesQuery = !query || s.label.toLowerCase().includes(query) || s.cat.toLowerCase().includes(query);
+    return matchesCat && matchesQuery;
+  });
+  shortcutGrid.innerHTML = "";
+  if(filtered.length === 0){
+    shortcutGrid.innerHTML = `<div class="no-results"><i class="fa-solid fa-magnifying-glass" style="margin-right:8px;"></i>No shortcuts match "${query}"</div>`;
+    return;
+  }
+  filtered.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'shortcut-card';
+    const keys = (activeOS === "win" ? s.win : s.mac);
+    card.innerHTML = `
+      <div class="label">${s.label}</div>
+      <div class="keys">${keys.map(k => `<kbd>${k}</kbd>`).join('')}</div>
+    `;
+    shortcutGrid.appendChild(card);
+  });
+}
+renderShortcuts();
+
+/* ============================================================
+   TOOLS
+   ============================================================ */
+const toolsData = [
+  {icon:"fa-table", name:"Tables", tag:"Ctrl + T", desc:"Turn a range into a structured Table: automatic banded rows, header filters, and formulas that auto-fill down new rows.", how:"Select your data, press Ctrl+T (Cmd+T on Mac), confirm the range has headers."},
+  {icon:"fa-chart-pie", name:"PivotTables", tag:"Insert tab", desc:"Summarize thousands of rows into a drag-and-drop cross-tab in seconds — sums, counts, averages by any field.", how:"Select data → Insert → PivotTable. Drag fields into Rows, Columns and Values."},
+  {icon:"fa-palette", name:"Conditional Formatting", tag:"Home tab", desc:"Automatically color, flag or icon-mark cells based on rules — over budget, top 10%, duplicates, and more.", how:"Select range → Home → Conditional Formatting → choose a rule type."},
+  {icon:"fa-bolt", name:"Flash Fill", tag:"Ctrl + E", desc:"Excel detects a pattern from one or two manually typed examples and fills the rest of the column instantly.", how:"Type the desired result for the first 1-2 rows, then press Ctrl+E."},
+  {icon:"fa-shield-halved", name:"Data Validation", tag:"Data tab", desc:"Restrict a cell to a dropdown list, a number range, or a custom rule — stops bad input before it happens.", how:"Select cells → Data → Data Validation → set criteria (e.g. List)."},
+  {icon:"fa-tag", name:"Named Ranges", tag:"Formulas tab", desc:"Give a range a readable name (e.g. TaxRate) so formulas read like plain language instead of cell coordinates.", how:"Select range → type a name directly in the Name Box (top-left), press Enter."},
+  {icon:"fa-snowflake", name:"Freeze Panes", tag:"View tab", desc:"Keep header rows or ID columns visible while scrolling through long or wide sheets.", how:"Select the cell below/right of what should freeze → View → Freeze Panes."},
+  {icon:"fa-magnifying-glass-chart", name:"XLOOKUP", tag:"Formula", desc:"The modern replacement for VLOOKUP — searches in any direction and returns a clean result with no #N/A guesswork by default.", how:"=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found])"},
+  {icon:"fa-scissors", name:"Text to Columns", tag:"Data tab", desc:"Split one messy column (e.g. 'Name, City') into separate clean columns based on a delimiter or fixed width.", how:"Select column → Data → Text to Columns → choose Delimited or Fixed Width."},
+  {icon:"fa-broom", name:"Remove Duplicates", tag:"Data tab", desc:"Strip exact duplicate rows from a range in one click, based on the columns you choose to compare.", how:"Select range → Data → Remove Duplicates → tick relevant columns."},
+  {icon:"fa-plug", name:"Power Query", tag:"Data tab", desc:"Import, clean and reshape data from CSVs, folders or databases with repeatable steps that refresh automatically.", how:"Data → Get Data → choose a source → build steps in the Query Editor."},
+  {icon:"fa-crosshairs", name:"Goal Seek", tag:"What-If Analysis", desc:"Work backwards: tell Excel the result you want, and it finds the input value that gets you there.", how:"Data → What-If Analysis → Goal Seek → set cell, value, and the cell to change."},
+];
+
+document.getElementById('toolsCount').textContent = toolsData.length;
+
+const toolsGrid = document.getElementById('toolsGrid');
+toolsData.forEach(t => {
+  const card = document.createElement('div');
+  card.className = 'tool-card';
+  card.innerHTML = `
+    <div class="tool-head">
+      <div class="tool-icon"><i class="fa-solid ${t.icon}"></i></div>
+      <div>
+        <div class="tool-name">${t.name}</div>
+        <div class="tool-tag">${t.tag}</div>
+      </div>
+      <div class="tool-chevron"><i class="fa-solid fa-chevron-down"></i></div>
+    </div>
+    <div class="tool-body"><div class="tool-body-inner">${t.desc}<span class="how"><i class="fa-solid fa-arrow-turn-down" style="margin-right:6px;"></i>${t.how}</span></div></div>
+  `;
+  card.addEventListener('click', () => card.classList.toggle('open'));
+  toolsGrid.appendChild(card);
+});
+
+/* ============================================================
+   TIPS & TRICKS
+   ============================================================ */
+const tipsData = [
+  {icon:"fa-arrows-left-right", name:"Auto-fit column width", tag:"Mouse trick", desc:"Get every column to fit its content perfectly in one move, instead of dragging each border by eye.", how:"Double-click the border between two column headers — it snaps to the widest content."},
+  {icon:"fa-paintbrush", name:"Format Painter, locked on", tag:"Home tab", desc:"Copy formatting to several separate ranges without re-selecting the source each time.", how:"Double-click the Format Painter icon to keep it active, click each target range, then press Esc when done."},
+  {icon:"fa-layer-group", name:"Edit several sheets at once", tag:"Sheet tabs", desc:"Type or format identical cells across multiple sheets in a single pass — handy for monthly tabs with the same layout.", how:"Right-click a sheet tab → Select All Sheets (or Ctrl+click each tab), then edit as normal."},
+  {icon:"fa-binoculars", name:"Watch Window", tag:"Formulas tab", desc:"Keep an eye on a few key cells from another sheet without switching tabs back and forth.", how:"Formulas → Watch Window → Add Watch, then pick the cells to monitor."},
+  {icon:"fa-hashtag", name:"Abbreviate big numbers", tag:"Custom format", desc:"Display 128,500 as 128.5K without changing the underlying value — useful for dashboards and reports.", how:"Ctrl+1 → Number → Custom → enter 0.0,,\"K\" (two commas for millions)."},
+  {icon:"fa-arrow-pointer", name:"Right-click drag the fill handle", tag:"Mouse trick", desc:"Get a menu of fill options — Fill Series, Fill Formatting Only, Fill Without Formatting — instead of a plain copy.", how:"Drag the bottom-right corner of a cell with the right mouse button instead of the left."},
+  {icon:"fa-location-crosshairs", name:"Jump anywhere by typing", tag:"Name Box", desc:"Skip scrolling entirely on huge sheets by typing the exact cell you want.", how:"Click the Name Box (top-left, next to the formula bar), type e.g. Z500, press Enter."},
+  {icon:"fa-eye", name:"Preview part of a formula", tag:"Formula bar", desc:"See the intermediate result of just one piece of a long formula, without splitting it into helper cells.", how:"In the formula bar, select the part you want to check, press F9 — then press Esc to avoid saving it."},
+  {icon:"fa-star", name:"Pin commands to Quick Access", tag:"Top-left toolbar", desc:"Keep your most-used commands one click away, regardless of which ribbon tab is open.", how:"Right-click any ribbon command → Add to Quick Access Toolbar."},
+  {icon:"fa-object-group", name:"Collapsible outlines", tag:"Data tab", desc:"Group rows or columns into expandable sections — great for hiding detail while keeping subtotals visible.", how:"Select rows/columns → Alt+Shift+→ to group, Alt+Shift+← to ungroup."},
+  {icon:"fa-clone", name:"Duplicate a sheet instantly", tag:"Sheet tabs", desc:"Copy a whole sheet — formatting, formulas and all — without rebuilding it from scratch.", how:"Ctrl+drag a sheet tab to the position you want (Option+drag on Mac)."},
+  {icon:"fa-code-compare", name:"See formulas, not results", tag:"Ctrl + `", desc:"Switch the whole sheet to show every formula at once — useful for auditing a workbook you didn't build.", how:"Press Ctrl+` to toggle; press it again to go back to normal view."},
+];
+
+document.getElementById('tipsCount').textContent = tipsData.length;
+
+const tipsGrid = document.getElementById('tipsGrid');
+tipsData.forEach(t => {
+  const card = document.createElement('div');
+  card.className = 'tool-card';
+  card.innerHTML = `
+    <div class="tool-head">
+      <div class="tool-icon"><i class="fa-solid ${t.icon}"></i></div>
+      <div>
+        <div class="tool-name">${t.name}</div>
+        <div class="tool-tag">${t.tag}</div>
+      </div>
+      <div class="tool-chevron"><i class="fa-solid fa-chevron-down"></i></div>
+    </div>
+    <div class="tool-body"><div class="tool-body-inner">${t.desc}<span class="how"><i class="fa-solid fa-arrow-turn-down" style="margin-right:6px;"></i>${t.how}</span></div></div>
+  `;
+  card.addEventListener('click', () => card.classList.toggle('open'));
+  tipsGrid.appendChild(card);
+});
+</script>
+
+</body>
+</html>
