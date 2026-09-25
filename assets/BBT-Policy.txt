@@ -1,0 +1,89 @@
+PRIVACY POLICY
+
+FAM Tracker
+
+Last updated: September 25, 2026
+
+1. WHO WE ARE
+
+FAM Tracker is developed and published by Veliu Labs (referred to as "we", "us", or "the developer"), based in Germany. FAM Tracker is a fertility awareness method (FAM) tracking app for Android that helps you log basal body temperature, cervix signs, notes, and related cycle data, and view charts, predictions, and cycle overviews based on that data.
+
+If you have questions about this policy or about your data, you can reach us at:
+
+veliu.labs@gmail.com
+
+2. THE SHORT VERSION
+
+FAM Tracker stores your cycle data only on your device. We do not operate a server, we do not collect your temperature readings, cervix data, notes, or any other health information, and we do not sell or share your data with anyone, because we never receive it in the first place. The app does not contain advertising, analytics, or crash reporting software, and it does not require an account, an email address, or an internet connection to work.
+
+If this changes in a future version of the app, for example by adding an optional AI-powered insights feature or a cloud backup feature, we will update this policy before that version is released and will describe clearly what data would be involved and how it would be used.
+
+3. WHAT DATA THE APP STORES, AND WHERE
+
+FAM Tracker stores the following categories of data, entered by you:
+
+- Cycle dates, including period start and end dates
+- Daily basal body temperature readings
+- Cervical mucus and cervix opening observations
+- Notes you write, including free text about symptoms, activity, or anything else you choose to log
+- Whether you logged intimacy on a given day
+
+All of this data is stored locally on your device, using Android's local database and preferences storage (Room and DataStore). None of it is transmitted to us, to Veliu Labs, or to any third party. We have no server that receives, stores, or has access to this data. We cannot see your cycle data, and we have no way to recover it if it is lost, since we never had a copy of it.
+
+4. BACKUP, RESTORE, AND EXPORT
+
+FAM Tracker includes two features that involve your data leaving the app's private storage, both of which are entirely under your control and happen only when you choose to use them:
+
+Local backup and restore: you can save a backup file of your cycle data to your device's storage, and later restore it, for example after reinstalling the app or switching phones. This backup file is created and read locally by the app. It is not uploaded anywhere by us.
+
+PDF export: you can generate a PDF summary of your cycle data, intended for your own records or to share with a healthcare provider. Generating the PDF happens entirely on your device. Once created, the file is handed to Android's standard share sheet, so you decide whether to save it, print it, or send it, and to whom. We do not receive a copy of anything you export or share this way.
+
+Because these files leave the app through your own device's file system and share sheet, their further handling (for example, if you attach one to an email or upload it somewhere yourself) is governed by the privacy practices of whichever app or service you choose to use for that, not by this policy.
+
+5. PERMISSIONS THE APP USES
+
+FAM Tracker requests the following Android permissions, each used only for the stated purpose:
+
+Notifications (POST_NOTIFICATIONS): used to show reminder notifications you can configure in the app, for example a daily reminder to log your temperature.
+
+Exact alarms (SCHEDULE_EXACT_ALARM): used so that reminder notifications fire at the specific time you choose, rather than an approximate time.
+
+Receive boot completed (RECEIVE_BOOT_COMPLETED): used to reschedule your reminders after your device restarts, so a reboot does not silently cancel them.
+
+None of these permissions give the app, or us, access to your contacts, location, camera, microphone, or any data outside of what you enter into FAM Tracker itself.
+
+6. HOME SCREEN WIDGETS
+
+If you add a FAM Tracker widget to your home screen, it reads the relevant cycle data from local storage to display it, and updates automatically when the date changes. This happens entirely on your device and does not involve any network activity.
+
+7. CHILDREN
+
+FAM Tracker is intended for users who are 18 years of age or older. We do not knowingly collect data from, or direct the app toward, children. Since the app does not collect or transmit any data to us in the first place, we have no server-side data to identify or remove even if a minor were to use the app; the protection here comes from the app not sending data anywhere at all.
+
+8. YOUR RIGHTS
+
+Because all of your data stays on your device and under your control, most data protection rights that would normally involve contacting a company, such as the right to access, correct, or delete your data, or to export it in a portable format, are things you can already do directly within the app at any time:
+
+- View and edit any entry directly in the app
+- Delete individual entries or entire cycles
+- Export your data to PDF or a local backup file whenever you want a copy
+- Uninstall the app to remove all locally stored data from your device, or clear the app's data through Android's system settings
+
+If you are located in the European Economic Area, the United Kingdom, or another jurisdiction with similar data protection law, and you have questions about how this app's design affects your rights under that law, you are welcome to contact us at the address above.
+
+9. HEALTH DATA AND FERTILITY AWARENESS
+
+The information you log in FAM Tracker, including temperature readings, cervix observations, and cycle predictions, relates to your reproductive and menstrual health and may be considered a special or sensitive category of personal data in some jurisdictions. We treat this as a reason to keep the app's data handling as simple and contained as possible: everything stays on your device, under no circumstance is it uploaded by us, and no account or identity is required to use the app. This design choice is deliberate, precisely because of the sensitivity of the data involved.
+
+FAM Tracker is an educational and tracking tool based on fertility awareness method principles. It is not a medical device, does not provide medical advice, and its predictions and analysis should not be relied upon as a form of contraception or as a diagnosis of any kind. Please see the Terms and Conditions for the full disclaimer.
+
+10. CHANGES TO THIS POLICY
+
+If we ever change what data the app collects or how it is handled, for example by introducing an optional feature that involves a third-party service, we will update this policy and update the "Last updated" date above before that version becomes available, so you can review the change before it affects you.
+
+11. CONTACT
+
+If you have any questions about this Privacy Policy or about FAM Tracker, please contact us at:
+
+Veliu Labs
+veliu.labs@gmail.com
