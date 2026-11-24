@@ -1,0 +1,70 @@
+.app-header {
+  flex: none; height: var(--header-h);
+  display: flex; align-items: center; gap: 0.75rem;
+  padding-inline: var(--space);
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.app-header h1 { font: 800 clamp(0.95rem, 0.6rem + 1vw, 1.15rem) var(--font-display); letter-spacing: -0.02em; white-space: nowrap; }
+.app-header h1 span { color: var(--accent); }
+.app-header .wordmark { margin-left: auto; display: flex; }
+.app-header .header-export { display: none; margin-left: 0.5rem; }
+
+.app-layout { flex: 1; min-height: 0; display: flex; }
+
+.panel { overflow-y: auto; overflow-x: hidden; background: var(--bg); }
+.panel-left  { flex: 0 0 var(--panel-left-w);  min-width: 20rem; max-width: min(45vw, 44rem); }
+.panel-right { flex: 0 0 var(--panel-right-w); min-width: 16rem; max-width: min(36vw, 28rem); }
+.panel-body { padding: var(--space); }
+.panel-right .panel-body { display: flex; flex-direction: column; }
+
+/* Left panel sections flow into as many ~11rem columns as the panel is wide */
+.panel-columns { column-width: 11rem; column-gap: 1.25rem; }
+
+.canvas-area { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.resize-handle { flex: none; width: 0.5rem; cursor: col-resize; position: relative; touch-action: none; }
+.resize-handle::before { content: ''; position: absolute; inset: 0 auto 0 50%; width: 1px; background: var(--line); }
+.resize-handle:hover::before, .resize-handle.dragging::before, .resize-handle:focus-visible::before { width: 3px; margin-left: -1px; background: var(--accent); }
+
+.view-nav { display: none; }
+.scrim { display: none; }
+
+/* ── Tablet: two columns, export panel becomes a drawer ── */
+@media (max-width: 1199.98px) {
+  .resize-handle { display: none; }
+  .panel-left { flex-basis: clamp(17rem, 40vw, 24rem); min-width: 0; max-width: none; }
+  .panel-right {
+    position: fixed; top: var(--header-h); bottom: 0; right: 0; z-index: 30;
+    width: min(24rem, 92vw); min-width: 0; max-width: none;
+    border-left: 1px solid var(--line);
+    transform: translateX(100%); visibility: hidden;
+    transition: transform 0.25s, visibility 0s 0.25s;
+  }
+  body[data-view='export'] .panel-right { transform: none; visibility: visible; transition: transform 0.25s; }
+  body[data-view='export'] .scrim { display: block; position: fixed; inset: var(--header-h) 0 0; background: rgba(0, 0, 0, 0.55); z-index: 20; }
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .app-header .header-export { display: inline-flex; }
+}
+
+/* ── Mobile: one view at a time, bottom navigation ── */
+@media (max-width: 767.98px) {
+  .panel-left, .canvas-area, .panel-right { display: none; }
+  body[data-view='edit'] .panel-left { display: block; flex: 1; max-width: none; }
+  body[data-view='preview'] .canvas-area { display: flex; }
+  body[data-view='export'] .panel-right {
+    display: block; position: static; flex: 1; width: auto; transform: none; visibility: visible; border: 0;
+  }
+  body[data-view='export'] .scrim { display: none; }
+  .view-nav {
+    flex: none; height: var(--nav-h); display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--surface); border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom); box-sizing: content-box;
+  }
+  .view-nav button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; font-size: 0.7rem; font-weight: 600; color: var(--muted); }
+  .view-nav button[aria-pressed='true'] { color: var(--accent); }
+  .view-nav i { font-size: 1.1rem; }
+}
+@media (max-width: 479.98px) {
+  .app-header .wordmark { display: none; }
+}

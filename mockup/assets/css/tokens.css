@@ -1,0 +1,35 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0e14;
+  --surface: #121720;
+  --surface-2: #19202b;
+  --line: #252e3c;
+  --text: #eef2f8;
+  --muted: #8b9ab0;
+  --accent: #00d4b8;
+  --accent-ink: #031a16;
+  --accent-soft: rgba(0, 212, 184, 0.12);
+  --danger: #ef4444;
+  --warn: #f59e0b;
+
+  --font-display: 'Montserrat', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius: 0.625rem;
+  --radius-sm: 0.4rem;
+  --space: clamp(0.75rem, 1.5vw, 1.1rem);
+  --header-h: 3.25rem;
+  --nav-h: 3.5rem;
+  --control-h: 2.25rem;
+
+  /* Resizable side panels (set by the resizer; bounded by min/max-width in layout.css) */
+  --panel-left-w: clamp(20rem, 30vw, 30rem);
+  --panel-right-w: clamp(17rem, 21vw, 22rem);
+}
+
+/* Layout categories: desktop >= 1200px, tablet 768-1199px, mobile < 768px (see layout.css) */
+@media (pointer: coarse) {
+  :root { --control-h: 2.75rem; }
+}

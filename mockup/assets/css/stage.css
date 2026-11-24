@@ -1,0 +1,46 @@
+.toolbar { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; padding: 0.5rem var(--space); background: var(--surface); border-bottom: 1px solid var(--line); font-size: 0.75rem; }
+.toolbar-title { font-weight: 700; }
+.toolbar-count { color: var(--accent); font-weight: 600; }
+.toolbar-note { color: var(--muted); flex: 1 1 12rem; min-width: 0; }
+.size-badge { margin-left: auto; font: 0.6875rem var(--font-mono); color: var(--accent); background: var(--accent-soft); padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); }
+
+.stage-view { flex: 1; min-height: 0; display: grid; place-items: center; padding: var(--space); overflow: hidden; touch-action: none; }
+.stage-frame { position: relative; flex: none; box-shadow: 0 0 0 1px var(--line), 0 1.5rem 3rem rgba(0, 0, 0, 0.45); }
+
+/* The stage is drawn in logical px and scaled by JS (preview/thumbnails) or rendered 1:1 (export) */
+.stage { position: absolute; top: 0; left: 0; transform-origin: 0 0; overflow: hidden; background: var(--bg); color: #fff; font-family: var(--font-body); line-height: 1.2; --stage-k: 1; }
+.export-host { position: fixed; top: 0; left: -10000px; pointer-events: none; }
+.export-host .stage { position: relative; }
+
+.stage [data-drag] { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.stage [data-drag]:active { cursor: grabbing; }
+.stage-item.is-selected { outline: calc(2px / var(--stage-k)) dashed var(--accent); outline-offset: calc(3px / var(--stage-k)); }
+
+/* Handles keep a constant on-screen size regardless of preview zoom and item scale */
+.stage-handle {
+  --u: calc(1 / (var(--stage-k) * var(--item-scale, 1)));
+  position: absolute; z-index: 50; display: grid; place-items: center;
+  font-size: calc(0.75rem * var(--u)); width: 1.9em; height: 1.9em; border-radius: 0.35em;
+  background: var(--accent); color: var(--accent-ink);
+  opacity: 0; transition: opacity 0.15s; touch-action: none;
+}
+.handle-scale  { right: -0.95em; bottom: -0.95em; cursor: nwse-resize; }
+.handle-rotate { right: -0.95em; top: -0.95em; cursor: crosshair; background: var(--warn); border-radius: 50%; }
+.stage-item:hover > .stage-handle, .stage-item.is-selected > .stage-handle { opacity: 1; }
+@media (pointer: coarse) { .stage-handle { opacity: 1; } }
+
+.stage-delete {
+  position: absolute; top: calc(-1.1 * 0.9rem / var(--stage-k)); left: calc(-1.1 * 0.9rem / var(--stage-k)); z-index: 60;
+  width: calc(1.8rem / var(--stage-k)); height: calc(1.8rem / var(--stage-k)); display: grid; place-items: center;
+  font: 700 calc(1.1rem / var(--stage-k)) var(--font-body); border-radius: 50%; background: var(--danger); color: #fff; cursor: pointer;
+}
+
+.carousel { flex: none; padding: 0.6rem var(--space); background: var(--surface); border-top: 1px solid var(--line); --thumb-h: clamp(4.5rem, 13dvh, 8rem); }
+.carousel-track { display: flex; gap: 0.6rem; overflow-x: auto; padding-bottom: 0.25rem; }
+.thumb { flex: none; display: flex; flex-direction: column; gap: 0.2rem; align-items: stretch; }
+.thumb-frame { position: relative; height: var(--thumb-h); aspect-ratio: var(--ar, 9 / 16); overflow: hidden; border-radius: 0.5rem; border: 2px solid var(--line); background: var(--surface-2); }
+.thumb[aria-selected='true'] .thumb-frame { border-color: var(--accent); }
+.thumb:hover .thumb-frame { border-color: var(--muted); }
+.thumb[aria-selected='true']:hover .thumb-frame { border-color: var(--accent); }
+.thumb-label { font-size: 0.625rem; font-weight: 600; color: var(--muted); text-align: center; }
+.thumb[aria-selected='true'] .thumb-label { color: var(--accent); }
