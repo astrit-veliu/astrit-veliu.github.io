@@ -1,5 +1,5 @@
 import { DEFAULT_ASSET, PLAY_STORE } from '../config/assetTypes.js'
-import { PRESETS } from '../config/defaults.js'
+import { PRESETS, WATERMARK_DEFAULTS } from '../config/defaults.js'
 import { releaseUrl } from '../lib/images.js'
 import { getPath, setPath } from '../lib/path.js'
 import { createScreen } from './screenFactory.js'
@@ -8,6 +8,7 @@ const state = {
   screens: PRESETS.map(preset => createScreen(preset)),
   currentId: null,
   assetType: DEFAULT_ASSET,
+  watermark: { ...WATERMARK_DEFAULTS },
   selectedOverlayId: null,
 }
 state.currentId = state.screens[0].id
@@ -34,6 +35,15 @@ export const store = {
   state,
   screen,
   get index() { return state.screens.findIndex(s => s.id === state.currentId) },
+  /** Everything the renderer needs besides the screen itself. */
+  project() { return { assetType: state.assetType, watermark: state.watermark } },
+  /** Replaces the whole project (already validated by project/restore.js). */
+  load({ screens, current, assetType, watermark }) {
+    state.screens.forEach(releaseScreen)
+    Object.assign(state, { screens, currentId: screens[current].id, assetType, watermark, selectedOverlayId: null })
+    emit('structure')
+    emit('app')
+  },
   subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn) },
 
   read(path) { const [root, p] = scoped(path); return getPath(root, p) },

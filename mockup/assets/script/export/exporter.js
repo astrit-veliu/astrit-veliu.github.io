@@ -9,17 +9,17 @@ import { renderStage } from '../stage/renderStage.js'
 const toBlob = canvas => new Promise((resolve, reject) =>
   canvas.toBlob(blob => (blob ? resolve(blob) : reject(new Error('The browser could not encode the PNG'))), 'image/png'))
 
-/** Renders a screen offscreen at its exact output size, independent of the preview. */
-export async function renderToCanvas(screen, assetType) {
+/** Renders a screen offscreen at its exact output size, independent of the preview. `project` = { assetType, watermark }. */
+export async function renderToCanvas(screen, project) {
   const html2canvas = vendor('html2canvas')
-  const out = outputSize(screen, assetType)
+  const out = outputSize(screen, project.assetType)
   const { exportScale } = stageSize(out)
   const stage = h('div', { class: 'stage' })
   const host = h('div', { class: 'export-host', 'aria-hidden': 'true' }, stage)
   document.body.append(host)
 
   try {
-    renderStage(stage, screen, { assetType })
+    renderStage(stage, screen, project)
     const fonts = [screen.style.headlineFont, screen.style.subtitleFont, 'Montserrat'].flatMap(name => [900, 700, 500].map(w => `${w} 1em ${fontStack(name)}`))
     await Promise.all([...fonts.map(f => document.fonts.load(f).catch(() => {})), ...[...stage.querySelectorAll('img')].map(img => img.decode().catch(() => {}))])
     await document.fonts.ready
@@ -33,28 +33,28 @@ export async function renderToCanvas(screen, assetType) {
   }
 }
 
-export async function renderToPng(screen, index, assetType) {
-  const canvas = await renderToCanvas(screen, assetType)
+export async function renderToPng(screen, index, project) {
+  const canvas = await renderToCanvas(screen, project)
   const blob = await toBlob(canvas)
-  const name = `${assetType}-${index + 1}-${slug(screen.content.headline)}-${canvas.width}x${canvas.height}.png`
+  const name = `${project.assetType}-${index + 1}-${slug(screen.content.headline)}-${canvas.width}x${canvas.height}.png`
   return { blob, name, oversize: blob.size > PLAY_STORE.maxFileBytes }
 }
 
-export async function exportScreen(screen, index, assetType) {
-  const file = await renderToPng(screen, index, assetType)
+export async function exportScreen(screen, index, project) {
+  const file = await renderToPng(screen, index, project)
   download(file.blob, file.name)
   return file
 }
 
-export async function exportZip(screens, assetType, onProgress) {
+export async function exportZip(screens, project, onProgress) {
   const zip = new (vendor('JSZip'))()
   let oversize = 0
   for (const [i, screen] of screens.entries()) {
-    const file = await renderToPng(screen, i, assetType)
+    const file = await renderToPng(screen, i, project)
     zip.file(file.name, file.blob)
     oversize += file.oversize
     onProgress?.((i + 1) / screens.length)
   }
-  download(await zip.generateAsync({ type: 'blob', compression: 'STORE' }), `playstore-mockups-${assetType}.zip`)
+  download(await zip.generateAsync({ type: 'blob', compression: 'STORE' }), `playstore-mockups-${project.assetType}.zip`)
   return { oversize }
 }

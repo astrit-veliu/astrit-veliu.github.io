@@ -14,8 +14,11 @@ export const STYLE_DEFAULTS = {
   headlineFont: 'Montserrat', subtitleFont: 'Poppins',
   headlineScale: 1, subtitleScale: 1, headlinePos: null,
   featureShow: true, featurePos: 'bottom', featureSize: 11,
-  badgesShow: true, watermarkShow: true, watermarkText: 'VELIU LABS',
+  badgesShow: true,
 }
+
+/** Project-wide: applied to every screen. */
+export const WATERMARK_DEFAULTS = { show: true, text: 'VELIU LABS' }
 
 /** null colours follow the active theme. */
 export const BG_DEFAULTS = { type: 'gradient', col1: null, col2: null, strip: true, stripStyle: 'gradient', shapes: true, noise: 0, image: null }

@@ -1,7 +1,8 @@
+import { FEATURE_POSITIONS } from '../../config/options.js'
 import { LIMITS } from '../../config/defaults.js'
 import { h, icon } from '../../lib/dom.js'
 import { store } from '../../state/store.js'
-import { Select, Slider, TextInput, Toggle, watch } from '../fields.js'
+import { Select, Slider, Toggle, watch } from '../fields.js'
 import { Button, Section } from '../primitives.js'
 
 function FeatureItems() {
@@ -25,10 +26,7 @@ function FeatureItems() {
 export const FeaturesSections = () => [
   Section('Feature Strip',
     Toggle({ path: 'style.featureShow', label: 'Show' }),
-    Select({ path: 'style.featurePos', label: 'Position', options: [{ value: 'bottom', label: 'Bottom' }, { value: 'top', label: 'Top' }, { value: 'center', label: 'Center' }] }),
+    Select({ path: 'style.featurePos', label: 'Position', options: FEATURE_POSITIONS }),
     Slider({ path: 'style.featureSize', min: 6, max: 22, label: 'Size', icon: 'text-height' }),
-    FeatureItems()),
-  Section('Watermark',
-    Toggle({ path: 'style.watermarkShow', label: 'Show' }),
-    TextInput({ path: 'style.watermarkText', label: 'Watermark text', placeholder: 'Watermark text' })),
+    FeatureItems())
 ]

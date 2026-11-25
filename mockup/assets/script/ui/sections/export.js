@@ -31,11 +31,11 @@ export function ExportSection() {
     }
   }
 
-  single.onclick = () => run(single, async () => ({ oversize: (await exportScreen(store.screen(), store.index, store.state.assetType)).oversize }))
+  single.onclick = () => run(single, async () => ({ oversize: (await exportScreen(store.screen(), store.index, store.project())).oversize }))
   all.onclick = () => run(all, () => {
     progress.hidden = false
     const fill = progress.firstChild
-    return exportZip(store.state.screens, store.state.assetType, ratio => { fill.style.width = `${ratio * 100}%` })
+    return exportZip(store.state.screens, store.project(), ratio => { fill.style.width = `${ratio * 100}%` })
   })
 
   return Section('Export',

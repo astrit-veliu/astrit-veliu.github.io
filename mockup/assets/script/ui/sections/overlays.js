@@ -1,3 +1,4 @@
+import { AWARD_STYLE_OPTIONS, BADGE_STYLE_OPTIONS } from '../../config/options.js'
 import { h, icon } from '../../lib/dom.js'
 import { createOverlay } from '../../state/screenFactory.js'
 import { store } from '../../state/store.js'
@@ -5,7 +6,7 @@ import { Toggle } from '../fields.js'
 import { Button, Hint, Section } from '../primitives.js'
 import { toast } from '../toast.js'
 
-const options = list => list.map(([value, label]) => h('option', { value }, label))
+const options = list => list.map(o => h('option', { value: o.value }, o.label))
 
 function OverlayList() {
   const root = h('div', { class: 'overlay-list' })
@@ -32,10 +33,10 @@ function OverlayList() {
 
 export function OverlaysSections() {
   const badgeText = h('input', { class: 'input', placeholder: 'e.g. Fast & Secure', 'aria-label': 'Badge text', maxlength: 40 })
-  const badgeStyle = h('select', { class: 'input', 'aria-label': 'Badge style' }, options([['accent', 'Filled'], ['outline', 'Outline'], ['dark', 'Glass'], ['white', 'White']]))
+  const badgeStyle = h('select', { class: 'input', 'aria-label': 'Badge style' }, options(BADGE_STYLE_OPTIONS))
   const awardTitle = h('input', { class: 'input', placeholder: 'Title', 'aria-label': 'Award title', maxlength: 30 })
   const awardSub = h('input', { class: 'input', placeholder: 'e.g. Google Play 2025', 'aria-label': 'Award subtitle', maxlength: 40 })
-  const awardStyle = h('select', { class: 'input', 'aria-label': 'Award style' }, options([['gold', 'Gold'], ['accent', 'Accent'], ['dark', 'Glass']]))
+  const awardStyle = h('select', { class: 'input', 'aria-label': 'Award style' }, options(AWARD_STYLE_OPTIONS))
   const slot = () => store.screen().overlays.length
 
   const addBadge = () => {

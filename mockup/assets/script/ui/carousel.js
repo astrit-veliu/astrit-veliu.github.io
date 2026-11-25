@@ -24,7 +24,7 @@ export function mountCarousel(host) {
       draw() {
         const screen = store.screen(id)
         if (!screen) return
-        size = renderStage(stage, screen, { assetType: store.state.assetType })
+        size = renderStage(stage, screen, store.project())
         frame.style.setProperty('--ar', `${size.width} / ${size.height}`)
         fit()
       },

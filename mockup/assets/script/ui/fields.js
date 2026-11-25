@@ -4,7 +4,8 @@ import { h, icon } from '../lib/dom.js'
 import { store } from '../state/store.js'
 
 const syncers = new Set()
-store.subscribe(() => syncers.forEach(sync => sync()))
+/** Structural changes (screen switch, project load) refresh every field, even a focused one. */
+store.subscribe(e => syncers.forEach(sync => sync(e.type === 'structure')))
 
 /** Runs `fn` now and after every store change. */
 export const watch = fn => { syncers.add(fn); fn() }

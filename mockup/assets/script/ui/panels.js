@@ -7,8 +7,10 @@ import { FeaturesSections } from './sections/features.js'
 import { GuideSection } from './sections/guide.js'
 import { MediaSections } from './sections/media.js'
 import { OverlaysSections } from './sections/overlays.js'
+import { ProjectSection } from './sections/project.js'
 import { ScreensSection } from './sections/screens.js'
 import { TextSection } from './sections/text.js'
+import { WatermarkSection } from './sections/watermark.js'
 import { FrameSection, ThemeSection, TypographySections } from './sections/appearance.js'
 
 export function mountPanels() {
@@ -17,5 +19,5 @@ export function mountPanels() {
     MediaSections(), TextSection(), OverlaysSections(), DeviceTransformSection(), FeaturesSections()))
 
   document.getElementById('panelRight').append(h('div', { class: 'panel-body' },
-    ExportSection(), CanvasSections(), BackgroundSection(), GuideSection()))
+    ProjectSection(), ExportSection(), CanvasSections(), WatermarkSection(), BackgroundSection(), GuideSection()))
 }

@@ -29,7 +29,7 @@ export function mountStageView(host) {
   }
 
   const render = rafOnce(() => {
-    const next = renderStage(stage, store.screen(), { assetType: store.state.assetType, interactive: true, selectedId: store.state.selectedOverlayId })
+    const next = renderStage(stage, store.screen(), { ...store.project(), interactive: true, selectedId: store.state.selectedOverlayId })
     if (next.width !== size.width || next.height !== size.height) { size = next; fit() }
   })
 

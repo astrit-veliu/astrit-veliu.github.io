@@ -1,3 +1,4 @@
+import { BG_TYPES, STRIP_STYLES } from '../../config/options.js'
 import { THEMES } from '../../config/themes.js'
 import { readImage } from '../../lib/images.js'
 import { store } from '../../state/store.js'
@@ -9,8 +10,8 @@ const theme = () => THEMES[store.screen().style.theme]
 
 export const BackgroundSection = () => Section('Background',
   Toggle({ path: 'bg.strip', label: 'Top strip' }),
-  Field('Strip style', Select({ path: 'bg.stripStyle', label: 'Strip style', options: [{ value: 'gradient', label: 'Gradient' }, { value: 'solid', label: 'Solid accent' }, { value: 'white', label: 'White' }, { value: 'none', label: 'None' }] })),
-  Field('Background type', Select({ path: 'bg.type', label: 'Background type', options: [{ value: 'gradient', label: 'Gradient' }, { value: 'solid', label: 'Solid color' }, { value: 'mesh', label: 'Mesh glow' }, { value: 'image', label: 'Custom image' }] })),
+  Field('Strip style', Select({ path: 'bg.stripStyle', label: 'Strip style', options: STRIP_STYLES })),
+  Field('Background type', Select({ path: 'bg.type', label: 'Background type', options: BG_TYPES })),
   Field('Color 1', ColorInput({ path: 'bg.col1', label: 'Color 1', fallback: () => theme().bg })),
   Field('Color 2', ColorInput({ path: 'bg.col2', label: 'Color 2', fallback: () => theme().bg2 })),
   Toggle({ path: 'bg.shapes', label: 'Shapes' }),
