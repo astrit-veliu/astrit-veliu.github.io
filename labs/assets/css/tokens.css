@@ -1,71 +1,54 @@
 :root {
-  --font-head: 'Montserrat', system-ui, sans-serif;
-  --font-body: 'Poppins', system-ui, sans-serif;
+  --font-head: 'Archivo', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  --navy: #0b2240;
-  --radius-s: 6px;
-  --radius-m: 10px;
-  --radius-l: 16px;
-  --radius-xl: 24px;
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 8px;
+  --stroke: 2px;
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
 
   --gutter: 1.25rem;
   --container-max: 75rem;
   --section-pad: 4rem;
   --nav-h: 4.75rem;
-  --gradient-accent: linear-gradient(120deg, var(--teal), var(--accent-2));
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --teal: #007f62;
-  --teal-rgb: 0 127 98;
-  --accent-2: #2457d6;
-  --on-teal: #ffffff;
-  --glass: rgb(255 255 255 / 0.72);
+  --bg: #f2efe8;
+  --bg-alt: #e8e4d9;
+  --surface: #ffffff;
+  --text: #0b2240;
+  --muted: #56627a;
+  --line: #0b2240;
+  --border: #cfcabc;
+  --teal: #007a5e;
+  --accent: #00c8a0;
+  --on-accent: #0b2240;
+  --tint: #d3ece3;
+  --stripe: #ddd8ca;
+  --shadow-solid: #0b2240;
   --logo-dark: #0b2240;
-  --bg: #f4f7fb;
-  --bg-alt: #ebf0f8;
-  --surface: rgb(255 255 255 / 0.85);
-  --chip-bg: rgb(255 255 255 / 0.7);
-  --input-bg: rgb(255 255 255 / 0.9);
-  --dots-bg: rgb(255 255 255 / 0.7);
-  --border: rgb(11 34 64 / 0.1);
-  --text: #0d1f35;
-  --muted: #5a7391;
-  --nav-bg: rgb(244 247 251 / 0.88);
-  --nav-shadow: 0 4px 20px rgb(0 0 0 / 0.06);
-  --card-shadow: 0 4px 24px rgb(0 0 0 / 0.07);
-  --grid-color: rgb(11 34 64 / 0.05);
-  --glow-one: rgb(0 200 160 / 0.13);
-  --glow-two: rgb(11 34 64 / 0.08);
-  --footer-bg: #ebf0f8;
-  --cursor-dot: #0d1f35;
+  --cursor-dot: #0b2240;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
+  --bg: #0b2240;
+  --bg-alt: #091c35;
+  --surface: #122f56;
+  --text: #eef2f7;
+  --muted: #9db0c6;
+  --line: #4a73a8;
+  --border: #25456f;
   --teal: #00c8a0;
-  --teal-rgb: 0 200 160;
-  --accent-2: #4d8dff;
-  --on-teal: #04121f;
-  --glass: rgb(13 45 82 / 0.35);
-  --logo-dark: #e4eef8;
-  --bg: #050e1a;
-  --bg-alt: #07131f;
-  --surface: rgb(13 45 82 / 0.4);
-  --chip-bg: rgb(13 45 82 / 0.3);
-  --input-bg: rgb(255 255 255 / 0.04);
-  --dots-bg: transparent;
-  --border: rgb(160 200 255 / 0.12);
-  --text: #e4eef8;
-  --muted: #7a99b8;
-  --nav-bg: rgb(5 14 26 / 0.88);
-  --nav-shadow: none;
-  --card-shadow: 0 4px 24px rgb(0 0 0 / 0.3);
-  --grid-color: rgb(0 200 160 / 0.04);
-  --glow-one: rgb(0 200 160 / 0.13);
-  --glow-two: rgb(11 34 64 / 0.13);
-  --footer-bg: transparent;
+  --accent: #00c8a0;
+  --on-accent: #0b2240;
+  --tint: #0f3c55;
+  --stripe: #11305a;
+  --shadow-solid: #05152b;
+  --logo-dark: #eef2f7;
   --cursor-dot: #ffffff;
 }

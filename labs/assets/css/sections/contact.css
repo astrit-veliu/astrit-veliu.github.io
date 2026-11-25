@@ -1,5 +1,5 @@
 #contact {
-  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  background: var(--bg-alt);
 }
 
 .contact-grid {
@@ -13,9 +13,10 @@
 .contact-info-label {
   margin-bottom: 1rem;
   color: var(--teal);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -31,46 +32,33 @@
 }
 
 .social-list > :nth-child(2) .social-list > :nth-child(4) .social-item {
-  transition-delay: 300ms;
-}
-
-.social-item {
-  transition-delay: 100ms;
-}
-
-.social-list > :nth-child(3) .social-item {
-  transition-delay: 200ms;
-}
-
-.social-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.2rem;
-  border: 1px solid var(--border);
+  border: var(--stroke) solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface);
   color: var(--muted);
   font-size: 0.9rem;
-  transition: opacity 700ms ease, transform 300ms, border-color 300ms, color 300ms;
+  transition: opacity 700ms ease, transform 150ms, box-shadow 150ms;
 }
 
 .social-item:hover {
-  border-color: var(--teal);
-  color: var(--text);
-  transform: translateX(4px);
+  box-shadow: 4px 4px 0 var(--shadow-solid);
+  transform: translate(-2px, -2px);
 }
 
 .social-icon {
   display: grid;
   place-items: center;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.3rem;
+  height: 2.3rem;
   flex: none;
-  border: 1px solid rgb(var(--teal-rgb) / 0.2);
-  border-radius: 8px;
-  background: rgb(var(--teal-rgb) / 0.1);
-  color: var(--teal);
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .social-text {
@@ -89,20 +77,19 @@
 
 .form-card {
   position: relative;
-  overflow: hidden;
   padding: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-l);
   background: var(--surface);
-  box-shadow: var(--card-shadow);
+  box-shadow: 8px 8px 0 var(--shadow-solid);
 }
 
 .form-card::before {
   content: '';
   position: absolute;
   inset: 0 0 auto;
-  height: 3px;
-  background: var(--gradient-accent);
+  height: 6px;
+  background: var(--accent);
 }
 
 .form-row {
@@ -119,30 +106,30 @@
   display: block;
   margin-bottom: 0.5rem;
   color: var(--teal);
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .field-input {
   width: 100%;
   padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
+  border: var(--stroke) solid var(--line);
   border-radius: var(--radius-m);
   outline: none;
-  background: var(--input-bg);
-  font-size: 0.9rem;
-  transition: border-color 300ms, box-shadow 300ms;
+  background: var(--bg);
+  font-size: 0.92rem;
+  transition: box-shadow 150ms;
 }
 
 .field-input:focus {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgb(var(--teal-rgb) / 0.12);
+  box-shadow: 4px 4px 0 var(--accent);
 }
 
 .field-input::placeholder {
-  color: rgb(122 153 184 / 0.6);
+  color: var(--muted);
 }
 
 textarea.field-input {
@@ -153,10 +140,10 @@ textarea.field-input {
 .form-success {
   margin-top: 1rem;
   padding: 0.85rem 1rem;
-  border: 1px solid rgb(var(--teal-rgb) / 0.3);
-  border-radius: 8px;
-  background: rgb(var(--teal-rgb) / 0.1);
-  color: var(--teal);
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--tint);
+  color: var(--text);
   font-size: 0.9rem;
   text-align: center;
   animation: fade-in 300ms ease;

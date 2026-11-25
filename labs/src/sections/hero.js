@@ -1,7 +1,6 @@
 import { html } from '../../../src/core/dom.js';
 import { labs } from '../data/labs-content.js';
 import { getApps, getHeroStats } from '../data/projects.js';
-import { logoMark } from '../components/logo.js';
 import { richText } from '../components/rich-text.js';
 
 export default {
@@ -9,13 +8,10 @@ export default {
   render: () => {
     const { hero } = labs;
     const values = getHeroStats();
-    const orbiting = getApps().filter(({ icon }) => icon);
+    const tiles = getApps().filter(({ icon }) => icon);
     return html`
       <div class="hero-wrap">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          ${hero.badge.map((item) => html`<span class="hero-badge-item">${item}</span>`)}
-        </div>
+        <div class="hero-badge">${hero.badge.map((item) => html`<span class="hero-badge-item">${item}</span>`)}</div>
         <h1 class="hero-title">${hero.headline.map((line) => html`<span class="hero-line">${richText(line)}</span>`)}</h1>
         <p class="hero-sub">${hero.subtitle}</p>
         <div class="hero-actions">
@@ -35,12 +31,11 @@ export default {
         </div>
       </div>
       <div class="hero-deco" aria-hidden="true">
-        <div class="hero-ring hero-ring--inner"></div>
-        <div class="hero-ring hero-ring--middle"></div>
-        <div class="hero-ring hero-ring--outer"></div>
-        <div class="hero-emblem">${logoMark()}</div>
-        <div class="hero-orbit" data-orbit>
-          ${orbiting.map(({ icon, fallbackIcon }) => html`<span class="hero-app"><img src="${icon}" data-fallback="${fallbackIcon}" alt="" width="48" height="48" decoding="async"></span>`)}
+        <span class="hero-stripe hero-stripe--a"></span>
+        <span class="hero-stripe hero-stripe--b"></span>
+        <span class="hero-stripe hero-stripe--c"></span>
+        <div class="hero-cascade" data-cascade>
+          ${tiles.map(({ icon, fallbackIcon }) => html`<span class="hero-app"><img src="${icon}" data-fallback="${fallbackIcon}" alt="" width="56" height="56" decoding="async"></span>`)}
         </div>
       </div>
     `;

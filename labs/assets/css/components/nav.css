@@ -14,28 +14,21 @@
   gap: 1rem;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0.5rem 0.6rem 0.5rem 1.1rem;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  background: var(--nav-bg);
-  box-shadow: var(--nav-shadow);
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--bg);
+  box-shadow: 4px 4px 0 var(--shadow-solid);
   pointer-events: auto;
-  backdrop-filter: blur(20px) saturate(1.4);
-  transition: box-shadow 400ms, border-color 400ms;
-}
-
-.nav.is-stuck .nav-inner {
-  border-color: rgb(var(--teal-rgb) / 0.3);
-  box-shadow: var(--card-shadow);
 }
 
 .nav-inner::after {
   content: '';
   position: absolute;
-  inset: auto 1.5rem -1px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--gradient-accent);
+  inset: auto 0 calc(var(--stroke) * -1);
+  height: 4px;
+  border-radius: 0 0 var(--radius-s) var(--radius-s);
+  background: var(--accent);
   transform: scaleX(var(--scroll, 0));
   transform-origin: left;
 }
@@ -65,7 +58,7 @@
   font-family: var(--font-head);
   font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.05;
 }
 
@@ -76,34 +69,36 @@
 }
 
 .nav-link {
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-s);
   color: var(--muted);
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
   font-weight: 500;
-  transition: color 250ms, background 250ms;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 150ms, background 150ms;
 }
 
 .nav-link:hover,
 .nav-link.is-active {
-  background: rgb(var(--teal-rgb) / 0.1);
+  background: var(--tint);
   color: var(--teal);
 }
 
 .nav-cta {
   margin-left: 0.5rem;
-  background: var(--gradient-accent);
-  color: var(--on-teal);
+  border: var(--stroke) solid var(--line);
+  background: var(--accent);
+  color: var(--on-accent);
   font-weight: 600;
-  transition: filter 250ms, box-shadow 250ms;
 }
 
 .nav-cta:hover,
 .nav-cta.is-active {
-  background: var(--gradient-accent);
-  box-shadow: 0 6px 24px rgb(var(--teal-rgb) / 0.35);
-  color: var(--on-teal);
-  filter: brightness(1.08);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 3px 3px 0 var(--shadow-solid);
 }
 
 .nav-tools {
@@ -117,16 +112,15 @@
   place-items: center;
   width: 2.25rem;
   height: 2.25rem;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  color: var(--muted);
-  transition: border-color 250ms, color 250ms, transform 250ms;
+  border: var(--stroke) solid var(--line);
+  border-radius: var(--radius-m);
+  color: var(--text);
+  transition: background 150ms, color 150ms;
 }
 
 .theme-toggle:hover {
-  border-color: var(--teal);
-  color: var(--teal);
-  transform: rotate(15deg);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .theme-toggle .icon {
@@ -150,7 +144,6 @@
   display: block;
   width: 22px;
   height: 2px;
-  border-radius: 2px;
   background: var(--text);
   transition: transform 300ms, opacity 300ms;
 }

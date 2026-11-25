@@ -3,14 +3,12 @@ import { observeLayout, widthAtLeast } from '../../src/core/layout.js';
 import { mountSections, sectionIds } from './sections/index.js';
 import { mountNav } from './components/nav.js';
 import { mountMobileNav, setMobileNav } from './components/mobile-nav.js';
-import { mountSectionDots } from './components/section-dots.js';
 import { mountFooter } from './components/footer.js';
 import { initTheme, toggleTheme } from './components/theme.js';
 import { initCursor } from './components/cursor.js';
 import { initReveal } from './components/reveal.js';
 import { initCarousels } from './components/carousel.js';
-import { initSpotlight } from './components/spotlight.js';
-import { layoutOrbits } from './components/orbit.js';
+import { layoutCascades } from './components/cascade.js';
 import { initSectionTracker } from './components/section-tracker.js';
 import { initScrollState } from './components/scroll-state.js';
 import { submitContact } from './services/contact-form.js';
@@ -32,7 +30,6 @@ observeLayout(({ widthClass }) => {
 mountSections($('#main'));
 mountNav();
 mountMobileNav();
-mountSectionDots();
 mountFooter();
 initTheme();
 
@@ -60,9 +57,8 @@ document.addEventListener(
   true,
 );
 
-layoutOrbits();
+layoutCascades();
 initCarousels();
-initSpotlight();
 initCursor();
 initReveal();
 initSectionTracker(sectionIds);

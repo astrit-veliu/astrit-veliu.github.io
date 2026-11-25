@@ -1,7 +1,7 @@
 import { $ } from '../../../src/core/dom.js';
 
 const STORAGE_KEY = 'vl-theme';
-const browserColors = { light: '#f4f7fb', dark: '#050e1a' };
+const browserColors = { light: '#f2efe8', dark: '#0b2240' };
 
 const reflect = (theme) => {
   document.documentElement.dataset.theme = theme;

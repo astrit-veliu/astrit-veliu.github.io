@@ -17,7 +17,6 @@
   margin-bottom: 1.2rem;
   color: var(--muted);
   font-size: 1rem;
-  font-weight: 300;
   line-height: 1.8;
 }
 
@@ -27,7 +26,7 @@
 
 .pillars {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .pillars > :nth-child(2) {
@@ -42,14 +41,10 @@
   display: flex;
   gap: 1.25rem;
   padding: 1.5rem;
-  border: 1px solid var(--border);
+  border: var(--stroke) solid var(--line);
   border-radius: var(--radius-l);
   background: var(--surface);
-  box-shadow: var(--card-shadow);
-}
-
-.pillar:hover {
-  border-color: rgb(var(--teal-rgb) / 0.4);
+  box-shadow: 5px 5px 0 var(--shadow-solid);
 }
 
 .pillar-icon {
@@ -58,37 +53,39 @@
   width: 3rem;
   height: 3rem;
   flex: none;
+  border: var(--stroke) solid var(--line);
   border-radius: var(--radius-m);
-  background: var(--gradient-accent);
-  color: var(--on-teal);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .pillar-title {
   margin-bottom: 0.35rem;
   color: var(--text);
   font-family: var(--font-head);
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
 }
 
 .pillar-text {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.6;
 }
 
 .stack {
   margin-top: 4rem;
   padding-top: 2.5rem;
-  border-top: 1px solid var(--border);
+  border-top: var(--stroke) solid var(--line);
 }
 
 .stack-label {
   margin-bottom: 1rem;
   color: var(--teal);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -99,19 +96,19 @@
 }
 
 .chip {
-  padding: 0.45rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  background: var(--chip-bg);
-  color: var(--muted);
-  font-size: 0.82rem;
-  transition: all 250ms;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  transition: background 150ms, color 150ms;
 }
 
 .chip:hover {
-  border-color: var(--teal);
-  background: rgb(var(--teal-rgb) / 0.08);
-  color: var(--teal);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 html:is([data-width='expanded'], [data-width='large'], [data-width='xlarge']) .about-grid {

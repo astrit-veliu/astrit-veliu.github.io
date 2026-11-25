@@ -7,7 +7,7 @@ import { richText } from '../components/rich-text.js';
 
 const appCard = (app) => html`
   <li class="carousel-item">
-    <a class="app-card" data-spotlight href="${app.href}" target="_blank" rel="noopener noreferrer" draggable="false">
+    <a class="app-card" href="${app.href}" target="_blank" rel="noopener noreferrer" draggable="false">
       <div class="app-top">
         ${app.icon && html`<img class="app-icon" src="${app.icon}" data-fallback="${app.fallbackIcon}" alt="${app.name} icon" width="64" height="64" loading="lazy" decoding="async" draggable="false">`}
         <span class="app-index" aria-hidden="true"></span>
