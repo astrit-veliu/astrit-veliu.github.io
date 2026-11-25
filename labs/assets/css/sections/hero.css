@@ -1,0 +1,239 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100dvh;
+  padding-top: var(--nav-h);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+}
+
+.hero-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 3rem var(--gutter);
+}
+
+.hero-badge {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: rgb(var(--teal-rgb) / 0.08);
+  color: var(--teal);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hero-badge-item + .hero-badge-item::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.hero-title {
+  margin-bottom: 1.5rem;
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: clamp(2.6rem, 7vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-sub {
+  max-width: 32.5rem;
+  margin-bottom: 3rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stat-value {
+  color: var(--teal);
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.hero-stat-label {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-deco {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 1;
+  display: none;
+  width: min(31rem, 45vw);
+  aspect-ratio: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.hero-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgb(var(--teal-rgb) / 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-ring--inner {
+  width: 55%;
+  height: 55%;
+  border-color: rgb(var(--teal-rgb) / 0.22);
+  animation: spin 20s linear infinite;
+}
+
+.hero-ring--middle {
+  width: 80%;
+  height: 80%;
+  animation: spin 30s linear infinite;
+}
+
+.hero-ring--outer {
+  width: 100%;
+  height: 100%;
+  border-style: dashed;
+  border-color: rgb(var(--teal-rgb) / 0.08);
+  animation: spin 50s linear infinite reverse;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.hero-emblem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 6.25rem;
+  height: 6.25rem;
+  border: 1px solid rgb(var(--teal-rgb) / 0.3);
+  border-radius: 50%;
+  background: rgb(var(--teal-rgb) / 0.1);
+  transform: translate(-50%, -50%);
+}
+
+.hero-emblem::before,
+.hero-emblem::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgb(var(--teal-rgb) / 0.25);
+  border-radius: 50%;
+  animation: emblem-pulse 3s ease-out infinite;
+}
+
+.hero-emblem::before {
+  width: 140%;
+  height: 140%;
+}
+
+.hero-emblem::after {
+  width: 190%;
+  height: 190%;
+  border-color: rgb(var(--teal-rgb) / 0.12);
+  animation-delay: 1s;
+}
+
+.hero-emblem .logo-mark {
+  height: 2.4rem;
+}
+
+@keyframes emblem-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.85);
+  }
+  60% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
+
+html:not([data-width='compact']) .hero-stats {
+  gap: 3rem;
+  margin-top: 5rem;
+  padding-top: 3rem;
+}
+
+html:not([data-width='compact']) .hero-stat-value {
+  font-size: 2.5rem;
+}
+
+html:is([data-width='expanded'], [data-width='large'], [data-width='xlarge']) .hero-deco {
+  display: block;
+}
+
+html[data-height='compact'] .hero {
+  min-height: auto;
+}
+
+html[data-height='compact'] .hero-stats {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}

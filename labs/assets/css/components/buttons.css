@@ -1,0 +1,45 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: transform 200ms, box-shadow 200ms, background 200ms, border-color 200ms, color 200ms;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  background: var(--teal);
+  color: var(--on-teal);
+  font-weight: 700;
+  box-shadow: 0 0 30px rgb(var(--teal-rgb) / 0.25);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 8px 40px rgb(var(--teal-rgb) / 0.4);
+  filter: brightness(1.1);
+}
+
+.btn--ghost {
+  border-color: var(--border);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.btn--ghost:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.btn--block {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.95rem;
+}

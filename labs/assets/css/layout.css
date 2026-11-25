@@ -1,0 +1,25 @@
+html[data-width='medium'] {
+  --gutter: 1.5rem;
+  --section-pad: 5rem;
+}
+
+html[data-width='expanded'] {
+  --gutter: 2rem;
+  --section-pad: 6rem;
+}
+
+html[data-width='large'] {
+  --gutter: 2rem;
+  --section-pad: 8rem;
+}
+
+html[data-width='xlarge'] {
+  --gutter: 2.5rem;
+  --section-pad: 9rem;
+  --container-max: 85rem;
+}
+
+html[data-height='compact'] {
+  --section-pad: 3rem;
+  --nav-h: 3.5rem;
+}

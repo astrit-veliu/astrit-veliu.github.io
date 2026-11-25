@@ -1,0 +1,28 @@
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  background: var(--bg);
+}
+
+.mobile-link {
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 8vw, 2.4rem);
+  font-weight: 700;
+  transition: color 300ms;
+}
+
+.mobile-link:hover,
+.mobile-link.is-active {
+  color: var(--teal);
+}
+
+html[data-height='compact'] .mobile-nav {
+  gap: 1rem;
+}

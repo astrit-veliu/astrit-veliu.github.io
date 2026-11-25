@@ -1,0 +1,39 @@
+html[data-cursor='custom'],
+html[data-cursor='custom'] a,
+html[data-cursor='custom'] button {
+  cursor: none;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgb(0 200 160 / 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 350ms var(--ease), height 350ms var(--ease), background 350ms, border-color 350ms;
+}
+
+.cursor-ring.is-hover {
+  width: 60px;
+  height: 60px;
+  border-color: #00c8a0;
+  background: rgb(0 200 160 / 0.06);
+}
