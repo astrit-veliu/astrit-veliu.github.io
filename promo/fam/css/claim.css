@@ -1,50 +1,79 @@
 h1 {
-  margin: 0 0 10px;
-  font: 700 clamp(1.25rem, 5vw, 1.5rem) / 1.25 var(--font-display);
+  margin: 0 0 12px;
+  font: 800 clamp(1.7rem, 7.5vw, 2.2rem) / 1.1 var(--font-display);
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #fff 25%, var(--accent) 60%, var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .desc {
-  margin: 0 0 22px;
+  margin: 0 0 26px;
   color: var(--ink-muted);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   line-height: 1.65;
 }
 
-.step-btn { margin-bottom: 12px; }
+.steps {
+  display: grid;
+  gap: 12px;
+}
 
 .step-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: #1b1330;
+  background: var(--glow);
   color: #fff;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
 }
 
-.step-num-light { background: rgba(255, 255, 255, 0.25); }
-
 .icon-done { display: none; }
+.icon-idle { color: var(--success); }
 
 .step-btn.done,
 .step-btn.done:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--panel-edge);
-  color: var(--ink);
+  background: rgba(111, 227, 180, 0.1);
+  border-color: rgba(111, 227, 180, 0.4);
 }
 
+.step-btn.done .step-num { background: rgba(111, 227, 180, 0.25); color: var(--success); }
 .step-btn.done .icon-idle { display: none; }
 .step-btn.done .icon-done { display: inline; color: var(--success); }
 
-.reveal { animation: rise 0.25s ease both; }
+.claim-btn .step-num { background: rgba(0, 0, 0, 0.28); }
+.claim-btn .icon { display: none; }
+
+.claim-btn[data-state='locked'] .icon-lock,
+.claim-btn[data-state='ready'] .icon-gift,
+.claim-btn[data-state='loading'] .icon-spin { display: inline; }
+
+.claim-btn[data-state='locked'] {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--panel-edge);
+  box-shadow: none;
+  color: var(--ink-muted);
+  opacity: 1;
+}
+
+.claim-btn[data-state='locked'] .step-num { background: rgba(255, 255, 255, 0.1); }
+
+@keyframes pop {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(255, 111, 181, 0.6); }
+  60% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(255, 111, 181, 0); }
+  100% { transform: scale(1); }
+}
+
+.claim-btn.reveal { animation: pop 0.6s ease; }
 
 .status {
   min-height: 1.25rem;
-  margin: 14px 0 0;
+  margin: 16px 0 0;
   font-size: 0.8rem;
   color: var(--ink-muted);
 }

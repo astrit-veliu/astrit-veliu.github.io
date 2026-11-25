@@ -2,6 +2,7 @@ import './components.js'
 import { promo } from './config.js'
 import { bindContent, fill } from './dom.js'
 import { copyText } from './clipboard.js'
+import { burst } from './confetti.js'
 import { readClaim, takePending } from './storage.js'
 
 const copy = promo.copy.code
@@ -92,4 +93,5 @@ if (!claim) {
   bindContent()
   render(claim, pending ? 'fresh' : 'repeat')
   bindActions(claim)
+  if (pending) requestAnimationFrame(() => burst(els.code))
 }

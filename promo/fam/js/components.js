@@ -5,8 +5,8 @@ class AppBrand extends HTMLElement {
     const icon = document.createElement('img')
     icon.src = promo.app.icon
     icon.alt = ''
-    icon.width = 64
-    icon.height = 64
+    icon.width = 72
+    icon.height = 72
 
     const name = document.createElement('span')
     name.textContent = promo.app.name

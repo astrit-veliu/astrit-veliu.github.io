@@ -1,16 +1,21 @@
 :root {
-  --violet: #6650a4;
-  --violet-soft: #7a63bf;
-  --accent: #b9a6e8;
-  --ink: #f3f0fa;
-  --ink-muted: #b3a8cf;
+  color-scheme: dark;
+  --bg: #0a0612;
+  --violet: #8b6cff;
+  --violet-deep: #6650a4;
+  --pink: #ff6fb5;
+  --sky: #6ec8ff;
+  --amber: #ffd166;
+  --accent: #c9b8ff;
+  --ink: #f6f3ff;
+  --ink-muted: #b6abd3;
   --success: #6fe3b4;
   --danger: #ff8a8a;
-  --play: #01875f;
-  --panel: rgba(20, 14, 33, 0.72);
-  --panel-edge: rgba(255, 255, 255, 0.1);
-  --radius: 20px;
-  --radius-sm: 12px;
+  --panel: rgba(18, 12, 32, 0.62);
+  --panel-edge: rgba(255, 255, 255, 0.12);
+  --glow: linear-gradient(135deg, var(--violet), var(--pink));
+  --radius: 24px;
+  --radius-sm: 14px;
   --font-body: 'Poppins', system-ui, sans-serif;
   --font-display: 'Montserrat', system-ui, sans-serif;
   --gutter: clamp(16px, 4vw, 32px);
@@ -20,7 +25,10 @@
 
 [hidden] { display: none !important; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   margin: 0;
@@ -33,21 +41,41 @@ body {
     max(var(--gutter), env(safe-area-inset-right))
     max(var(--gutter), env(safe-area-inset-bottom))
     max(var(--gutter), env(safe-area-inset-left));
-  background: linear-gradient(180deg, var(--violet) 0%, #2c2340 42%, #000 100%) fixed;
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.5;
 }
 
-body::before {
+body::before,
+body::after {
   content: '';
   position: fixed;
-  inset: 0;
   z-index: -1;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  filter: blur(80px);
   pointer-events: none;
-  background:
-    radial-gradient(40rem 28rem at 12% 6%, rgba(185, 166, 232, 0.22), transparent 60%),
-    radial-gradient(34rem 26rem at 92% 94%, rgba(102, 80, 164, 0.3), transparent 60%);
+}
+
+body::before {
+  top: -28vmax;
+  left: -22vmax;
+  background: radial-gradient(circle, var(--violet-deep), transparent 65%);
+  opacity: 0.7;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+body::after {
+  right: -26vmax;
+  bottom: -30vmax;
+  background: radial-gradient(circle, var(--pink), transparent 65%);
+  opacity: 0.32;
+  animation: drift 22s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift {
+  to { transform: translate3d(8vmax, 6vmax, 0) scale(1.15); }
 }
 
 .wrap { width: min(100%, 26rem); }
@@ -68,6 +96,7 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

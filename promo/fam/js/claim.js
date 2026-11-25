@@ -16,15 +16,20 @@ function setStatus(message = '', kind = '') {
   status.className = `status ${kind}`.trim()
 }
 
+function setClaimState(state) {
+  claimBtn.dataset.state = state
+  claimBtn.disabled = state !== 'ready'
+}
+
 function unlockClaim() {
-  claimBtn.hidden = false
+  setClaimState('ready')
   claimBtn.classList.add('reveal')
   storeStep.classList.add('done')
   setStatus()
 }
 
 async function claim() {
-  claimBtn.disabled = true
+  setClaimState('loading')
   claimLabel.textContent = copy.loading
   setStatus()
 
@@ -47,7 +52,7 @@ async function claim() {
     setStatus(error.name === 'AbortError' ? copy.timeout : copy.network, 'error')
   }
 
-  claimBtn.disabled = false
+  setClaimState('ready')
   claimLabel.textContent = copy.cta
 }
 
