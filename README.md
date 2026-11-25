@@ -1,7 +1,6 @@
 <div align="center">
-# Astrit Veliu
- 
-**Android software engineer, based in Cologne, Germany.**
+<h1>Astrit Veliu</h1>
+<strong>Android Software Engineer, based in Cologne, Germany.</strong>
 This repository is the source of my personal site and the tools I publish next to it.
  
 [![Live site](https://img.shields.io/badge/live-astrit--veliu.github.io-0b2240?style=for-the-badge&labelColor=00c8a0)](https://astrit-veliu.github.io)
@@ -14,7 +13,6 @@ This repository is the source of my personal site and the tools I publish next t
 [![Watchers](https://img.shields.io/github/watchers/astrit-veliu/astrit-veliu.github.io.svg?style=flat-square&label=watchers)](https://github.com/astrit-veliu/astrit-veliu.github.io/watchers)
  
 </div>
----
  
 ## What is in here
  
