@@ -10,6 +10,8 @@ export function initScrollState() {
 
   const update = () => {
     queued = false;
+    const range = document.documentElement.scrollHeight - window.innerHeight;
+    nav.style.setProperty('--scroll', range > 0 ? window.scrollY / range : 0);
     nav.classList.toggle('is-stuck', window.scrollY > STUCK_OFFSET);
     top.classList.toggle('is-visible', window.scrollY > window.innerHeight * TOP_VIEWPORT_RATIO);
   };
@@ -23,5 +25,6 @@ export function initScrollState() {
     },
     { passive: true },
   );
+  window.addEventListener('resize', update, { passive: true });
   update();
 }

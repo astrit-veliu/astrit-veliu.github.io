@@ -12,7 +12,7 @@ const statsOf = (app) => {
     app.installs && { value: formatInstalls(app.installs, { compact: true }), label: statLabels.installs },
     app.rating && { value: formatRating(app.rating), label: statLabels.rating },
   ].filter(Boolean);
-  return entries.length ? entries : [{ value: app.category, label: '' }];
+  return entries;
 };
 
 const iconsOf = ({ icon }) =>
@@ -22,6 +22,7 @@ export const getApps = () =>
   apps.map((app) => ({
     id: app.id,
     name: app.name,
+    category: app.category,
     description: app.description,
     ...iconsOf(app),
     href: `${storeBaseUrl}${app.packageName}`,

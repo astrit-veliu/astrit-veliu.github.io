@@ -53,3 +53,7 @@ html:is([data-width='medium'], [data-width='expanded'], [data-width='large'], [d
 html[data-height='compact'] .section-dots {
   display: none;
 }
+
+html[data-width='compact'] .section-dots {
+  display: none;
+}

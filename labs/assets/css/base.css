@@ -124,14 +124,33 @@ main > section {
 
 .section-title em,
 .hero-title em {
-  color: var(--teal);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-style: normal;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.section-lead {
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(2.5rem);
-  transition: opacity 700ms ease, transform 700ms ease;
+  transform: translateY(1.75rem);
+  transition: opacity 700ms ease, transform 700ms var(--ease);
 }
 
 .reveal.is-in {

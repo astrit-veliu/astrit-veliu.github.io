@@ -8,6 +8,9 @@ import { mountFooter } from './components/footer.js';
 import { initTheme, toggleTheme } from './components/theme.js';
 import { initCursor } from './components/cursor.js';
 import { initReveal } from './components/reveal.js';
+import { initCarousels } from './components/carousel.js';
+import { initSpotlight } from './components/spotlight.js';
+import { layoutOrbits } from './components/orbit.js';
 import { initSectionTracker } from './components/section-tracker.js';
 import { initScrollState } from './components/scroll-state.js';
 import { submitContact } from './services/contact-form.js';
@@ -57,6 +60,9 @@ document.addEventListener(
   true,
 );
 
+layoutOrbits();
+initCarousels();
+initSpotlight();
 initCursor();
 initReveal();
 initSectionTracker(sectionIds);

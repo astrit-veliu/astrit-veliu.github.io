@@ -30,7 +30,11 @@
   gap: 0.75rem;
 }
 
-.social-list > :nth-child(2) .social-item {
+.social-list > :nth-child(2) .social-list > :nth-child(4) .social-item {
+  transition-delay: 300ms;
+}
+
+.social-item {
   transition-delay: 100ms;
 }
 
@@ -84,11 +88,21 @@
 }
 
 .form-card {
+  position: relative;
+  overflow: hidden;
   padding: 1.5rem;
   border: 1px solid var(--border);
-  border-radius: var(--radius-l);
+  border-radius: var(--radius-xl);
   background: var(--surface);
   box-shadow: var(--card-shadow);
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--gradient-accent);
 }
 
 .form-row {
@@ -115,7 +129,7 @@
   width: 100%;
   padding: 0.85rem 1rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-m);
   outline: none;
   background: var(--input-bg);
   font-size: 0.9rem;

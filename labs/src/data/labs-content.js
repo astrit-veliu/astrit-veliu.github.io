@@ -33,6 +33,8 @@ export const labs = {
     label: 'What we build',
     title: [{ text: 'Featured ' }, { text: 'Projects', accent: true }],
     tagLimit: 4,
+    intro: 'Production Android apps we design, build and maintain end to end.',
+    carousel: { region: 'Projects', previous: 'Previous project', next: 'Next project' },
     storeLabel: 'Play Store',
     developerSuffix: ' - Play Store',
     statLabels: { installs: 'installs', rating: 'rating' },
@@ -45,6 +47,23 @@ export const labs = {
       'Veliu Labs is a software development company specializing in high-quality Android applications. We focus on creating user-centric mobile experiences using cutting-edge technology and modern architecture patterns.',
       'Our portfolio spans VPN & privacy tools, health & fitness trackers, and network utilities - all built with a strong emphasis on performance, accessibility, and thoughtful UX.',
       'We leverage Jetpack Compose, Material Design 3, and scalable clean architecture to ship apps that are fast, reliable, and a pleasure to use.',
+    ],
+    pillars: [
+      {
+        icon: 'build',
+        title: 'Modern architecture',
+        text: 'Clean, modular codebases built on MVVM and MVI that stay easy to extend.',
+      },
+      {
+        icon: 'lightbulb',
+        title: 'Thoughtful design',
+        text: 'Material Design 3 interfaces shaped around how people actually use their phones.',
+      },
+      {
+        icon: 'chart',
+        title: 'Built to perform',
+        text: 'Fast start-up, low battery impact and dependable behavior across devices.',
+      },
     ],
     stackLabel: 'Tech Stack',
     stack: [
@@ -67,6 +86,7 @@ export const labs = {
     label: 'Get in touch',
     title: [{ text: "Let's build something " }, { text: 'great', accent: true }, { text: '.' }],
     infoLabel: 'Reach out',
+    emailLabel: 'Email',
     intro:
       "Have a project in mind? Whether it's a new Android app, architecture consultation, or a collaboration - we'd love to hear from you.",
     email: ['veliu.labs', 'gmail.com'],
@@ -84,5 +104,5 @@ export const labs = {
     },
   },
 
-  footer: { rights: 'All rights reserved' },
+  footer: { tagline: 'Android software, built with care.', rights: 'All rights reserved' },
 };

@@ -2,7 +2,15 @@ import { html } from '../../../src/core/dom.js';
 import { icon } from '../../../src/components/icons.js';
 import { labs } from '../data/labs-content.js';
 import { getSocialLinks } from '../data/projects.js';
+import { emailAddress } from '../core/email.js';
 import { richText } from '../components/rich-text.js';
+
+const isWeb = (url) => url.startsWith('http');
+
+const channels = () => [
+  { id: 'mail', label: labs.contact.emailLabel, handle: emailAddress(), url: `mailto:${emailAddress()}` },
+  ...getSocialLinks(),
+];
 
 const field = ({ name, label, type, placeholder }) => html`
   <div class="field">
@@ -26,10 +34,10 @@ export default {
             <div class="contact-info-label">${contact.infoLabel}</div>
             <p class="contact-intro">${contact.intro}</p>
             <ul class="social-list">
-              ${getSocialLinks().map(
+              ${channels().map(
                 ({ id, label, handle, url }) => html`
                   <li>
-                    <a class="social-item reveal" href="${url}" target="_blank" rel="noopener noreferrer">
+                    <a class="social-item reveal" href="${url}" ${isWeb(url) && html`target="_blank" rel="noopener noreferrer"`}>
                       <span class="social-icon">${icon(id)}</span>
                       <span class="social-text">
                         <span class="social-name">${label}</span>

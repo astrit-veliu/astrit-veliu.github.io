@@ -1,6 +1,6 @@
 import { html } from '../../../src/core/dom.js';
 import { labs } from '../data/labs-content.js';
-import { getHeroStats } from '../data/projects.js';
+import { getApps, getHeroStats } from '../data/projects.js';
 import { logoMark } from '../components/logo.js';
 import { richText } from '../components/rich-text.js';
 
@@ -9,6 +9,7 @@ export default {
   render: () => {
     const { hero } = labs;
     const values = getHeroStats();
+    const orbiting = getApps().filter(({ icon }) => icon);
     return html`
       <div class="hero-wrap">
         <div class="hero-badge">
@@ -38,6 +39,9 @@ export default {
         <div class="hero-ring hero-ring--middle"></div>
         <div class="hero-ring hero-ring--outer"></div>
         <div class="hero-emblem">${logoMark()}</div>
+        <div class="hero-orbit" data-orbit>
+          ${orbiting.map(({ icon, fallbackIcon }) => html`<span class="hero-app"><img src="${icon}" data-fallback="${fallbackIcon}" alt="" width="48" height="48" decoding="async"></span>`)}
+        </div>
       </div>
     `;
   },
