@@ -10,7 +10,7 @@ export const workspace = {
   user: 'astrit',
   host: 'veliu-labs',
   runtime: {
-    kotlin: 'Kotlin 1.9.0-21.0.8+',
+    kotlin: 'Kotlin 2.4.21',
     vm: 'Portfolio JVM by Veliu Labs',
     system: 'Darwin AstritMacBook.local 23.2.0 Darwin Kernel Version 23.2.0',
   },

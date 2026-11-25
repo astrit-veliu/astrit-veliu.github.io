@@ -13,7 +13,7 @@ export const content = {
       'Android Software Engineer with 10+ years of experience building innovative mobile applications.',
     currentRole:
       'Founder & Android Engineer at Veliu Labs, focused on developing My DNS and My IP applications.',
-    currentWork: 'Building innovative Android apps: My DNS & My IP',
+    currentWork: 'Building innovative Android apps: My DNS, My IP & FAM Tracker',
     education: [
       'MSc in Information Technology (2016-2018)',
       'BSc in Information Technology (2013-2016)',
@@ -21,14 +21,14 @@ export const content = {
       'CCNA Certification - Score: 961/1000',
     ],
     achievements: [
-      { key: 'users', value: '60,000+ active app users' },
+      { key: 'users', value: '111,000+ active app users' },
       { key: 'apps', value: '3 published production apps' },
       { key: 'architecture', value: 'Migrated CHECK24 from MVI to MVVM' },
     ],
     stats: [
       { value: '10+', label: 'Years Experience' },
-      { value: '60K+', label: 'App Users' },
-      { value: '3', label: 'Published Apps' },
+      { value: '111K+', label: 'App Users' },
+      { value: '4', label: 'Published Apps' },
       { value: '10+', label: 'Projects' },
     ],
   },
@@ -42,6 +42,7 @@ export const content = {
       highlights: [
         'Developing My DNS app (60,000+ users)',
         'Building My IP network tool',
+        'Developing FAM Tracker app for pregnancy planning and fertility tracking',
         'Implementing modern Android architecture',
         'Focus on user privacy and security',
       ],
@@ -104,6 +105,24 @@ export const content = {
         technologies: [
           'Jetpack Compose',
           'VPN Service',
+          'Material Design 3',
+          'MVVM Architecture',
+          'Room DB',
+          'Kotlin Coroutines',
+        ],
+      },
+       {
+        id: 'famTracker',
+        name: 'FAM Tracker',
+        packageName: 'website.techalbania.bbttemperaturetracker',
+        category: 'Health & Fitness',
+        description:
+          'FAM Tracker uses FAM methodology to understand women\'s natural cycle and has the pregnancy tracking feature. It provides a modern UI/UX experience and natural interaction.',
+        technologies: [
+          'Jetpack Compose',
+          'Work Manager',
+          'Alarm',
+          'Room DB',
           'Material Design 3',
           'MVVM Architecture',
           'Kotlin Coroutines',
@@ -172,6 +191,10 @@ export const content = {
         'JUnit',
         'Mockito',
         'Espresso',
+        'AI Agents',
+        'VPN Service',
+        'Work Manager',
+        'Custom Views',
         'Git',
         'CI/CD',
         'Jira & Bamboo',
