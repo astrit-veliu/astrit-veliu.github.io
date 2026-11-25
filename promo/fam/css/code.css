@@ -1,0 +1,48 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(111, 227, 180, 0.14);
+  color: var(--success);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag[data-state='repeat'] {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink-muted);
+}
+
+.code-box {
+  margin: 0;
+  padding: 18px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1.5px dashed var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 32px rgba(185, 166, 232, 0.1);
+  font: 700 clamp(1.1rem, 5.5vw, 1.4rem) / 1.3 var(--font-display);
+  letter-spacing: 2px;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.claimed-date {
+  margin: 10px 0 20px;
+  color: var(--ink-muted);
+  font-size: 0.75rem;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.action-row .btn { flex: 1; }
+
+@media (max-width: 340px) {
+  .action-row { flex-direction: column; }
+}

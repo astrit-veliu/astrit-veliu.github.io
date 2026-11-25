@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6650a4">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/code.css">
+<title>Promo code</title>
+<script type="module" src="js/code.js"></script>
+</head>
+<body data-title="copy.code.pageTitle">
+<main class="wrap">
+  <app-brand></app-brand>
+
+  <section class="card">
+    <div class="tag" id="tag">
+      <i id="tagIcon" class="fa-solid"></i>
+      <span id="tagLabel"></span>
+    </div>
+
+    <p class="code-box" id="codeBox"></p>
+    <p class="claimed-date" id="claimedDate"></p>
+
+    <div class="action-row">
+      <button class="btn btn-ghost" id="copyBtn" type="button">
+        <i class="fa-regular fa-copy"></i>
+        <span data-text="copy.code.copy"></span>
+      </button>
+      <button class="btn btn-ghost" id="shareBtn" type="button">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span data-text="copy.code.share"></span>
+      </button>
+    </div>
+
+    <a class="btn btn-light" id="redeemBtn" href="#" target="_blank" rel="noopener">
+      <i class="fa-brands fa-google-play"></i>
+      <span data-text="copy.code.redeem"></span>
+    </a>
+
+    <a class="btn btn-link" data-href="store.url" href="#">
+      <span data-text="copy.code.store"></span>
+    </a>
+  </section>
+
+  <app-footer></app-footer>
+</main>
+</body>
+</html>
