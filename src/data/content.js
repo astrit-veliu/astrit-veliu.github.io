@@ -20,21 +20,21 @@ const apps = [
     ],
   },
   {
-        id: 'famTracker',
-        name: 'FAM Tracker',
-        packageName: 'website.techalbania.bbttemperaturetracker',
-        category: 'Health & Fitness',
-        description:
-          'FAM Tracker uses FAM methodology to understand women\'s natural cycle and has the pregnancy tracking feature. It provides a modern UI/UX experience and natural interaction.',
-        technologies: [
-          'Jetpack Compose',
-          'Work Manager',
-          'Alarm',
-          'Room DB',
-          'Material Design 3',
-          'MVVM Architecture',
-          'Kotlin Coroutines',
-        ],
+    id: 'famTracker',
+    name: 'FAM Tracker',
+    packageName: 'website.techalbania.bbttemperaturetracker',
+    category: 'Health & Fitness',
+    description:
+      'FAM Tracker uses FAM methodology to understand women\'s natural cycle and has the pregnancy tracking feature. It provides a modern UI/UX experience and natural interaction.',
+    technologies: [
+      'Jetpack Compose',
+      'Work Manager',
+      'Alarm',
+      'Room DB',
+      'Material Design 3',
+      'MVVM Architecture',
+      'Kotlin Coroutines',
+    ],
    },
   {
     id: 'fitAl',
