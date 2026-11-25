@@ -1,0 +1,91 @@
+.tree {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.25rem 0;
+}
+
+.tree-node > summary {
+  list-style: none;
+}
+
+.tree-node > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: 100%;
+  min-height: 1.75rem;
+  padding-right: 0.5rem;
+  padding-left: calc(0.5rem + var(--depth, 0) * 1rem);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.tree-row:hover {
+  background: var(--ide-hover);
+}
+
+.tree-row.is-active {
+  background: var(--ide-selection);
+}
+
+.depth-0 {
+  --depth: 0;
+}
+.depth-1 {
+  --depth: 1;
+}
+.depth-2 {
+  --depth: 2;
+}
+.depth-3 {
+  --depth: 3;
+}
+.depth-4 {
+  --depth: 4;
+}
+.depth-5 {
+  --depth: 5;
+}
+
+.tree-caret {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ide-text-dim);
+  transition: transform var(--motion);
+}
+
+.tree-node[open] > summary > .tree-caret {
+  transform: rotate(90deg);
+}
+
+.tree-folder {
+  color: #8f9ba8;
+}
+
+.tree-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tree-hint {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ide-text-dim);
+  font-size: 0.75rem;
+}
+
+.tree-file {
+  padding-left: calc(1.5rem + var(--depth, 0) * 1rem);
+}
+
+.file-kotlin {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #a97bff;
+}

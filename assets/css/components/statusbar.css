@@ -1,0 +1,59 @@
+.statusbar {
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0 0.75rem;
+  background: var(--ide-panel);
+  border-top: 1px solid var(--ide-border);
+  color: var(--ide-text-muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.status-message {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-spacer {
+  flex: 1;
+}
+
+.status-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0 0.5rem;
+}
+
+.status-item .icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+html[data-width='medium'] .status-optional,
+html[data-width='expanded'] .status-optional {
+  display: none;
+}
+
+.ide[data-building='true'] .status-message::before {
+  content: '';
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  margin-right: 0.5rem;
+  border: 2px solid var(--ide-pressed);
+  border-top-color: var(--ide-accent);
+  border-radius: 50%;
+  vertical-align: -1px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

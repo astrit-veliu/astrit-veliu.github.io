@@ -1,0 +1,250 @@
+.device-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  height: 1.75rem;
+  padding: 0 0.5rem;
+  border-radius: var(--radius-m);
+  font-weight: 500;
+}
+
+.device-chip:hover,
+.device-chip[aria-expanded='true'] {
+  background: var(--ide-hover);
+}
+
+.device-chip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emulator-stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--emulator-pad);
+  container-type: size;
+}
+
+.device {
+  --d-bg: #121614;
+  --d-surface: #1b201e;
+  --d-surface-2: #232927;
+  --d-outline: #343d39;
+  --d-text: #e4ebe7;
+  --d-muted: #9aa8a2;
+  --d-primary: #1eb980;
+  --d-on-primary: #04281b;
+  --d-primary-container: #14463a;
+  --btn-bg: var(--d-primary);
+  --btn-fg: var(--d-on-primary);
+  --btn-border: var(--d-outline);
+  --btn-outlined-fg: var(--d-primary);
+  --fw: min(100cqw, calc(100cqh * var(--device-ratio)));
+  position: relative;
+  width: var(--fw);
+  height: calc(var(--fw) / var(--device-ratio));
+  padding: 0.5em;
+  border-radius: 2.4em;
+  background: #050607;
+  box-shadow: 0 0 0 1px #45484d;
+  font-family: var(--font-app);
+  font-size: max(8px, calc(var(--fw) / 25));
+  line-height: 1.45;
+}
+
+.device[data-theme='light'] {
+  --d-bg: #f6faf7;
+  --d-surface: #ffffff;
+  --d-surface-2: #e8f0eb;
+  --d-outline: #c6d3cc;
+  --d-text: #171d1a;
+  --d-muted: #55615b;
+  --d-primary: #0a7a55;
+  --d-on-primary: #ffffff;
+  --d-primary-container: #cdeede;
+}
+
+.device-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1.9em;
+  background: var(--d-bg);
+  color: var(--d-text);
+}
+
+.device-camera {
+  position: absolute;
+  top: 1.1em;
+  left: 50%;
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 50%;
+  background: #000000;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 1px #2a2c30;
+}
+
+.phone-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  padding: 0.7em 1.6em 0.2em;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.phone-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.phone-status-icons .icon {
+  width: 1em;
+  height: 1em;
+}
+
+.app-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.5em 1em 1.5em;
+  scrollbar-width: thin;
+  scrollbar-color: var(--d-outline) transparent;
+  outline-offset: -2px;
+}
+
+.app-content.is-entering {
+  animation: screen-enter 240ms ease-out;
+}
+
+@keyframes screen-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+}
+
+.scroll-top {
+  position: absolute;
+  right: 1em;
+  bottom: 7.2em;
+  display: grid;
+  place-items: center;
+  width: 3em;
+  height: 3em;
+  border-radius: 1em;
+  background: var(--d-primary);
+  color: var(--d-on-primary);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+  transition: opacity var(--motion), transform var(--motion);
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.bottom-nav {
+  display: flex;
+  flex: none;
+  padding: 0.6em 0.3em 0.3em;
+  background: var(--d-surface-2);
+}
+
+.nav-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+  min-width: 0;
+  color: var(--d-muted);
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.nav-pill {
+  display: grid;
+  place-items: center;
+  width: 4em;
+  height: 2.2em;
+  border-radius: 1.1em;
+  transition: background var(--motion);
+}
+
+.nav-pill .icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.nav-item.is-active {
+  color: var(--d-text);
+  font-weight: 500;
+}
+
+.nav-item.is-active .nav-pill {
+  background: var(--d-primary-container);
+  color: var(--d-text);
+}
+
+.nav-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gesture-bar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  height: 1.4em;
+  background: var(--d-surface-2);
+}
+
+.gesture-bar::after {
+  content: '';
+  width: 36%;
+  height: 0.3em;
+  border-radius: 0.3em;
+  background: var(--d-muted);
+}
+
+.device-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  background: color-mix(in srgb, var(--d-bg) 94%, transparent);
+  color: var(--d-muted);
+}
+
+.device-loader.is-active {
+  display: flex;
+}
+
+.spinner {
+  width: 2.6em;
+  height: 2.6em;
+  border: 0.3em solid var(--d-outline);
+  border-top-color: var(--d-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}

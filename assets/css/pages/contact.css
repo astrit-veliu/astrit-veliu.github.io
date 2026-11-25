@@ -1,0 +1,75 @@
+.page-contact .contact-form {
+  display: grid;
+  gap: 0.8em;
+}
+
+.page-contact .contact-field {
+  display: grid;
+  gap: 0.3em;
+}
+
+.page-contact .contact-label {
+  color: var(--d-muted);
+  font-size: 0.85em;
+}
+
+.page-contact .contact-input {
+  width: 100%;
+  padding: 0.7em 0.9em;
+  border: 1px solid var(--d-outline);
+  border-radius: 0.8em;
+  background: var(--d-bg);
+  color: var(--d-text);
+  font-family: inherit;
+}
+
+.page-contact .contact-input:focus {
+  border-color: var(--d-primary);
+  outline: none;
+}
+
+.page-contact .contact-textarea {
+  min-height: 7em;
+  resize: vertical;
+}
+
+.page-contact .social-list {
+  display: grid;
+  gap: 0.6em;
+}
+
+.page-contact .social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  padding: 0.6em;
+  border-radius: 0.9em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-contact .social-link:hover {
+  background: var(--d-surface-2);
+}
+
+.page-contact .social-icon {
+  display: grid;
+  place-items: center;
+  width: 2.6em;
+  height: 2.6em;
+  border-radius: 50%;
+  background: var(--d-primary-container);
+}
+
+.page-contact .social-text {
+  display: grid;
+}
+
+.page-contact .social-name {
+  font-weight: 500;
+}
+
+.page-contact .social-handle {
+  color: var(--d-muted);
+  font-size: 0.85em;
+}

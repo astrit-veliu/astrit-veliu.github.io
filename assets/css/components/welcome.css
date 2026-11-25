@@ -1,0 +1,186 @@
+.welcome {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-welcome);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--ide-bg);
+  transition: opacity 400ms ease, visibility 0s linear 400ms;
+}
+
+.welcome.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-window {
+  display: flex;
+  flex-direction: column;
+  width: min(56rem, 100%);
+  height: min(40rem, 100%);
+  overflow: hidden;
+  background: var(--ide-panel);
+  border: 1px solid var(--ide-border);
+  border-radius: var(--radius-l);
+}
+
+.welcome-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: none;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--ide-border);
+}
+
+.android-logo {
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+}
+
+.android-logo-disc {
+  fill: #3ddc84;
+}
+
+.android-logo-mark {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.welcome-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.welcome-version {
+  color: var(--ide-text-muted);
+}
+
+.welcome-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.welcome-sidebar {
+  flex: none;
+  width: 11rem;
+  padding: 0.75rem;
+  background: var(--ide-bg);
+  border-right: 1px solid var(--ide-border);
+}
+
+.welcome-nav {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-m);
+}
+
+.welcome-nav.is-active {
+  background: var(--ide-selection);
+}
+
+.welcome-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1rem 1.25rem;
+  overflow: auto;
+}
+
+.welcome-toolbar {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.welcome-search {
+  flex: 1;
+  min-width: 0;
+  height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--ide-border);
+  border-radius: var(--radius-m);
+  background: var(--ide-bg);
+}
+
+.welcome-search:focus {
+  border-color: var(--ide-accent);
+  outline: none;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-m);
+  background: var(--ide-selection);
+}
+
+.project-item:hover {
+  filter: brightness(1.1);
+}
+
+.project-badge--large {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+}
+
+.project-info {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.project-title {
+  font-weight: 500;
+}
+
+.project-path,
+.project-branch {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ide-text-muted);
+  font-size: 0.75rem;
+}
+
+.project-branch {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.project-branch .icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.welcome-empty {
+  color: var(--ide-text-muted);
+}
+
+.welcome-footer {
+  display: flex;
+  flex: none;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--ide-border);
+}
+
+html[data-width='compact'] .welcome-sidebar {
+  display: none;
+}
+
+html[data-height='compact'] .welcome-header {
+  padding: 0.75rem 1.25rem;
+}

@@ -1,0 +1,110 @@
+.titlebar {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0 0.5rem;
+  background: var(--ide-panel);
+  border-bottom: 1px solid var(--ide-border);
+}
+
+.titlebar-menu {
+  display: inline-grid;
+}
+
+.menubar {
+  display: none;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.menu-trigger {
+  height: 1.875rem;
+  padding: 0 0.625rem;
+  border-radius: var(--radius-m);
+  color: var(--ide-text);
+}
+
+.menu-trigger:hover,
+.menu-trigger[aria-expanded='true'],
+.project-widget:hover,
+.project-widget[aria-expanded='true'] {
+  background: var(--ide-hover);
+}
+
+.project-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  height: 1.875rem;
+  padding: 0 0.5rem 0 0.25rem;
+  border-radius: var(--radius-m);
+  font-weight: 500;
+}
+
+.project-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-caret {
+  color: var(--ide-text-muted);
+}
+
+.project-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  border-radius: var(--radius-m);
+  background: var(--ide-run);
+  color: #0e1f10;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.branch-widget {
+  display: none;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0 0.5rem;
+  color: var(--ide-text-muted);
+}
+
+.titlebar-spacer {
+  flex: 1;
+}
+
+.run-btn {
+  background: var(--ide-run);
+  color: #0e1f10;
+}
+
+.run-btn:hover {
+  background: var(--ide-run);
+  color: #0e1f10;
+  filter: brightness(1.12);
+}
+
+.run-btn.is-busy {
+  background: var(--ide-panel-raised);
+  color: var(--ide-text-dim);
+  cursor: progress;
+}
+
+html:is([data-width='expanded'], [data-width='large'], [data-width='xlarge']) .menubar {
+  display: flex;
+}
+
+html:is([data-width='expanded'], [data-width='large'], [data-width='xlarge']) .titlebar-menu {
+  display: none;
+}
+
+html:is([data-width='large'], [data-width='xlarge']) .branch-widget {
+  display: inline-flex;
+}

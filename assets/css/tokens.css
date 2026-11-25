@@ -1,0 +1,52 @@
+:root {
+  color-scheme: dark;
+
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+  --font-app: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ide-bg: #1e1f22;
+  --ide-panel: #2b2d30;
+  --ide-panel-raised: #313338;
+  --ide-border: #393b40;
+  --ide-hover: #393b41;
+  --ide-pressed: #43454a;
+  --ide-selection: #2e436e;
+  --ide-current-line: #26282e;
+  --ide-text: #dfe1e5;
+  --ide-text-muted: #9da0a8;
+  --ide-text-dim: #6f737a;
+  --ide-accent: #3574f0;
+  --ide-run: #5fb865;
+  --ide-error: #f75464;
+
+  --tok-comment: #7a7e85;
+  --tok-string: #6aab73;
+  --tok-keyword: #cf8e6d;
+  --tok-number: #2aacb8;
+  --tok-annotation: #b3ae60;
+  --tok-call: #56a8f5;
+  --tok-property: #c77dbb;
+  --tok-type: #6fafbd;
+
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 10px;
+
+  --titlebar-h: 2.75rem;
+  --statusbar-h: 1.5rem;
+  --tool-header-h: 2.25rem;
+  --pane-switcher-h: 3.5rem;
+  --stripe-w: 2.5rem;
+  --explorer-w: 15rem;
+  --terminal-h: clamp(8rem, 30dvh, 20rem);
+  --emulator-pad: 0.75rem;
+  --device-ratio: 0.4455;
+  --motion: 150ms ease;
+
+  --layer-welcome: 50;
+  --layer-popover: 60;
+  --layer-palette: 70;
+  --layer-dialog: 80;
+  --layer-toast: 90;
+}

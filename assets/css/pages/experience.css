@@ -1,0 +1,31 @@
+.page-experience .timeline {
+  position: relative;
+  display: grid;
+  gap: 0.9em;
+  padding-left: 1.3em;
+}
+
+.page-experience .timeline::before {
+  content: '';
+  position: absolute;
+  top: 0.4em;
+  bottom: 0.4em;
+  left: 0.3em;
+  width: 2px;
+  background: var(--d-outline);
+}
+
+.page-experience .timeline-item {
+  position: relative;
+}
+
+.page-experience .timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 1.3em;
+  left: -1.3em;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: var(--d-primary);
+}

@@ -1,0 +1,9 @@
+.page-projects .store-links {
+  display: grid;
+  gap: 0.5em;
+}
+
+.page-projects .store-links a {
+  color: var(--d-primary);
+  font-weight: 500;
+}

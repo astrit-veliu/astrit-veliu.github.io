@@ -1,0 +1,85 @@
+.terminal-pane {
+  background: var(--ide-bg);
+  border-top: 1px solid var(--ide-border);
+}
+
+.tool-tabs {
+  display: flex;
+  flex: 1;
+  align-self: stretch;
+}
+
+.tool-tab {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  border-bottom: 2px solid transparent;
+  color: var(--ide-text-muted);
+}
+
+.tool-tab:hover {
+  color: var(--ide-text);
+}
+
+.tool-tab.is-active {
+  border-bottom-color: var(--ide-accent);
+  color: var(--ide-text);
+}
+
+.terminal-view {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+#terminal[data-tab='terminal'] [data-view='build'],
+#terminal[data-tab='build'] [data-view='terminal'] {
+  display: none;
+}
+
+.terminal-line {
+  min-height: 1.5em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.terminal-line--success {
+  color: var(--ide-run);
+}
+
+.terminal-line--error {
+  color: var(--ide-error);
+}
+
+.terminal-prompt {
+  color: var(--ide-run);
+}
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-prompt {
+  flex: none;
+}
+
+.terminal-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  caret-color: var(--ide-text);
+}
+
+.terminal-input::placeholder {
+  color: var(--ide-text-dim);
+}

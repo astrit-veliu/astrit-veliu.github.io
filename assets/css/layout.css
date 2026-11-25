@@ -1,0 +1,271 @@
+html[data-width='medium'] {
+  --stripe-w: 2.25rem;
+}
+
+html[data-width='expanded'] {
+  --explorer-w: 13rem;
+}
+
+html[data-width='large'] {
+  --explorer-w: 15rem;
+}
+
+html[data-width='xlarge'] {
+  --explorer-w: 17rem;
+  --titlebar-h: 3rem;
+  --statusbar-h: 1.625rem;
+}
+
+html[data-height='compact'] {
+  --titlebar-h: 2.25rem;
+  --statusbar-h: 0rem;
+  --tool-header-h: 2rem;
+  --terminal-h: 45dvh;
+}
+
+html[data-width='compact'] {
+  --stripe-w: 0rem;
+  --statusbar-h: var(--pane-switcher-h);
+}
+
+html[data-width='compact'][data-height='compact'] {
+  --statusbar-h: 2.5rem;
+}
+
+.ide {
+  --emulator-w: clamp(
+    13rem,
+    calc(
+      (100dvh - var(--titlebar-h) - var(--statusbar-h) - var(--tool-header-h) - 2 * var(--emulator-pad)) *
+        var(--device-ratio) + 2 * var(--emulator-pad)
+    ),
+    38vw
+  );
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--titlebar-h) minmax(0, 1fr) var(--statusbar-h);
+  grid-template-columns: minmax(0, 1fr);
+  height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow: hidden;
+  background: var(--ide-bg);
+  color: var(--ide-text);
+}
+
+.ide-body {
+  --explorer-col: 0px;
+  --emulator-col: 0px;
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns:
+    var(--stripe-w) var(--explorer-col) minmax(0, 1fr) var(--emulator-col)
+    var(--stripe-w);
+  min-height: 0;
+}
+
+.stripe-left {
+  grid-column: 1;
+}
+
+.explorer {
+  grid-column: 2;
+}
+
+.workspace {
+  grid-column: 3;
+}
+
+.emulator-pane {
+  grid-column: 4;
+}
+
+.stripe-right {
+  grid-column: 5;
+}
+
+.stripe-left,
+.explorer,
+.workspace,
+.emulator-pane,
+.stripe-right {
+  grid-row: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  background: var(--ide-bg);
+}
+
+.editor-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.terminal-pane {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  height: var(--terminal-h);
+}
+
+.explorer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--ide-panel);
+  border-right: 1px solid var(--ide-border);
+}
+
+.emulator-pane {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--ide-panel);
+  border-left: 1px solid var(--ide-border);
+}
+
+.drawer-scrim {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 19;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+html:is([data-width='expanded'], [data-width='large'], [data-width='xlarge']) .ide[data-explorer='open'] .ide-body {
+  --explorer-col: var(--explorer-w);
+}
+
+html:is([data-width='expanded'], [data-width='large'], [data-width='xlarge']) .ide[data-explorer='closed'] .explorer {
+  visibility: hidden;
+}
+
+html:not([data-width='compact']) .ide[data-emulator='open'] .ide-body {
+  --emulator-col: var(--emulator-w);
+}
+
+html:not([data-width='compact']) .ide[data-emulator='closed'] .emulator-pane {
+  display: none;
+}
+
+html:not([data-width='compact']) .ide[data-terminal='closed'] .terminal-pane {
+  display: none;
+}
+
+html[data-width='medium'] .explorer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--stripe-w);
+  z-index: 20;
+  width: min(16rem, 80%);
+  border-right: 1px solid var(--ide-border);
+  transform: translateX(calc(-100% - var(--stripe-w)));
+  visibility: hidden;
+  transition: transform var(--motion), visibility 0s linear var(--motion);
+}
+
+html[data-width='medium'] .ide[data-overlay='explorer'] .explorer {
+  transform: none;
+  visibility: visible;
+  transition: transform var(--motion), visibility 0s;
+}
+
+html[data-width='medium'] .ide[data-overlay='explorer'] .drawer-scrim {
+  display: block;
+}
+
+html[data-width='compact'] .ide-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html[data-width='compact'] .workspace {
+  display: contents;
+}
+
+html[data-width='compact'] .explorer,
+html[data-width='compact'] .editor-pane,
+html[data-width='compact'] .terminal-pane,
+html[data-width='compact'] .emulator-pane {
+  grid-area: 1 / 1;
+  display: none;
+  height: auto;
+  border: 0;
+}
+
+html[data-width='compact'] .ide[data-pane='project'] .explorer,
+html[data-width='compact'] .ide[data-pane='editor'] .editor-pane,
+html[data-width='compact'] .ide[data-pane='terminal'] .terminal-pane,
+html[data-width='compact'] .ide[data-pane='emulator'] .emulator-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--ide-bg);
+}
+
+html[data-width='compact'] .ide[data-pane='project'] .explorer,
+html[data-width='compact'] .ide[data-pane='emulator'] .emulator-pane {
+  background: var(--ide-panel);
+}
+
+html[data-width='compact'] .stripe {
+  display: none;
+}
+
+html[data-width='compact'] .explorer-close,
+html[data-width='compact'] .terminal-hide,
+html[data-width='compact'] .emulator-hide {
+  display: none;
+}
+
+html[data-width='compact'] .statusbar {
+  display: none;
+}
+
+html:not([data-width='compact']) .pane-switcher {
+  display: none;
+}
+
+html[data-height='compact'] .statusbar,
+html[data-height='compact'] .breadcrumbs {
+  display: none;
+}
+
+html[data-height='compact'][data-width='compact'] .pane-switcher {
+  display: grid;
+}
+
+.progress {
+  position: absolute;
+  top: calc(var(--titlebar-h) + env(safe-area-inset-top));
+  left: 0;
+  z-index: 25;
+  width: 0;
+  height: 2px;
+  background: var(--ide-accent);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+html[data-rainbow='true'] .ide {
+  animation: hue-cycle 8s linear infinite;
+}
+
+@keyframes hue-cycle {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-rainbow='true'] .ide {
+    animation: none;
+    filter: hue-rotate(90deg);
+  }
+}

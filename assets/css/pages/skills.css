@@ -1,0 +1,4 @@
+.page-skills .ui-card {
+  display: grid;
+  gap: 0.8em;
+}

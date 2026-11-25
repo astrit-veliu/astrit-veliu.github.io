@@ -1,0 +1,30 @@
+.pane-switcher {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--ide-panel);
+  border-top: 1px solid var(--ide-border);
+}
+
+.pane-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  color: var(--ide-text-muted);
+  font-size: 0.6875rem;
+  text-align: center;
+}
+
+.pane-btn.is-active {
+  color: var(--ide-text);
+  box-shadow: inset 0 2px 0 var(--ide-accent);
+  background: var(--ide-panel-raised);
+}
+
+html[data-height='compact'] .pane-btn {
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}

@@ -1,0 +1,4 @@
+.page-about .about-actions {
+  display: flex;
+  justify-content: flex-start;
+}
