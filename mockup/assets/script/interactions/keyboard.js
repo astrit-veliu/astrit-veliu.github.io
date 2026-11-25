@@ -15,7 +15,7 @@ export function attachKeyboard() {
     const dir = ARROWS[e.key]
     if (!dir) return
     e.preventDefault()
-    const { width, height } = stageSize(outputSize(store.screen(), store.state.assetType))
+    const { width, height } = stageSize(outputSize(store.project()))
     const step = e.shiftKey ? 10 : 1
     store.patchOverlay(id, o => ({ x: o.x + (dir[0] * step) / width, y: o.y + (dir[1] * step) / height }))
   })

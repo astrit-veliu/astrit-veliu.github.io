@@ -1,7 +1,7 @@
 import { vendor } from '../lib/vendor.js'
 
 export const PROJECT_APP = 'playstore-mockup-generator'
-export const PROJECT_VERSION = 1
+export const PROJECT_VERSION = 2
 
 const EXTENSIONS = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif', 'image/svg+xml': 'svg' }
 
@@ -24,13 +24,14 @@ export async function serializeProject(state) {
     return packed.get(url)
   }
 
+  const bg = { ...state.bg, image: await pack(state.bg.image) }
+
   const screens = []
   for (const source of state.screens) {
     const screen = structuredClone(source)
     delete screen.id
     screen.media.screenshot = await pack(source.media.screenshot)
     screen.media.frame = await pack(source.media.frame)
-    screen.bg.image = await pack(source.bg.image)
     for (const overlay of screen.overlays) {
       delete overlay.id
       if (overlay.src) overlay.src = await pack(overlay.src)
@@ -41,7 +42,7 @@ export async function serializeProject(state) {
   const index = state.screens.findIndex(s => s.id === state.currentId)
   zip.file('project.json', JSON.stringify({
     app: PROJECT_APP, version: PROJECT_VERSION, savedAt: new Date().toISOString(),
-    assetType: state.assetType, watermark: state.watermark, current: index, screens,
+    assetType: state.assetType, watermark: state.watermark, bg, size: state.size, current: index, screens,
   }, null, 2))
 
   return zip.generateAsync({ type: 'blob', compression: 'DEFLATE' })

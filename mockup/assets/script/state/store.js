@@ -1,14 +1,16 @@
 import { DEFAULT_ASSET, PLAY_STORE } from '../config/assetTypes.js'
-import { PRESETS, WATERMARK_DEFAULTS } from '../config/defaults.js'
+import { BG_DEFAULTS, PRESETS, SIZE_DEFAULTS, WATERMARK_DEFAULTS } from '../config/defaults.js'
 import { releaseUrl } from '../lib/images.js'
 import { getPath, setPath } from '../lib/path.js'
-import { createScreen } from './screenFactory.js'
+import { cloneScreen, createScreen } from './screenFactory.js'
 
 const state = {
   screens: PRESETS.map(preset => createScreen(preset)),
   currentId: null,
   assetType: DEFAULT_ASSET,
   watermark: { ...WATERMARK_DEFAULTS },
+  bg: { ...BG_DEFAULTS },
+  size: { ...SIZE_DEFAULTS },
   selectedOverlayId: null,
 }
 state.currentId = state.screens[0].id
@@ -23,7 +25,6 @@ const screenEvent = live => emit('screen', { screenId: state.currentId, live })
 function releaseScreen(s) {
   releaseUrl(s.media.screenshot)
   releaseUrl(s.media.frame)
-  releaseUrl(s.bg.image)
   s.overlays.forEach(o => releaseUrl(o.src))
 }
 
@@ -36,11 +37,12 @@ export const store = {
   screen,
   get index() { return state.screens.findIndex(s => s.id === state.currentId) },
   /** Everything the renderer needs besides the screen itself. */
-  project() { return { assetType: state.assetType, watermark: state.watermark } },
+  project() { return { assetType: state.assetType, watermark: state.watermark, bg: state.bg, size: state.size } },
   /** Replaces the whole project (already validated by project/restore.js). */
-  load({ screens, current, assetType, watermark }) {
+  load({ screens, current, assetType, watermark, bg, size }) {
     state.screens.forEach(releaseScreen)
-    Object.assign(state, { screens, currentId: screens[current].id, assetType, watermark, selectedOverlayId: null })
+    releaseUrl(state.bg.image)
+    Object.assign(state, { screens, currentId: screens[current].id, assetType, watermark, bg, size, selectedOverlayId: null })
     emit('structure')
     emit('app')
   },
@@ -69,6 +71,16 @@ export const store = {
     const s = createScreen()
     state.screens.push(s)
     state.currentId = s.id
+    state.selectedOverlayId = null
+    emit('structure')
+    return true
+  },
+  duplicate(id) {
+    const i = state.screens.findIndex(s => s.id === id)
+    if (i < 0 || state.screens.length >= PLAY_STORE.maxScreens) return false
+    const copy = cloneScreen(state.screens[i])
+    state.screens.splice(i + 1, 0, copy)
+    state.currentId = copy.id
     state.selectedOverlayId = null
     emit('structure')
     return true

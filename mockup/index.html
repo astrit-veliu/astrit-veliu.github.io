@@ -23,36 +23,40 @@
   </div>
   <script src="assets/script/file-notice.js"></script>
 
-  <header class="app-header">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <rect width="28" height="28" rx="7" fill="#00d4b8"/>
-      <rect x="8" y="5" width="12" height="18" rx="2.5" stroke="#031a16" stroke-width="1.5"/>
-      <rect x="11.5" y="19.5" width="5" height="1.5" rx=".75" fill="#031a16"/>
-      <path d="M14 8.5l.6 1.9h2l-1.6 1.2.6 1.9-1.6-1.2-1.6 1.2.6-1.9-1.6-1.2h2z" fill="#031a16"/>
-    </svg>
-    <h1>Play Store <span>Mockup Generator</span></h1>
-    <button type="button" class="btn header-export" data-view-toggle="export"><i class="fa-solid fa-download" aria-hidden="true"></i><span>Export</span></button>
-    <svg class="wordmark" width="90" height="26" viewBox="0 0 200 56" role="img" aria-label="Veliu Labs">
-      <polygon points="0,6 14,6 32,42 18,42" fill="rgba(255,255,255,.25)"/>
-      <polygon points="14,6 28,6 46,42 32,42" fill="#00c8a0"/>
-      <polygon points="28,20 42,20 50,42 36,42" fill="rgba(255,255,255,.15)"/>
-      <text x="62" y="24" font-family="Montserrat,sans-serif" font-weight="800" font-size="19" fill="#fff" letter-spacing="-.5">Veliu</text>
-      <text x="62" y="46" font-family="Montserrat,sans-serif" font-weight="800" font-size="19" fill="#00c8a0" letter-spacing="-.5">Labs</text>
-    </svg>
-  </header>
-
   <div class="app-layout">
-    <aside class="panel panel-left" id="panelLeft" aria-label="Design controls"></aside>
+    <aside class="panel panel-left" id="panelLeft" aria-label="Design controls">
+      <header class="panel-head">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect width="28" height="28" rx="7" fill="#00d4b8"/>
+          <rect x="8" y="5" width="12" height="18" rx="2.5" stroke="#031a16" stroke-width="1.5"/>
+          <rect x="11.5" y="19.5" width="5" height="1.5" rx=".75" fill="#031a16"/>
+          <path d="M14 8.5l.6 1.9h2l-1.6 1.2.6 1.9-1.6-1.2-1.6 1.2.6-1.9-1.6-1.2h2z" fill="#031a16"/>
+        </svg>
+        <h1>Mockup <span>Generator</span></h1>
+      </header>
+    </aside>
     <div class="resize-handle" id="resizeLeft" role="separator" aria-orientation="vertical" aria-label="Resize design panel" tabindex="0"></div>
 
     <main class="canvas-area">
-      <div class="toolbar" id="toolbar"></div>
+      <span class="size-badge" id="sizeBadge"></span>
+      <button type="button" class="btn float-export" data-view-toggle="export"><i class="fa-solid fa-download" aria-hidden="true"></i><span>Export</span></button>
       <div class="stage-view" id="stageView"></div>
       <div class="carousel" id="carousel"></div>
     </main>
 
     <div class="resize-handle" id="resizeRight" role="separator" aria-orientation="vertical" aria-label="Resize export panel" tabindex="0"></div>
-    <aside class="panel panel-right" id="panelRight" aria-label="Export and canvas settings"></aside>
+    <aside class="panel panel-right" id="panelRight" aria-label="Project settings, applied to all screens">
+      <header class="panel-head">
+        <svg width="120" height="34" viewBox="0 0 200 56" role="img" aria-label="Veliu Labs">
+          <polygon points="0,6 14,6 32,42 18,42" fill="rgba(255,255,255,.25)"/>
+          <polygon points="14,6 28,6 46,42 32,42" fill="#00c8a0"/>
+          <polygon points="28,20 42,20 50,42 36,42" fill="rgba(255,255,255,.15)"/>
+          <text x="62" y="24" font-family="Montserrat,sans-serif" font-weight="800" font-size="19" fill="#fff" letter-spacing="-.5">Veliu</text>
+          <text x="62" y="46" font-family="Montserrat,sans-serif" font-weight="800" font-size="19" fill="#00c8a0" letter-spacing="-.5">Labs</text>
+        </svg>
+        <button type="button" class="icon-btn head-close" data-view-set="preview" aria-label="Close export panel"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </header>
+    </aside>
   </div>
   <div class="scrim" data-view-set="preview"></div>
 

@@ -11,6 +11,7 @@ export async function readImage(file, types = IMAGE_TYPES) {
     const probe = new Image()
     probe.src = url
     await probe.decode()
+    refs.set(url, 1)
     return url
   } catch {
     URL.revokeObjectURL(url)
@@ -18,4 +19,18 @@ export async function readImage(file, types = IMAGE_TYPES) {
   }
 }
 
-export const releaseUrl = url => { if (url?.startsWith('blob:')) URL.revokeObjectURL(url) }
+/** Object URLs are reference counted: duplicated screens share them, and the last release frees them. */
+const refs = new Map()
+
+export function retainUrl(url) {
+  if (refs.has(url)) refs.set(url, refs.get(url) + 1)
+  return url
+}
+
+export function releaseUrl(url) {
+  const count = refs.get(url)
+  if (count === undefined) return
+  if (count > 1) return void refs.set(url, count - 1)
+  refs.delete(url)
+  URL.revokeObjectURL(url)
+}

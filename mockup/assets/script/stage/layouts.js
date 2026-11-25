@@ -10,8 +10,7 @@ const tagLayer = ({ asset, theme, width }) => asset.tag && h('div', {
 }, icon(asset.tag.icon), asset.tag.text)
 
 function bannerLayout(ctx) {
-  const { screen } = ctx
-  const scrim = screen.bg.type === 'image' && screen.bg.image && h('div', { style: { position: 'absolute', inset: '0', background: 'linear-gradient(120deg, rgba(0,0,0,.7) 30%, transparent 100%)', zIndex: 1 } })
+  const scrim = ctx.bg.type === 'image' && ctx.bg.image && h('div', { style: { position: 'absolute', inset: '0', background: 'linear-gradient(120deg, rgba(0,0,0,.7) 30%, transparent 100%)', zIndex: 1 } })
   return [scrim, headlineLayer(ctx, BANNER_METRICS), tagLayer(ctx)]
 }
 

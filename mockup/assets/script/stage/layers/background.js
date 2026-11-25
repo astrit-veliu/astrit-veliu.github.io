@@ -4,7 +4,7 @@ import { noiseTile } from '../../lib/noise.js'
 
 const fill = { position: 'absolute', inset: '0' }
 
-function baseFill({ bg }, theme, c1, c2) {
+function baseFill(bg, theme, c1, c2) {
   if (bg.type === 'image' && bg.image) return { backgroundImage: `url("${bg.image}")`, backgroundSize: 'cover', backgroundPosition: 'center' }
   if (bg.type === 'mesh') {
     return { background: `radial-gradient(ellipse 120% 80% at 20% 20%, ${alpha(theme.accent, 0.15)} 0%, transparent 55%), radial-gradient(ellipse 80% 100% at 80% 80%, ${alpha(theme.accent2, 0.1)} 0%, transparent 55%), ${c1}` }
@@ -16,9 +16,8 @@ function baseFill({ bg }, theme, c1, c2) {
 const stripFill = (style, theme) =>
   ({ white: '#fff', solid: theme.accent, gradient: `linear-gradient(90deg, ${theme.accent}, ${theme.accent2})` })[style]
 
-export function backgroundLayers({ screen, theme, width, height }) {
-  const { bg } = screen
-  const layers = [h('div', { style: { ...fill, ...baseFill(screen, theme, bg.col1 ?? theme.bg, bg.col2 ?? theme.bg2) } })]
+export function backgroundLayers({ bg, theme, width, height }) {
+  const layers = [h('div', { style: { ...fill, ...baseFill(bg, theme, bg.col1 ?? theme.bg, bg.col2 ?? theme.bg2) } })]
 
   if (bg.noise > 0) {
     layers.push(h('div', { style: { ...fill, opacity: bg.noise / 100, backgroundImage: `url(${noiseTile()})`, backgroundSize: '128px 128px' } }))

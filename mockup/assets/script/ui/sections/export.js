@@ -6,7 +6,7 @@ import { store } from '../../state/store.js'
 import { Button, InfoList, Section } from '../primitives.js'
 import { toast } from '../toast.js'
 
-const size = () => outputSize(store.screen(), store.state.assetType)
+const size = () => outputSize(store.project())
 
 export function ExportSection() {
   const progress = h('div', { class: 'progress', hidden: true }, h('div', { class: 'progress-fill' }))

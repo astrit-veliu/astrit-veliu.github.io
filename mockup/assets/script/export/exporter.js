@@ -12,7 +12,7 @@ const toBlob = canvas => new Promise((resolve, reject) =>
 /** Renders a screen offscreen at its exact output size, independent of the preview. `project` = { assetType, watermark }. */
 export async function renderToCanvas(screen, project) {
   const html2canvas = vendor('html2canvas')
-  const out = outputSize(screen, project.assetType)
+  const out = outputSize(project)
   const { exportScale } = stageSize(out)
   const stage = h('div', { class: 'stage' })
   const host = h('div', { class: 'export-host', 'aria-hidden': 'true' }, stage)

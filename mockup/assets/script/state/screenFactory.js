@@ -1,4 +1,5 @@
-import { BG_DEFAULTS, BLANK_PRESET, DEVICE_DEFAULTS, STYLE_DEFAULTS } from '../config/defaults.js'
+import { BLANK_PRESET, DEVICE_DEFAULTS, STYLE_DEFAULTS } from '../config/defaults.js'
+import { retainUrl } from '../lib/images.js'
 
 let seq = 0
 export const uid = prefix => `${prefix}${++seq}`
@@ -9,11 +10,19 @@ export const createScreen = (preset = BLANK_PRESET) => structuredClone({
   content: preset,
   style: STYLE_DEFAULTS,
   device: DEVICE_DEFAULTS,
-  bg: BG_DEFAULTS,
   media: { screenshot: null, frame: null },
   overlays: [],
-  size: { w: null, h: null },
 })
+
+/** Independent copy of a screen. Uploaded images are shared via reference counting, not duplicated. */
+export function cloneScreen(source) {
+  const copy = structuredClone(source)
+  copy.id = uid('s')
+  retainUrl(copy.media.screenshot)
+  retainUrl(copy.media.frame)
+  for (const overlay of copy.overlays) { overlay.id = uid('o'); retainUrl(overlay.src) }
+  return copy
+}
 
 /** Overlay positions are the element centre as fractions of the stage. `slot` staggers new items. */
 export const createOverlay = (type, props, slot = 0) => ({ id: uid('o'), type, x: 0.5, y: 0.3 + (slot % 5) * 0.08, ...props })

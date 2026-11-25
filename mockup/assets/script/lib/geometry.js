@@ -2,12 +2,12 @@ import { ASSET_TYPES, CANVAS_LIMITS, LOGICAL_LONG_EDGE, PLAY_STORE } from '../co
 
 export const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
-/** Final pixel size of a screen for an asset type. */
-export function outputSize(screen, assetKey) {
-  const asset = ASSET_TYPES[assetKey]
+/** Final pixel size for a project ({ assetType, size }). */
+export function outputSize({ assetType, size }) {
+  const asset = ASSET_TYPES[assetType]
   if (!asset.resizable) return { w: asset.w, h: asset.h }
   const side = (value, fallback) => clamp(Math.round(value ?? fallback), CANVAS_LIMITS.minSide, CANVAS_LIMITS.maxSide)
-  return { w: side(screen.size.w, asset.w), h: side(screen.size.h, asset.h) }
+  return { w: side(size.w, asset.w), h: side(size.h, asset.h) }
 }
 
 /** Logical drawing space for an output size, plus the factor that maps it back to pixels. */

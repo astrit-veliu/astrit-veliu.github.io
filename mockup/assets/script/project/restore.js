@@ -17,18 +17,32 @@ const MIME = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'i
 
 // A project file is untrusted input: every field is type-checked, range-clamped and
 // matched against the known options, and anything else is replaced by its default.
+const obj = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : {})
 const text = (v, max, fallback) => (typeof v === 'string' ? v.slice(0, max) : fallback)
 const bool = (v, fallback) => (typeof v === 'boolean' ? v : fallback)
 const num = (v, [min, max], fallback) => (Number.isFinite(v) ? clamp(v, min, max) : fallback)
 const nullableNum = (v, range) => (Number.isFinite(v) ? clamp(v, ...range) : null)
 const oneOf = (v, allowed, fallback) => (allowed.includes(v) ? v : fallback)
 const color = v => (typeof v === 'string' && isHex(v) ? normalizeHex(v) : null)
-const position = v => (v && Number.isFinite(v.x) && Number.isFinite(v.y) ? { x: clamp(v.x, -1, 2), y: clamp(v.y, -1, 2) } : null)
+const position = v => (Number.isFinite(obj(v).x) && Number.isFinite(v.y) ? { x: clamp(v.x, -1, 2), y: clamp(v.y, -1, 2) } : null)
 const side = v => (Number.isFinite(v) ? clamp(Math.round(v), CANVAS_LIMITS.minSide, CANVAS_LIMITS.maxSide) : null)
+
+async function sanitizeBg(raw, loadAsset) {
+  const b = obj(raw)
+  return {
+    type: oneOf(b.type, values(BG_TYPES), 'gradient'),
+    col1: color(b.col1), col2: color(b.col2),
+    strip: bool(b.strip, true), stripStyle: oneOf(b.stripStyle, values(STRIP_STYLES), 'gradient'),
+    shapes: bool(b.shapes, true), noise: num(b.noise, [0, 60], 0),
+    image: await loadAsset(b.image),
+  }
+}
+
+const sanitizeSize = raw => ({ w: side(obj(raw).w), h: side(obj(raw).h) })
 
 async function sanitizeScreen(raw, loadAsset) {
   const s = createScreen()
-  const { content: c = {}, style: st = {}, device: d = {}, bg: b = {}, media: m = {}, size = {} } = raw
+  const c = obj(raw.content), st = obj(raw.style), d = obj(raw.device), m = obj(raw.media)
   const def = { content: s.content, style: s.style }
 
   s.content = {
@@ -54,21 +68,14 @@ async function sanitizeScreen(raw, loadAsset) {
     x: nullableNum(d.x, [-1, 2]), y: nullableNum(d.y, [-1, 2]),
     scale: num(d.scale, LIMITS.deviceScale, 1), rotate: num(d.rotate, [-180, 180], 0),
   }
-  s.bg = {
-    type: oneOf(b.type, values(BG_TYPES), 'gradient'),
-    col1: color(b.col1), col2: color(b.col2),
-    strip: bool(b.strip, true), stripStyle: oneOf(b.stripStyle, values(STRIP_STYLES), 'gradient'),
-    shapes: bool(b.shapes, true), noise: num(b.noise, [0, 60], 0),
-    image: await loadAsset(b.image),
-  }
   s.media = { screenshot: await loadAsset(m.screenshot), frame: await loadAsset(m.frame, ['image/png']) }
-  s.size = { w: side(size.w), h: side(size.h) }
 
-  for (const [i, o] of (Array.isArray(raw.overlays) ? raw.overlays.slice(0, MAX_OVERLAYS) : []).entries()) {
-    const base = { x: num(o?.x, [-1, 2], 0.5), y: num(o?.y, [-1, 2], 0.5) }
-    if (o?.type === 'badge') s.overlays.push({ ...createOverlay('badge', { text: text(o.text, 40, 'Badge'), style: oneOf(o.style, values(BADGE_STYLE_OPTIONS), 'accent') }, i), ...base })
-    else if (o?.type === 'award') s.overlays.push({ ...createOverlay('award', { title: text(o.title, 30, 'Award'), sub: text(o.sub, 40, ''), style: oneOf(o.style, values(AWARD_STYLE_OPTIONS), 'gold') }, i), ...base })
-    else if (o?.type === 'popup') {
+  for (const [i, item] of (Array.isArray(raw.overlays) ? raw.overlays.slice(0, MAX_OVERLAYS) : []).entries()) {
+    const o = obj(item)
+    const base = { x: num(o.x, [-1, 2], 0.5), y: num(o.y, [-1, 2], 0.5) }
+    if (o.type === 'badge') s.overlays.push({ ...createOverlay('badge', { text: text(o.text, 40, 'Badge'), style: oneOf(o.style, values(BADGE_STYLE_OPTIONS), 'accent') }, i), ...base })
+    else if (o.type === 'award') s.overlays.push({ ...createOverlay('award', { title: text(o.title, 30, 'Award'), sub: text(o.sub, 40, ''), style: oneOf(o.style, values(AWARD_STYLE_OPTIONS), 'gold') }, i), ...base })
+    else if (o.type === 'popup') {
       const src = await loadAsset(o.src)
       if (src) s.overlays.push({ ...createOverlay('popup', { src, w: num(o.w, LIMITS.popupWidth, 0.4), rotate: num(o.rotate, [-180, 180], 0) }, i), ...base })
     }
@@ -85,9 +92,10 @@ export async function restoreProject(file) {
   const entry = zip.file('project.json')
   if (!entry) throw new Error('This is not a project file (project.json is missing)')
   let data
-  try { data = JSON.parse(await entry.async('string')) } catch { throw new Error('The project data is corrupted') }
-  if (data?.app !== PROJECT_APP) throw new Error('This file was not created by this app')
-  if (!Number.isInteger(data.version) || data.version > PROJECT_VERSION) throw new Error('This project was saved by a newer version of the app')
+  try { data = obj(JSON.parse(await entry.async('string'))) } catch { throw new Error('The project data is corrupted') }
+  if (data.app !== PROJECT_APP) throw new Error('This file was not created by this app')
+  if (!Number.isInteger(data.version) || data.version < 1) throw new Error('The project data is corrupted')
+  if (data.version > PROJECT_VERSION) throw new Error('This project was saved by a newer version of the app')
   if (!Array.isArray(data.screens) || !data.screens.length) throw new Error('The project contains no screens')
 
   let missing = 0
@@ -104,13 +112,17 @@ export async function restoreProject(file) {
     }
   }
 
+  // Version 1 stored background and canvas size per screen; those settings are global now, so take the first screen's.
+  const legacy = obj(data.screens[0])
+  const bg = await sanitizeBg(data.bg ?? legacy.bg, loadAsset)
+  const size = sanitizeSize(data.size ?? legacy.size)
+
   const screens = []
-  for (const raw of data.screens.slice(0, PLAY_STORE.maxScreens)) screens.push(await sanitizeScreen(raw ?? {}, loadAsset))
+  for (const raw of data.screens.slice(0, PLAY_STORE.maxScreens)) screens.push(await sanitizeScreen(obj(raw), loadAsset))
   return {
-    screens,
+    screens, bg, size, missing,
     current: Number.isInteger(data.current) ? clamp(data.current, 0, screens.length - 1) : 0,
     assetType: oneOf(data.assetType, Object.keys(ASSET_TYPES), DEFAULT_ASSET),
-    watermark: { show: bool(data.watermark?.show, WATERMARK_DEFAULTS.show), text: text(data.watermark?.text, 60, WATERMARK_DEFAULTS.text) },
-    missing,
+    watermark: { show: bool(obj(data.watermark).show, WATERMARK_DEFAULTS.show), text: text(obj(data.watermark).text, 60, WATERMARK_DEFAULTS.text) },
   }
 }

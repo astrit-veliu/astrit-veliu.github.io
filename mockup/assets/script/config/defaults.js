@@ -23,6 +23,9 @@ export const WATERMARK_DEFAULTS = { show: true, text: 'VELIU LABS' }
 /** null colours follow the active theme. */
 export const BG_DEFAULTS = { type: 'gradient', col1: null, col2: null, strip: true, stripStyle: 'gradient', shapes: true, noise: 0, image: null }
 
+/** Project-wide canvas size override; null = the asset type's default. */
+export const SIZE_DEFAULTS = { w: null, h: null }
+
 /** x/y null = automatic placement; otherwise fractions of the stage. */
 export const DEVICE_DEFAULTS = { x: null, y: null, scale: 1, rotate: 0 }
 
