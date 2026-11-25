@@ -1,15 +1,21 @@
 import { html } from '../core/dom.js';
 import { construct, doc, indentBlock, join, list, str } from '../core/kotlin.js';
+import { formatInstalls, formatRating } from '../core/format.js';
+import { assetUrl } from '../core/assets.js';
 import { workspace } from '../data/workspace.js';
 import { card, chips, screen, stats, text } from '../components/ui-kit.js';
 
 const storeUrl = ({ projects }, app) => `${projects.storeBaseUrl}${app.packageName}`;
 
-const metrics = (app) =>
-  [
-    app.users && { value: app.users, label: 'Users' },
-    app.rating && { value: app.rating, label: 'Rating' },
-  ].filter(Boolean);
+const figures = (app) => ({
+  users: app.installs ? formatInstalls(app.installs) : null,
+  rating: app.rating ? formatRating(app.rating) : null,
+});
+
+const metrics = (app) => {
+  const { users, rating } = figures(app);
+  return [users && { value: users, label: 'Users' }, rating && { value: rating, label: 'Rating' }].filter(Boolean);
+};
 
 export default {
   id: 'projects',
@@ -47,12 +53,12 @@ export default {
                   category: str(app.category),
                   description: str(app.description),
                   stats:
-                    app.users || app.rating
+                    figures(app).users || figures(app).rating
                       ? construct(
                           'AppStats',
                           {
-                            users: app.users ? str(app.users) : 'null',
-                            rating: app.rating ? str(app.rating) : 'null',
+                            users: figures(app).users ? str(figures(app).users) : 'null',
+                            rating: figures(app).rating ? str(figures(app).rating) : 'null',
                           },
                           1,
                         )
@@ -79,6 +85,7 @@ export default {
       'Projects',
       content.projects.apps.map((app) =>
         card({
+          leading: html`<img class="ui-app-icon" src="${assetUrl(app.icon)}" alt="" width="64" height="64" loading="lazy" decoding="async">`,
           title: app.name,
           subtitle: app.category,
           href: storeUrl(content, app),
@@ -105,9 +112,8 @@ export default {
   summary: ({ projects }) => [
     'Published Applications:',
     ...projects.apps.map((app, index) => {
-      const detail = [app.users && `${app.users} users`, app.rating && `${app.rating} rating`]
-        .filter(Boolean)
-        .join(', ');
+      const { users, rating } = figures(app);
+      const detail = [users && `${users} users`, rating && `${rating} rating`].filter(Boolean).join(', ');
       return `${index + 1}. ${app.name} - ${detail || app.category}`;
     }),
     '',

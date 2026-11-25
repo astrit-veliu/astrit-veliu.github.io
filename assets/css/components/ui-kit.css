@@ -50,6 +50,32 @@
   font-size: 0.85em;
 }
 
+.ui-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+}
+
+.ui-card-heading > * + * {
+  margin-top: 0.2em;
+}
+
+.ui-avatar {
+  width: 3.8em;
+  height: 3.8em;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ui-app-icon {
+  width: 3.4em;
+  height: 3.4em;
+  flex: none;
+  border-radius: 0.9em;
+  object-fit: cover;
+}
+
 .ui-text {
   color: var(--d-muted);
 }

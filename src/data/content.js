@@ -1,3 +1,66 @@
+import { formatInstalls } from '../core/format.js';
+
+const apps = [
+  {
+    id: 'myDns',
+    name: 'My DNS',
+    packageName: 'website.techalbania.generaldns',
+    icon: 'assets/img/apps/my-dns.png',
+    category: 'Networking',
+    description:
+      'Fast & secure DNS switching application with VPN-based architecture. Provides optimal privacy and modern UI/UX built with Material Design 3.',
+    installs: 60000,
+    rating: 4.5,
+    technologies: [
+      'Jetpack Compose',
+      'VPN Service',
+      'Material Design 3',
+      'MVVM Architecture',
+      'Kotlin Coroutines',
+    ],
+  },
+  {
+        id: 'famTracker',
+        name: 'FAM Tracker',
+        packageName: 'website.techalbania.bbttemperaturetracker',
+        category: 'Health & Fitness',
+        description:
+          'FAM Tracker uses FAM methodology to understand women\'s natural cycle and has the pregnancy tracking feature. It provides a modern UI/UX experience and natural interaction.',
+        technologies: [
+          'Jetpack Compose',
+          'Work Manager',
+          'Alarm',
+          'Room DB',
+          'Material Design 3',
+          'MVVM Architecture',
+          'Kotlin Coroutines',
+        ],
+   },
+  {
+    id: 'fitAl',
+    name: 'Fit AL',
+    packageName: 'website.techalbania.fit',
+    icon: 'assets/img/apps/fit-al.png',
+    category: 'Health & Fitness',
+    description:
+      'Pedometer and health tracker application with engaging animations. Tracks steps, calories, and provides health insights with modern Android architecture.',
+    technologies: ['Step Detection Sensors', 'Health Connect API', 'Animated UI', 'Material Design'],
+  },
+  {
+    id: 'myIp',
+    name: 'My IP',
+    packageName: 'website.techalbania.mynetworkip',
+    icon: 'assets/img/apps/my-ip.png',
+    category: 'Network Tools',
+    description:
+      'Network information tool to check IP address and network details instantly. Clean interface with fast performance.',
+    technologies: ['Network API', 'Clean Architecture', 'Minimal UI', 'Kotlin'],
+  },
+];
+
+const totalInstalls = apps.reduce((sum, app) => sum + (app.installs ?? 0), 0);
+const flagship = apps.find((app) => app.installs === Math.max(...apps.map((entry) => entry.installs ?? 0)));
+
 export const content = {
   profile: {
     name: 'Astrit Veliu',
@@ -6,6 +69,7 @@ export const content = {
     location: 'Köln, Germany',
     experience: '10+ years',
     cvPath: 'assets/cv/Astrit_Veliu_CV_EN.pdf',
+    avatar: 'assets/img/avatar.jpg',
   },
 
   about: {
@@ -13,7 +77,7 @@ export const content = {
       'Android Software Engineer with 10+ years of experience building innovative mobile applications.',
     currentRole:
       'Founder & Android Engineer at Veliu Labs, focused on developing My DNS and My IP applications.',
-    currentWork: 'Building innovative Android apps: My DNS, My IP & FAM Tracker',
+    currentWork: 'Building innovative Android apps: My DNS & My IP',
     education: [
       'MSc in Information Technology (2016-2018)',
       'BSc in Information Technology (2013-2016)',
@@ -21,14 +85,14 @@ export const content = {
       'CCNA Certification - Score: 961/1000',
     ],
     achievements: [
-      { key: 'users', value: '111,000+ active app users' },
-      { key: 'apps', value: '3 published production apps' },
+      { key: 'users', value: `${formatInstalls(totalInstalls)} active app users` },
+      { key: 'apps', value: `${apps.length} published production apps` },
       { key: 'architecture', value: 'Migrated CHECK24 from MVI to MVVM' },
     ],
     stats: [
       { value: '10+', label: 'Years Experience' },
-      { value: '111K+', label: 'App Users' },
-      { value: '4', label: 'Published Apps' },
+      { value: formatInstalls(totalInstalls, { compact: true }), label: 'App Users' },
+      { value: String(apps.length), label: 'Published Apps' },
       { value: '10+', label: 'Projects' },
     ],
   },
@@ -40,9 +104,8 @@ export const content = {
       period: 'January 2026 - Present',
       location: 'Köln, Germany',
       highlights: [
-        'Developing My DNS app (60,000+ users)',
+        `Developing ${flagship.name} app (${formatInstalls(flagship.installs)} users)`,
         'Building My IP network tool',
-        'Developing FAM Tracker app for pregnancy planning and fertility tracking',
         'Implementing modern Android architecture',
         'Focus on user privacy and security',
       ],
@@ -92,66 +155,7 @@ export const content = {
   ],
 
   projects: {
-    apps: [
-      {
-        id: 'myDns',
-        name: 'My DNS',
-        packageName: 'website.techalbania.generaldns',
-        category: 'Networking',
-        description:
-          'Fast & secure DNS switching application with VPN-based architecture. Provides optimal privacy and modern UI/UX built with Material Design 3.',
-        users: '60,000+',
-        rating: '4.5',
-        technologies: [
-          'Jetpack Compose',
-          'VPN Service',
-          'Material Design 3',
-          'MVVM Architecture',
-          'Room DB',
-          'Kotlin Coroutines',
-        ],
-      },
-       {
-        id: 'famTracker',
-        name: 'FAM Tracker',
-        packageName: 'website.techalbania.bbttemperaturetracker',
-        category: 'Health & Fitness',
-        description:
-          'FAM Tracker uses FAM methodology to understand women\'s natural cycle and has the pregnancy tracking feature. It provides a modern UI/UX experience and natural interaction.',
-        technologies: [
-          'Jetpack Compose',
-          'Work Manager',
-          'Alarm',
-          'Room DB',
-          'Material Design 3',
-          'MVVM Architecture',
-          'Kotlin Coroutines',
-        ],
-      },
-      {
-        id: 'fitAl',
-        name: 'Fit AL',
-        packageName: 'website.techalbania.fit',
-        category: 'Health & Fitness',
-        description:
-          'Pedometer and health tracker application with engaging animations. Tracks steps, calories, and provides health insights with modern Android architecture.',
-        technologies: [
-          'Step Detection Sensors',
-          'Health Connect API',
-          'Animated UI',
-          'Material Design',
-        ],
-      },
-      {
-        id: 'myIp',
-        name: 'My IP',
-        packageName: 'website.techalbania.mynetworkip',
-        category: 'Network Tools',
-        description:
-          'Network information tool to check IP address and network details instantly. Clean interface with fast performance.',
-        technologies: ['Network API', 'Clean Architecture', 'Minimal UI', 'Kotlin'],
-      },
-    ],
+    apps,
     storeBaseUrl: 'https://play.google.com/store/apps/details?id=',
     developerPages: [
       {
@@ -191,10 +195,6 @@ export const content = {
         'JUnit',
         'Mockito',
         'Espresso',
-        'AI Agents',
-        'VPN Service',
-        'Work Manager',
-        'Custom Views',
         'Git',
         'CI/CD',
         'Jira & Bamboo',

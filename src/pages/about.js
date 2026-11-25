@@ -1,5 +1,6 @@
 import { html } from '../core/dom.js';
 import { doc, indentBlock, join, list, map, str } from '../core/kotlin.js';
+import { assetUrl } from '../core/assets.js';
 import { workspace } from '../data/workspace.js';
 import { bulletList, button, card, screen, stats, text } from '../components/ui-kit.js';
 
@@ -39,11 +40,16 @@ export default {
       )}\n}`,
     ),
 
-  screen: ({ about }) =>
+  screen: ({ profile, about }) =>
     screen(
       'about',
       'About Me',
-      card({ title: 'Astrit Veliu', body: text(about.summary) }),
+      card({
+        leading: html`<img class="ui-avatar" src="${assetUrl(profile.avatar)}" alt="${profile.name}" width="96" height="96" decoding="async">`,
+        title: profile.name,
+        subtitle: profile.role,
+        body: text(about.summary),
+      }),
       card({ title: 'Current Role', body: text(about.currentRole) }),
       stats(about.stats),
       card({ title: 'Education', body: bulletList(about.education) }),

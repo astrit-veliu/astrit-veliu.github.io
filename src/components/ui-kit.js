@@ -7,11 +7,14 @@ export const screen = (name, title, ...children) => html`
   </div>
 `;
 
-export const card = ({ title, subtitle, meta, body, footer, href, className = '' }) => {
-  const inner = html`
+export const card = ({ leading, title, subtitle, meta, body, footer, href, className = '' }) => {
+  const heading = html`
     ${title && html`<h3 class="ui-card-title">${title}</h3>`}
     ${subtitle && html`<p class="ui-card-subtitle">${subtitle}</p>`}
     ${meta && html`<p class="ui-card-meta">${meta}</p>`}
+  `;
+  const inner = html`
+    ${leading ? html`<div class="ui-card-head">${leading}<div class="ui-card-heading">${heading}</div></div>` : heading}
     ${body}
     ${footer}
   `;
