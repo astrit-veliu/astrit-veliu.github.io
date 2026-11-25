@@ -6,7 +6,7 @@ import { richText } from '../components/rich-text.js';
 
 const appCard = (app) => html`
   <a class="app-card reveal" href="${app.href}" target="_blank" rel="noopener noreferrer">
-    <img class="app-icon" src="${app.icon}" data-fallback="${app.fallbackIcon}" alt="${app.name} icon" width="64" height="64" loading="lazy" decoding="async">
+    ${app.icon && html`<img class="app-icon" src="${app.icon}" data-fallback="${app.fallbackIcon}" alt="${app.name} icon" width="64" height="64" loading="lazy" decoding="async">`}
     <h3 class="app-name">${app.name}</h3>
     <p class="app-desc">${app.description}</p>
     <ul class="app-tags">${app.tags.slice(0, labs.projects.tagLimit).map((tag) => html`<li class="tag">${tag}</li>`)}</ul>

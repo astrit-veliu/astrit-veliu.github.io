@@ -15,13 +15,15 @@ const statsOf = (app) => {
   return entries.length ? entries : [{ value: app.category, label: '' }];
 };
 
+const iconsOf = ({ icon }) =>
+  icon ? { icon: labsAsset(`assets/img/apps/${icon.split('/').pop()}`), fallbackIcon: assetUrl(icon) } : {};
+
 export const getApps = () =>
   apps.map((app) => ({
     id: app.id,
     name: app.name,
     description: app.description,
-    icon: labsAsset(`assets/img/apps/${app.icon.split('/').pop()}`),
-    fallbackIcon: assetUrl(app.icon),
+    ...iconsOf(app),
     href: `${storeBaseUrl}${app.packageName}`,
     tags: app.technologies,
     stats: statsOf(app),

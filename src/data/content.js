@@ -9,7 +9,7 @@ const apps = [
     category: 'Networking',
     description:
       'Fast & secure DNS switching application with VPN-based architecture. Provides optimal privacy and modern UI/UX built with Material Design 3.',
-    installs: 60000,
+    installs: 112000,
     rating: 4.5,
     technologies: [
       'Jetpack Compose',
@@ -23,6 +23,7 @@ const apps = [
     id: 'famTracker',
     name: 'FAM Tracker',
     packageName: 'website.techalbania.bbttemperaturetracker',
+    icon: 'assets/img/apps/fam-tracker.png',
     category: 'Health & Fitness',
     description:
       'FAM Tracker uses FAM methodology to understand women\'s natural cycle and has the pregnancy tracking feature. It provides a modern UI/UX experience and natural interaction.',
@@ -35,7 +36,7 @@ const apps = [
       'MVVM Architecture',
       'Kotlin Coroutines',
     ],
-   },
+  },
   {
     id: 'fitAl',
     name: 'Fit AL',
