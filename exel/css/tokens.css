@@ -1,0 +1,56 @@
+:root{
+  color-scheme:dark;
+  --font-display:'Montserrat',system-ui,sans-serif;
+  --font-body:'Poppins',system-ui,sans-serif;
+
+  --bg:#151515;
+  --surface:#1c1c1c;
+  --surface-2:#242424;
+  --line:#333;
+  --line-soft:#262626;
+  --grid:rgba(255,255,255,.035);
+  --text:#f4f4f2;
+  --text-dim:#b0b0ac;
+  --text-faint:#8c8c88;
+  --key:#0f0f0f;
+  --select:#56c98e;
+
+  --fs-xs:clamp(.75rem,.73rem + .1vw,.8125rem);
+  --fs-s:clamp(.8125rem,.79rem + .12vw,.9rem);
+  --fs-m:clamp(.9rem,.87rem + .16vw,1rem);
+  --fs-l:clamp(1.15rem,1rem + .7vw,1.5rem);
+  --fs-xl:clamp(1.65rem,1.2rem + 1.9vw,2.6rem);
+
+  --sp-2:.5rem;
+  --sp-3:.75rem;
+  --sp-4:1rem;
+  --sp-5:clamp(1.25rem,1rem + 1vw,2rem);
+  --sp-6:clamp(1.5rem,.9rem + 2.6vw,3.5rem);
+
+  --radius:.5rem;
+  --radius-l:.875rem;
+  --tap:2.75rem;
+  --cell:3rem;
+  --ease:.2s ease;
+
+  --sidebar-w:16.5rem;
+  --rail-w:4.75rem;
+  --bar-h:4rem;
+}
+
+@media (prefers-color-scheme:light){
+  :root{
+    color-scheme:light;
+    --bg:#f7f7f4;
+    --surface:#fff;
+    --surface-2:#efefeb;
+    --line:#d6d6d0;
+    --line-soft:#e4e4de;
+    --grid:rgba(0,0,0,.045);
+    --text:#171717;
+    --text-dim:#52524e;
+    --text-faint:#6f6f6a;
+    --key:#fff;
+    --select:#1e7a4c;
+  }
+}
