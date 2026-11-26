@@ -1,0 +1,59 @@
+/* Help button + first-visit attention dot */
+.panel-head .help-btn { margin-left: auto; }
+.panel-head .help-btn:hover { border-color: var(--accent); color: var(--accent); }
+[data-help-open] { position: relative; }
+[data-help-open][data-new]::after {
+  content: ''; position: absolute; top: 0.3rem; right: 0.3rem; width: 0.55rem; height: 0.55rem;
+  border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--surface);
+}
+
+/* Dialog */
+.help {
+  width: min(48rem, calc(100vw - 1.5rem)); height: min(42rem, calc(100dvh - 1.5rem));
+  max-width: none; max-height: none; padding: 0; border: 0; background: transparent; color: var(--text);
+  margin: auto; /* base.css resets all margins, which would pin a modal dialog to the top-left */
+}
+.help[open] { display: flex; }
+.help::backdrop { background: rgba(0, 0, 0, 0.7); }
+.help-card { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+
+.help-head { flex: none; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem var(--space); border-bottom: 1px solid var(--line); }
+.help-head h2 { display: flex; align-items: center; gap: 0.5rem; font: 800 1.05rem var(--font-display); }
+.help-head h2 i { color: var(--accent); }
+.help-search { flex: 1; min-width: 0; }
+.help-head .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.help-tabs { flex: none; display: flex; gap: 0.25rem; padding: 0 var(--space); border-bottom: 1px solid var(--line); overflow-x: auto; }
+.help-tab { display: flex; align-items: center; gap: 0.45rem; padding: 0.7rem 0.75rem; min-height: var(--control-h); font-size: 0.8125rem; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; }
+.help-tab:hover { color: var(--text); }
+.help-tab[aria-selected='true'] { color: var(--accent); border-bottom-color: var(--accent); }
+
+.help-body { flex: 1; min-height: 0; overflow-y: auto; padding: var(--space); }
+.help-group { margin-bottom: 1.5rem; }
+.help-group .section-label { margin-bottom: 0.6rem; }
+.help-empty { color: var(--muted); text-align: center; padding: 2rem 0; }
+
+.help-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 0.6rem; }
+.help-steps { display: flex; flex-direction: column; gap: 0.6rem; }
+.help .card { display: flex; gap: 0.75rem; padding: 0.75rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
+.help .card h4 { font-size: 0.8125rem; margin-bottom: 0.15rem; }
+.help .card p { font-size: 0.75rem; line-height: 1.5; color: var(--muted); }
+.card-icon, .step-num { flex: none; width: 1.9rem; height: 1.9rem; display: grid; place-items: center; border-radius: 0.5rem; background: var(--accent-soft); color: var(--accent); font-size: 0.8rem; }
+.step-num { border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 800; }
+
+.help-list { display: flex; flex-direction: column; }
+.shortcut { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+.shortcut:last-child { border: 0; }
+.shortcut-text { flex: 1; min-width: 0; font-size: 0.8125rem; text-align: right; }
+.keys { flex: none; max-width: 55%; display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; }
+.combo { display: inline-flex; align-items: center; gap: 0.2rem; color: var(--muted); }
+.or { color: var(--muted); font-size: 0.75rem; }
+kbd { display: inline-block; min-width: 1.6rem; padding: 0.15rem 0.45rem; text-align: center; font: 700 0.75rem var(--font-mono); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 0.35rem; }
+
+@media (max-width: 767.98px) {
+  .help { width: 100vw; height: 100dvh; }
+  .help-card { border: 0; border-radius: 0; }
+  .shortcut { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .shortcut-text { text-align: left; }
+  .keys { max-width: none; }
+}

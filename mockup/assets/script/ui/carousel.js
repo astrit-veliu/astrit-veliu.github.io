@@ -61,7 +61,9 @@ export function mountCarousel(host) {
       t.label.textContent = `Screen ${i + 1}`
       t.select.setAttribute('aria-current', String(s.id === currentId))
       t.select.setAttribute('aria-label', `Screen ${i + 1}`)
+      t.select.title = `Select screen ${i + 1}`
       t.menu.setAttribute('aria-label', `Options for screen ${i + 1}`)
+      t.menu.title = 'Duplicate or delete'
       t.root.classList.toggle('is-active', s.id === currentId)
       return t.root
     }), add)

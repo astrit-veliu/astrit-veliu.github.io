@@ -63,13 +63,14 @@
     display: block; position: static; flex: 1; width: auto; transform: none; visibility: visible; border: 0;
   }
   body[data-view='export'] .scrim { display: none; }
-  .panel-head .head-close { display: none; }
+  .panel-head .head-close, .panel-head .help-btn { display: none; }
   .view-nav {
-    flex: none; height: var(--nav-h); display: grid; grid-template-columns: repeat(3, 1fr);
+    flex: none; height: var(--nav-h); display: grid; grid-template-columns: repeat(4, 1fr);
     background: var(--surface); border-top: 1px solid var(--line);
     padding-bottom: env(safe-area-inset-bottom); box-sizing: content-box;
   }
   .view-nav button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; font-size: 0.7rem; font-weight: 600; color: var(--muted); }
   .view-nav button[aria-pressed='true'] { color: var(--accent); }
   .view-nav i { font-size: 1.1rem; }
+  .view-nav [data-help-open][data-new]::after { top: 0.45rem; right: calc(50% - 1.25rem); }
 }

@@ -9,7 +9,7 @@ export function initViewSwitcher() {
     if (set) body.dataset.view = set.dataset.viewSet
     else if (toggle) body.dataset.view = body.dataset.view === toggle.dataset.viewToggle ? 'preview' : toggle.dataset.viewToggle
   })
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && body.dataset.view === 'export') body.dataset.view = 'preview' })
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && body.dataset.view === 'export' && !e.target.closest('dialog')) body.dataset.view = 'preview' })
   new MutationObserver(sync).observe(body, { attributes: true, attributeFilter: ['data-view'] })
   sync()
 }

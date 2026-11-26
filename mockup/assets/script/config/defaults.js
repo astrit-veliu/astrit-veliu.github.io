@@ -5,6 +5,9 @@ export const LIMITS = {
   maxUploadBytes: 15 * 1024 * 1024,
 }
 
+/** Keyboard step sizes: overlay nudge in logical px, panel divider in screen px. */
+export const KEYBOARD = { nudge: 1, nudgeLarge: 10, panelStep: 16 }
+
 /** Feature-strip font size is expressed relative to a stage this wide. */
 export const FEATURE_REF_WIDTH = 300
 export const PREVIEW = { maxScale: 2 }

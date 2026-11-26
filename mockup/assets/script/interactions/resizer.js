@@ -1,4 +1,4 @@
-const KEY_STEP = 16
+import { KEYBOARD } from '../config/defaults.js'
 
 /** Drag (or arrow-key) a handle to resize the neighbouring panel. Only visible on desktop layouts. */
 export function initResizers() {
@@ -28,7 +28,7 @@ export function initResizers() {
     handle.addEventListener('pointercancel', end)
     handle.addEventListener('dblclick', () => root.style.removeProperty(cssVar))
     handle.addEventListener('keydown', e => {
-      const delta = { ArrowLeft: -KEY_STEP, ArrowRight: KEY_STEP }[e.key]
+      const delta = { ArrowLeft: -KEYBOARD.panelStep, ArrowRight: KEYBOARD.panelStep }[e.key]
       if (!delta) return
       e.preventDefault()
       apply(panel.getBoundingClientRect().width + delta * direction)
