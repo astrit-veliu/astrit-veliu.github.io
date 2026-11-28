@@ -97,3 +97,9 @@
 }
 
 .sheet-picker{align-items:center;margin-bottom:var(--sp-4)}
+
+.how-to{max-width:44rem;margin-bottom:var(--sp-4);color:var(--text-dim);font-size:var(--fs-s)}
+.summary{display:grid;gap:var(--sp-2)}
+.summary li{display:grid;padding:var(--sp-2) var(--sp-3);background:var(--surface-2);border:1px solid var(--line-soft);border-radius:var(--radius);font-size:var(--fs-s)}
+.summary small{color:var(--text-faint);font-size:var(--fs-xs)}
+.summary-result{display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-2);font-size:var(--fs-s);font-weight:500}

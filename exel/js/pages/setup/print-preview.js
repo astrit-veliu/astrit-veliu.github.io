@@ -44,6 +44,7 @@ export function printPreview(page) {
     const total = layout.pages.length;
     stage.replaceChildren(sheetPage(layout, layout.pages[selected]));
     caption.textContent = format(text.page, { n: selected + 1, total });
+    const more = total > text.maxThumbs ? [el('span', { class: 'thumb-more' }, format(text.more, { n: total - text.maxThumbs }))] : [];
     thumbs.replaceChildren(
       ...layout.pages.slice(0, text.maxThumbs).map((entry, index) =>
         el('button', {
@@ -53,7 +54,7 @@ export function printPreview(page) {
           'aria-pressed': String(index === selected),
           onclick: () => pick(index),
         }, sheetPage(layout, entry, { mini: true }))),
-      total > text.maxThumbs ? el('span', { class: 'thumb-more' }, format(text.more, { n: total - text.maxThumbs })) : null);
+      ...more);
   }
 
   function update(settings) {
@@ -65,6 +66,7 @@ export function printPreview(page) {
     show('scale', `${Math.round(layout.scale * 100)}%`);
     node.dataset.state = layout.pages.length === 1 ? 'done' : '';
     fits.hidden = layout.pages.length !== 1;
+    return layout;
   }
 
   return { node, update };
