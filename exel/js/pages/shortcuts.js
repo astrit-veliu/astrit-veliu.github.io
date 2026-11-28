@@ -5,6 +5,8 @@ import { choiceGroup } from '../components/choice-group.js';
 import { searchField } from '../components/search-field.js';
 import { emptyState } from '../components/empty-state.js';
 import { kbdGroup } from '../components/kbd.js';
+import { icon } from '../core/dom.js';
+import { shortcutPreview } from './shortcuts/shortcut-preview.js';
 
 function keysFor(entry, platforms, id) {
   if (id in entry) return entry[id];
@@ -40,9 +42,24 @@ export function mount(root, page, ui) {
 
   const row = entry => {
     const keys = keysFor(entry, platforms, state.platform);
-    return el('li', { class: 'sc' },
+    const host = el('div', { class: 'sc-demo' });
+    const body = el('div', { class: 'sc-body', inert: true }, el('div', {}, host));
+    const head = el('button', {
+      type: 'button',
+      class: 'sc-head',
+      'aria-expanded': 'false',
+      onclick: () => {
+        const open = item.classList.toggle('open');
+        head.setAttribute('aria-expanded', String(open));
+        body.inert = !open;
+        if (open && !host.hasChildNodes()) host.append(shortcutPreview(entry.demo, page, ui));
+      },
+    },
       el('span', { class: 'sc-label' }, entry.label),
-      keys ? kbdGroup(keys) : el('span', { class: 'sc-none' }, ui.unavailable));
+      keys ? kbdGroup(keys) : el('span', { class: 'sc-none' }, ui.unavailable),
+      icon('fa-chevron-down', 'sc-chev'));
+    const item = el('li', { class: 'sc' }, head, body);
+    return item;
   };
 
   function render() {

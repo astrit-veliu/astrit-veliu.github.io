@@ -2,15 +2,19 @@ import { el, icon, format } from '../core/dom.js';
 import { pageHead } from '../components/page-head.js';
 import { callout } from '../components/callout.js';
 import { richText } from '../components/rich-text.js';
+import { choiceGroup } from '../components/choice-group.js';
+import { printPreview } from './setup/print-preview.js';
 
 export function mount(root, page, ui) {
   const { steps } = page;
+  const settings = { ...page.defaults };
+  const preview = printPreview(page);
   let index = 0;
 
   const num = el('p', { class: 'step-num' });
   const title = el('h2', { class: 'step-title' });
   const text = el('p', { class: 'step-text' });
-  const visual = el('div', { class: 'step-visual', 'aria-hidden': 'true' });
+  const control = el('div', { class: 'step-control' });
 
   const dots = steps.map((_, position) =>
     el('button', {
@@ -20,25 +24,47 @@ export function mount(root, page, ui) {
       onclick: () => go(position),
     }));
 
-  const back = el('button', { type: 'button', class: 'btn', onclick: () => go(index - 1) },
-    icon('fa-arrow-left'), ui.back);
+  const back = el('button', { type: 'button', class: 'btn', onclick: () => go(index - 1) }, icon('fa-arrow-left'), ui.back);
+  const reset = el('button', {
+    type: 'button',
+    class: 'btn reset',
+    onclick: () => {
+      Object.assign(settings, page.defaults, { sheet: settings.sheet });
+      render();
+    },
+  }, icon('fa-rotate-left'), page.preview.reset);
   const next = el('button', {
     type: 'button',
     class: 'btn btn-primary',
     onclick: () => go(index === steps.length - 1 ? 0 : index + 1),
   });
 
+  const sheetPicker = el('div', { class: 'toolbar sheet-picker' },
+    el('span', { class: 'step-control-label' }, page.preview.sheetLabel),
+    choiceGroup({
+      label: page.preview.sheetLabel,
+      options: Object.entries(page.sheets).map(([value, sheet]) => ({ value, label: sheet.label })),
+      value: settings.sheet,
+      onChange: value => {
+        settings.sheet = value;
+        preview.update(settings);
+      },
+    }));
+
   const stepper = el('section', {
     class: 'stepper',
     'aria-label': page.title,
     onkeydown: event => {
+      if (event.target.closest('.choices')) return;
       if (event.key === 'ArrowRight') go(index + 1);
       if (event.key === 'ArrowLeft') go(index - 1);
     },
   },
     el('div', { class: 'step-progress' }, dots),
-    el('div', { class: 'step-body', 'aria-live': 'polite' }, el('div', {}, num, title, text), visual),
-    el('div', { class: 'step-controls' }, back, next));
+    el('div', { class: 'step-body' },
+      el('div', { class: 'step-copy', 'aria-live': 'polite' }, num, title, text, control),
+      preview.node),
+    el('div', { class: 'step-controls' }, back, reset, next));
 
   function go(target) {
     if (target < 0 || target >= steps.length) return;
@@ -49,10 +75,27 @@ export function mount(root, page, ui) {
   function render() {
     const step = steps[index];
     const last = index === steps.length - 1;
-    num.textContent = format(ui.stepOf, { n: index + 1, total: steps.length });
+    const setting = step.control;
+
+    num.replaceChildren(icon(step.icon), format(ui.stepOf, { n: index + 1, total: steps.length }));
     title.textContent = step.title;
     text.replaceChildren(richText(step.text));
-    visual.replaceChildren(icon(step.icon, 'step-icon'), el('p', { class: 'step-figure' }, step.figure));
+    control.replaceChildren(...(setting ? [
+      el('p', { class: 'step-control-label' }, setting.label),
+      choiceGroup({
+        label: setting.label,
+        options: setting.options,
+        value: settings[setting.key],
+        onChange: value => {
+          settings[setting.key] = value;
+          preview.update(settings);
+        },
+      }),
+    ] : []));
+
+    preview.node.dataset.focus = setting?.key ?? '';
+    preview.update(settings);
+
     back.disabled = index === 0;
     next.replaceChildren(...(last ? [ui.restart, icon('fa-rotate-left')] : [ui.next, icon('fa-arrow-right')]));
     dots.forEach((dot, position) => {
@@ -62,6 +105,6 @@ export function mount(root, page, ui) {
     });
   }
 
-  root.append(pageHead({ ...page, count: steps.length }), stepper, callout({ icon: 'fa-circle-info', ...page.callout }));
+  root.append(pageHead({ ...page, count: steps.length }), sheetPicker, stepper, callout({ icon: 'fa-circle-info', ...page.callout }));
   render();
 }

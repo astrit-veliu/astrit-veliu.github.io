@@ -14,6 +14,12 @@
   --text-faint:#8c8c88;
   --key:#0f0f0f;
   --select:#56c98e;
+  --paper:#fff;
+  --paper-ink:#1b1b1b;
+  --paper-line:#cfcfcf;
+  --paper-head:#e6e6e6;
+  --paper-hit:#fde68a;
+  --paper-link:#1a5fd0;
 
   --fs-xs:clamp(.75rem,.73rem + .1vw,.8125rem);
   --fs-s:clamp(.8125rem,.79rem + .12vw,.9rem);
